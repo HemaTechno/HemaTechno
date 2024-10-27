@@ -14,19 +14,18 @@
             margin: 0;
         }
         .header {
-            background-color: #333;
+            background-color: #4f4f4f;
             color: white;
-            padding: 15px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
         }
         .header img {
             height: 50px;
         }
         .header .theme-toggle {
-            background-color: #555;
+            background-color: #666;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -35,7 +34,7 @@
             transition: background-color 0.3s;
         }
         .header .theme-toggle:hover {
-            background-color: #666;
+            background-color: #777;
         }
         .search-bar {
             margin: 20px;
@@ -48,12 +47,12 @@
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
         }
         .search-bar button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #333;
+            background-color: #666;
             color: white;
             border: none;
             border-radius: 5px;
@@ -67,9 +66,9 @@
             padding: 20px;
         }
         .script-card {
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 250px;
             padding: 10px;
             text-align: left;
@@ -86,10 +85,11 @@
             font-size: 18px;
             font-weight: bold;
             margin: 10px 0;
+            color: #333;
         }
         .script-description {
             font-size: 14px;
-            color: #555;
+            color: #666;
         }
         .get-button {
             margin-top: 10px;
@@ -104,14 +104,26 @@
             text-align: center;
         }
         .footer {
-            background-color: #333;
+            background-color: #4f4f4f;
             color: white;
             padding: 10px;
             margin-top: 20px;
         }
-        <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-
+        .dark-theme {
+            background-color: #222;
+            color: #ccc;
+        }
+        .dark-theme .script-card {
+            background-color: #333;
+            color: #eee;
+        }
+        .dark-theme .header,
+        .dark-theme .footer {
+            background-color: #444;
+        }
+        .dark-theme .get-button {
+            background-color: #5cb85c;
+        }
     </style>
 </head>
 <body>
@@ -137,25 +149,24 @@
     </div>
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
 
     <script>
         // إعدادات Firebase الخاصة بمشروعك
         const firebaseConfig = {
-  apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-  authDomain: "treng-c6027.firebaseapp.com",
-  projectId: "treng-c6027",
-  storageBucket: "treng-c6027.appspot.com",
-  messagingSenderId: "305527546716",
-  appId: "1:305527546716:web:fd072a58200f31bb42d799",
-  measurementId: "G-3JFKFT2LT0"
-};
-
+            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+            authDomain: "treng-c6027.firebaseapp.com",
+            projectId: "treng-c6027",
+            storageBucket: "treng-c6027.appspot.com",
+            messagingSenderId: "305527546716",
+            appId: "1:305527546716:web:fd072a58200f31bb42d799",
+            measurementId: "G-3JFKFT2LT0"
+        };
 
         // تهيئة Firebase
         const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore(app);
+        const db = firebase.firestore();
 
         // تحميل آخر 5 سكربتات من Firestore
         async function loadScripts() {
@@ -214,8 +225,6 @@
         // تفعيل الوضع الليلي/النهاري
         function toggleTheme() {
             document.body.classList.toggle("dark-theme");
-            document.body.style.backgroundColor = document.body.classList.contains("dark-theme") ? "#222" : "#f4f4f4";
-            document.body.style.color = document.body.classList.contains("dark-theme") ? "#fff" : "#333";
         }
 
         // استدعاء الدالة لتحميل السكربتات
