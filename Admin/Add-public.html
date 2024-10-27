@@ -64,9 +64,6 @@
             margin-top: 10px;
             display: none;
         }
-        <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-
     </style>
 </head>
 <body>
@@ -81,7 +78,7 @@
             <label>الوصف:</label>
             <textarea id="description" rows="4" required></textarea>
 
-            <label>قسم السكربتات:</label>
+            <label>قسم السكربتا:</label>
             <input type="text" id="category" required>
 
             <label>الصورة:</label>
@@ -95,27 +92,26 @@
     </div>
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-storage-compat.js"></script>
 
     <script>
         // إعدادات Firebase الخاصة بمشروعك
         const firebaseConfig = {
-  apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-  authDomain: "treng-c6027.firebaseapp.com",
-  projectId: "treng-c6027",
-  storageBucket: "treng-c6027.appspot.com",
-  messagingSenderId: "305527546716",
-  appId: "1:305527546716:web:fd072a58200f31bb42d799",
-  measurementId: "G-3JFKFT2LT0"
-};
-
+            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+            authDomain: "treng-c6027.firebaseapp.com",
+            projectId: "treng-c6027",
+            storageBucket: "treng-c6027.appspot.com",
+            messagingSenderId: "305527546716",
+            appId: "1:305527546716:web:fd072a58200f31bb42d799",
+            measurementId: "G-3JFKFT2LT0"
+        };
 
         // تهيئة Firebase
         const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore(app);
-        const storage = firebase.storage(app);
+        const db = firebase.firestore();
+        const storage = firebase.storage();
 
         // إضافة سكربت جديد
         document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
