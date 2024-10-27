@@ -198,17 +198,22 @@
             const scriptsContainer = document.getElementById("scriptsContainer");
             scriptsContainer.innerHTML = ""; // تفريغ المحتوى الحالي
 
-            const querySnapshot = await db.collection("scripts")
-                                         .where("title", ">=", searchInput)
-                                         .where("title", "<=", searchInput + "\uf8ff")
-                                         .get();
+            // جلب جميع السكربتات من Firestore
+            const querySnapshot = await db.collection("scripts").get();
 
-            if (querySnapshot.empty) {
+            // فلترة السكربتات حسب العنوان
+            const filteredScripts = querySnapshot.docs.filter((doc) => {
+                const script = doc.data();
+                return script.title.toLowerCase().includes(searchInput);
+            });
+
+            if (filteredScripts.length === 0) {
                 scriptsContainer.innerHTML = "<p>لم يتم العثور على نتائج</p>";
                 return;
             }
 
-            querySnapshot.forEach((doc) => {
+            // عرض السكربتات المتطابقة
+            filteredScripts.forEach((doc) => {
                 const script = doc.data();
                 const scriptCard = document.createElement("div");
                 scriptCard.className = "script-card";
