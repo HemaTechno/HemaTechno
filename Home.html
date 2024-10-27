@@ -8,14 +8,14 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #f0f4f8;
             color: #333;
             padding: 0;
             margin: 0;
         }
         .header {
-            background-color: #4f4f4f;
-            color: white;
+            background-color: #b0b0b0;
+            color: #ffffff;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -25,7 +25,7 @@
             height: 50px;
         }
         .header .theme-toggle {
-            background-color: #666;
+            background-color: #888;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -34,7 +34,7 @@
             transition: background-color 0.3s;
         }
         .header .theme-toggle:hover {
-            background-color: #777;
+            background-color: #999;
         }
         .search-bar {
             margin: 20px;
@@ -47,12 +47,12 @@
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
         }
         .search-bar button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #666;
+            background-color: #7ba6d6;
             color: white;
             border: none;
             border-radius: 5px;
@@ -66,7 +66,7 @@
             padding: 20px;
         }
         .script-card {
-            background-color: #ffffff;
+            background-color: #f0f4f8;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 250px;
@@ -95,7 +95,7 @@
             margin-top: 10px;
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #4caf50;
+            background-color: #7ba6d6;
             color: white;
             border: none;
             border-radius: 5px;
@@ -104,25 +104,25 @@
             text-align: center;
         }
         .footer {
-            background-color: #4f4f4f;
+            background-color: #b0b0b0;
             color: white;
             padding: 10px;
             margin-top: 20px;
         }
         .dark-theme {
-            background-color: #222;
+            background-color: #333;
             color: #ccc;
         }
         .dark-theme .script-card {
-            background-color: #333;
+            background-color: #444;
             color: #eee;
         }
         .dark-theme .header,
         .dark-theme .footer {
-            background-color: #444;
+            background-color: #555;
         }
         .dark-theme .get-button {
-            background-color: #5cb85c;
+            background-color: #5c9ecf;
         }
     </style>
 </head>
@@ -192,7 +192,7 @@
             });
         }
 
-        // البحث عن السكربتات
+        // البحث عن السكربتات حسب العنوان
         async function searchScripts() {
             const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
             const scriptsContainer = document.getElementById("scriptsContainer");
