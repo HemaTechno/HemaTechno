@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة سكربت جديد</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            color: #333;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .success-message {
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>إضافة سكربت جديد</h2>
+
+        <form id="addScriptForm">
+            <label>العنوان:</label>
+            <input type="text" id="title" required>
+
+            <label>الوصف:</label>
+            <textarea id="description" rows="4" required></textarea>
+
+            <label>قسم السكربتات:</label>
+            <input type="text" id="category" required>
+
+            <label>الصورة:</label>
+            <input type="file" id="imageFile" accept="image/*" required>
+
+            <button type="submit">إضافة السكربت</button>
+
+            <p class="success-message" id="successMessage">تمت إضافة السكربت بنجاح!</p>
+            <p class="error-message" id="errorMessage">حدث خطأ أثناء إضافة السكربت. يرجى المحاولة مرة أخرى.</p>
+        </form>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js"></script>
+
+    <script>
+        // إعدادات Firebase الخاصة بمشروعك
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // تهيئة Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore(app);
+        const storage = firebase.storage(app);
+
+        // إضافة سكربت جديد
+        document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // الحصول على القيم من الحقول
+            const title = document.getElementById("title").value.trim();
+            const description = document.getElementById("description").value.trim();
+            const category = document.getElementById("category").value.trim();
+            const imageFile = document.getElementById("imageFile").files[0];
+            const successMessage = document.getElementById("successMessage");
+            const errorMessage = document.getElementById("errorMessage");
+
+            // تحقق من الحقول
+            if (!title || !description || !category || !imageFile) {
+                errorMessage.textContent = "جميع الحقول مطلوبة!";
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            // رفع الصورة إلى Firebase Storage
+            const imageRef = storage.ref().child(`scripts/${imageFile.name}`);
+            try {
+                const snapshot = await imageRef.put(imageFile);
+                const imageUrl = await snapshot.ref.getDownloadURL();
+
+                // إضافة بيانات السكربت إلى Firestore
+                await db.collection("scripts").add({
+                    title,
+                    description,
+                    category,
+                    imageUrl,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // عرض رسالة نجاح
+                successMessage.style.display = "block";
+                errorMessage.style.display = "none";
+
+                // مسح الحقول بعد الإضافة
+                document.getElementById("addScriptForm").reset();
+
+                // إخفاء رسالة النجاح بعد ثوانٍ قليلة
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+
+            } catch (error) {
+                // عرض رسالة خطأ إذا فشلت العملية
+                console.error("Error adding document: ", error);
+                errorMessage.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
