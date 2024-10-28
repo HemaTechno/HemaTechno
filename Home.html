@@ -151,10 +151,47 @@
         .footer a:hover {
             color: #c0c0c0;
         }
+        .click-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(70, 130, 180, 0.8); /* لون الدائرة */
+            pointer-events: none;
+            animation: fadeOut 0.6s ease-out forwards;
+        }
+
+        /* حركة التلاشي */
+        @keyframes fadeOut {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3); /* تضخيم الحجم */
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <script>
+        // إعداد Firebase وتحديث البيانات ...
+        
+        // إضافة تأثير عند النقر
+        document.addEventListener("click", function(e) {
+            const effect = document.createElement("div");
+            effect.classList.add("click-effect");
+            effect.style.left = `${e.pageX - 10}px`; // تخصيص الموقع الأفقي
+            effect.style.top = `${e.pageY - 10}px`; // تخصيص الموقع العمودي
+            document.body.appendChild(effect);
 
+            // إزالة العنصر بعد انتهاء الحركة
+            effect.addEventListener("animationend", () => {
+                effect.remove();
+            });
+        });
+    </script>
     <!-- Header -->
     <div class="header">
         <a href="index.html"><img src="logo.png" alt="شعار الموقع" title="العودة للصفحة الرئيسية"></a>
