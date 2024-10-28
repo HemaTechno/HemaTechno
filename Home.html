@@ -220,6 +220,11 @@
 
             const querySnapshot = await db.collection("scripts").orderBy("timestamp", "desc").limit(5).get();
 
+            if (querySnapshot.empty) {
+                latestScriptsContainer.innerHTML = "<p>لا توجد سكربتات مضافة حديثًا</p>";
+                return;
+            }
+
             querySnapshot.forEach((doc) => {
                 const script = doc.data();
                 const scriptCard = document.createElement("div");
@@ -250,7 +255,7 @@
                                          .get();
 
             if (querySnapshot.empty) {
-                scriptsContainer.innerHTML = "<p>لم يتم العثور على نتائج</p>";
+                scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
                 return;
             }
 
