@@ -251,7 +251,7 @@
 
             const querySnapshot = await db.collection("scripts")
                                          .where("title", ">=", searchInput)
-                                         .where("title", "<=", searchInput + "\uf8ff")
+                                         .where("title", "<=", searchInput + '\uf8ff')
                                          .get();
 
             if (querySnapshot.empty) {
@@ -278,7 +278,9 @@
         }
 
         // تحميل السكربتات عند تحميل الصفحة
-        window.onload = loadLatestScripts;
+        window.onload = function() {
+            loadLatestScripts();
+        };
     </script>
 </body>
 </html>
