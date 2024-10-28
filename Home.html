@@ -213,6 +213,46 @@
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore(app);
 
+        // الحصول على تاريخ اليوم
+        function getTodayDate() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // يناير هو 0
+            const year = today.getFullYear();
+            return `${year}-${month}-${day}`; // YYYY-MM-DD
+        }
+
+        // تحميل السكربتات التي تم إضافتها اليوم فقط
+        async function loadTodayScripts() {
+            const scriptsContainer = document.getElementById("scriptsContainer");
+            scriptsContainer.innerHTML = "";
+
+            const today = getTodayDate();
+            const querySnapshot = await db.collection("scripts").where("addedDate", "==", today).get();
+
+            if (querySnapshot.empty) {
+                scriptsContainer.innerHTML = "<p>لا توجد سكربتات مضافة اليوم.</p>";
+                return;
+            }
+
+            querySnapshot.forEach((doc) => {
+                const script = doc.data();
+                const scriptCard = document.createElement("div");
+                scriptCard.className = "script-card";
+                scriptCard.innerHTML = `
+                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="script-info">
+                        <span>تاريخ الإضافة: ${script.addedDate}</span>
+                        <span>اسم اللعبة: ${script.mapName}</span>
+                    </div>
+                    <div class="script-title">${script.title}</div>
+                    <p class="script-description">${script.description}</p>
+                    <a href="${script.link}" class="get-button">Get</a>
+                `;
+                scriptsContainer.appendChild(scriptCard);
+            });
+        }
+
         // تحميل آخر 5 سكربتات من Firestore
         async function loadLatestScripts() {
             const latestScriptsContainer = document.getElementById("latestScriptsContainer");
@@ -279,7 +319,8 @@
 
         // تحميل السكربتات عند تحميل الصفحة
         window.onload = function() {
-            loadLatestScripts();
+            loadTodayScripts(); // تحميل السكربتات التي تم إضافتها اليوم
+            loadLatestScripts(); // تحميل آخر 5 سكربتات
         };
     </script>
 </body>
