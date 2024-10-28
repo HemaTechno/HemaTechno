@@ -72,18 +72,29 @@
             width: 100%;
             height: auto;
             border-radius: 8px;
+            position: relative;
         }
         .watermark {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            top: 10px;
+            left: 10px;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             background-color: rgba(0, 0, 0, 0.5);
             padding: 2px 6px;
             border-radius: 4px;
             pointer-events: none;
+        }
+        .script-info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
         .footer {
             background-color: #283048;
@@ -110,7 +121,12 @@
         <button class="theme-toggle" onclick="toggleTheme()">وضع ليلي / نهاري</button>
     </div>
 
-    <!-- المحتوى -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="ابحث عن السكربتات...">
+        <button onclick="searchScripts()">بحث</button>
+    </div>
+
     <h2>آخر السكربتات</h2>
     <div class="scripts-container" id="scriptsContainer"></div>
 
@@ -150,8 +166,41 @@
                 const scriptCard = document.createElement("div");
                 scriptCard.className = "script-card";
                 scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
                     <div class="watermark">H-Scripts</div>
+                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="script-info">تاريخ الإضافة: ${script.addedDate} | اسم الماب: ${script.mapName}</div>
+                    <div class="script-title">${script.title}</div>
+                    <p class="script-description">${script.description}</p>
+                    <a href="${script.link}" class="get-button">Get</a>
+                `;
+                scriptsContainer.appendChild(scriptCard);
+            });
+        }
+
+        // البحث عن السكربتات
+        async function searchScripts() {
+            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
+            const scriptsContainer = document.getElementById("scriptsContainer");
+            scriptsContainer.innerHTML = "";
+
+            const querySnapshot = await db.collection("scripts")
+                                         .where("title", ">=", searchInput)
+                                         .where("title", "<=", searchInput + "\uf8ff")
+                                         .get();
+
+            if (querySnapshot.empty) {
+                scriptsContainer.innerHTML = "<p>لم يتم العثور على نتائج</p>";
+                return;
+            }
+
+            querySnapshot.forEach((doc) => {
+                const script = doc.data();
+                const scriptCard = document.createElement("div");
+                scriptCard.className = "script-card";
+                scriptCard.innerHTML = `
+                    <div class="watermark">H-Scripts</div>
+                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="script-info">تاريخ الإضافة: ${script.addedDate} | اسم الماب: ${script.mapName}</div>
                     <div class="script-title">${script.title}</div>
                     <p class="script-description">${script.description}</p>
                     <a href="${script.link}" class="get-button">Get</a>
