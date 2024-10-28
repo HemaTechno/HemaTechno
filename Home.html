@@ -312,43 +312,42 @@ window.onload = function() {
 
         // البحث عن السكربتات
         async function searchScripts() {
-    const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
-    const scriptsContainer = document.getElementById("scriptsContainer");
-    scriptsContainer.innerHTML = "";
+            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
+            const scriptsContainer = document.getElementById("scriptsContainer");
+            scriptsContainer.innerHTML = "";
 
-    const querySnapshot = await db.collection("scripts")
-        .where("title", ">=", searchInput)
-        .where("title", "<=", searchInput + '\uf8ff')
-        .get();
+            const querySnapshot = await db.collection("scripts")
+                .where("titleLowercase", ">=", searchInput)
+                .where("titleLowercase", "<=", searchInput + '\uf8ff')
+                .get();
 
-    if (querySnapshot.empty) {
-        scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
-        return;
-    }
+            if (querySnapshot.empty) {
+                scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
+                return;
+            }
 
-    querySnapshot.forEach((doc) => {
-        const script = doc.data();
-        const scriptCard = document.createElement("div");
-        scriptCard.className = "script-card";
-        scriptCard.innerHTML = `
-            <img src="${script.imageUrl}" alt="${script.title}">
-            <div class="script-info">
-                <span>تاريخ الإضافة: ${script.addedDate}</span>
-                <span>اسم اللعبة: ${script.mapName}</span>
-            </div>
-            <div class="script-title">${script.title}</div>
-            <p class="script-description">${script.description}</p>
-            <a href="${script.link}" class="get-button">Get</a>
-        `;
-        scriptsContainer.appendChild(scriptCard);
-    });
-}
+            querySnapshot.forEach((doc) => {
+                const script = doc.data();
+                const scriptCard = document.createElement("div");
+                scriptCard.className = "script-card";
+                scriptCard.innerHTML = `
+                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="script-info">
+                        <span>تاريخ الإضافة: ${script.addedDate}</span>
+                        <span>اسم اللعبة: ${script.mapName}</span>
+                    </div>
+                    <div class="script-title">${script.title}</div>
+                    <p class="script-description">${script.description}</p>
+                    <a href="${script.link}" class="get-button">Get</a>
+                `;
+                scriptsContainer.appendChild(scriptCard);
+            });
+        }
 
-
-        // تحميل السكربتات عند تحميل الصفحة
+        // دالة تحميل السكربتات
         window.onload = function() {
-            loadTodayScripts(); // تحميل السكربتات التي تم إضافتها اليوم
-            loadLatestScripts(); // تحميل آخر 5 سكربتات
+            loadTodayScripts();
+            loadLatestScripts();
         };
     </script>
     
