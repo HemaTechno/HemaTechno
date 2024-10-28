@@ -58,6 +58,17 @@
             margin-top: 20px;
             font-size: 14px;
         }
+        .delete-button {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #c9302c;
+        }
     </style>
 </head>
 <body>
@@ -111,9 +122,20 @@
                     <p class="script-description">${script.description}</p>
                     <span>تاريخ الإضافة: ${script.addedDate}</span>
                     <span>اسم اللعبة: ${script.mapName}</span>
+                    <button class="delete-button" onclick="deleteScript('${doc.id}')">حذف</button>
                 `;
                 scriptsContainer.appendChild(scriptCard);
             });
+        }
+
+        // دالة لحذف السكربت من Firestore
+        async function deleteScript(scriptId) {
+            try {
+                await db.collection("scripts").doc(scriptId).delete();
+                loadAllScripts(); // إعادة تحميل السكربتات بعد الحذف
+            } catch (error) {
+                console.error("خطأ في حذف السكربت: ", error);
+            }
         }
 
         // استدعاء الدالة لتحميل السكربتات
