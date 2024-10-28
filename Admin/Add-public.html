@@ -6,165 +6,150 @@
     <title>إضافة سكربت جديد</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            background-color: #e3e8ed;
+            color: #333;
+            padding: 20px;
             margin: 0;
         }
         .form-container {
             background-color: #fff;
+            border-radius: 12px;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
-            width: 100%;
-            text-align: center;
+            margin: auto;
         }
-        h2 {
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            font-size: 14px;
             color: #333;
         }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-            color: #333;
-        }
-        input, textarea {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
+            font-size: 14px;
+            border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
         }
-        button {
-            margin-top: 15px;
+        .form-group textarea {
+            resize: vertical;
+        }
+        .submit-button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #4caf50;
-            color: #fff;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            width: 100%;
         }
-        button:hover {
+        .submit-button:hover {
             background-color: #45a049;
         }
-        .success-message {
-            color: green;
-            margin-top: 10px;
-            display: none;
-        }
-        .error-message {
-            color: red;
-            margin-top: 10px;
-            display: none;
+        .header {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>إضافة سكربت جديد</h2>
+<div class="header">
+    <h1>إضافة سكربت جديد</h1>
+</div>
 
-        <form id="addScriptForm">
-            <label>العنوان:</label>
+<div class="form-container">
+    <form id="addScriptForm">
+        <div class="form-group">
+            <label for="title">عنوان السكربت:</label>
             <input type="text" id="title" required>
-
-            <label>الوصف:</label>
+        </div>
+        <div class="form-group">
+            <label for="mapName">اسم اللعبة:</label>
+            <input type="text" id="mapName" required>
+        </div>
+        <div class="form-group">
+            <label for="description">الوصف:</label>
             <textarea id="description" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="scriptName">اسم السكربت:</label>
+            <input type="text" id="scriptName" required>
+        </div>
+        <div class="form-group">
+            <label for="image">رفع صورة:</label>
+            <input type="file" id="image" accept="image/*" required>
+        </div>
+        <button type="submit" class="submit-button">إضافة السكربت</button>
+    </form>
+</div>
 
-            <label>قسم السكربتا:</label>
-            <input type="text" id="category" required>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-storage-compat.js"></script>
 
-            <label>الصورة:</label>
-            <input type="file" id="imageFile" accept="image/*" required>
+<script>
+    // إعداد Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+        authDomain: "treng-c6027.firebaseapp.com",
+        projectId: "treng-c6027",
+        storageBucket: "treng-c6027.appspot.com",
+        messagingSenderId: "305527546716",
+        appId: "1:305527546716:web:fd072a58200f31bb42d799",
+        measurementId: "G-3JFKFT2LT0"
+    };
 
-            <button type="submit">إضافة السكربت</button>
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
 
-            <p class="success-message" id="successMessage">تمت إضافة السكربت بنجاح!</p>
-            <p class="error-message" id="errorMessage">حدث خطأ أثناء إضافة السكربت. يرجى المحاولة مرة أخرى.</p>
-        </form>
-    </div>
+    // معالجة إرسال النموذج
+    document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-storage-compat.js"></script>
+        const title = document.getElementById("title").value;
+        const mapName = document.getElementById("mapName").value;
+        const description = document.getElementById("description").value;
+        const scriptName = document.getElementById("scriptName").value;
+        const imageFile = document.getElementById("image").files[0];
+        const timestamp = new Date().toLocaleDateString();
 
-    <script>
-        // إعدادات Firebase الخاصة بمشروعك
-        const firebaseConfig = {
-            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-            authDomain: "treng-c6027.firebaseapp.com",
-            projectId: "treng-c6027",
-            storageBucket: "treng-c6027.appspot.com",
-            messagingSenderId: "305527546716",
-            appId: "1:305527546716:web:fd072a58200f31bb42d799",
-            measurementId: "G-3JFKFT2LT0"
-        };
+        if (!imageFile) {
+            alert("يرجى رفع صورة.");
+            return;
+        }
 
-        // تهيئة Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const storage = firebase.storage();
-
-        // إضافة سكربت جديد
-        document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            // الحصول على القيم من الحقول
-            const title = document.getElementById("title").value.trim();
-            const description = document.getElementById("description").value.trim();
-            const category = document.getElementById("category").value.trim();
-            const imageFile = document.getElementById("imageFile").files[0];
-            const successMessage = document.getElementById("successMessage");
-            const errorMessage = document.getElementById("errorMessage");
-
-            // تحقق من الحقول
-            if (!title || !description || !category || !imageFile) {
-                errorMessage.textContent = "جميع الحقول مطلوبة!";
-                errorMessage.style.display = "block";
-                return;
-            }
-
+        try {
             // رفع الصورة إلى Firebase Storage
-            const imageRef = storage.ref().child(`scripts/${imageFile.name}`);
-            try {
-                const snapshot = await imageRef.put(imageFile);
-                const imageUrl = await snapshot.ref.getDownloadURL();
+            const storageRef = storage.ref(`scripts/${imageFile.name}`);
+            await storageRef.put(imageFile);
+            const imageUrl = await storageRef.getDownloadURL();
 
-                // إضافة بيانات السكربت إلى Firestore
-                await db.collection("scripts").add({
-                    title,
-                    description,
-                    category,
-                    imageUrl,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
+            // إضافة البيانات إلى Firestore
+            await db.collection("scripts").add({
+                title,
+                mapName,
+                description,
+                scriptName,
+                imageUrl,
+                addedDate: timestamp
+            });
 
-                // عرض رسالة نجاح
-                successMessage.style.display = "block";
-                errorMessage.style.display = "none";
+            alert("تمت إضافة السكربت بنجاح!");
+            document.getElementById("addScriptForm").reset();
+        } catch (error) {
+            console.error("حدث خطأ:", error);
+            alert("حدث خطأ أثناء إضافة السكربت.");
+        }
+    });
+</script>
 
-                // مسح الحقول بعد الإضافة
-                document.getElementById("addScriptForm").reset();
-
-                // إخفاء رسالة النجاح بعد ثوانٍ قليلة
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-
-            } catch (error) {
-                // عرض رسالة خطأ إذا فشلت العملية
-                console.error("Error adding document: ", error);
-                errorMessage.style.display = "block";
-            }
-        });
-    </script>
 </body>
 </html>
