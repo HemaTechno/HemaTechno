@@ -22,8 +22,13 @@
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
+        .header a {
+            text-decoration: none;
+            color: #ffffff;
+        }
         .header img {
             height: 50px;
+            cursor: pointer;
         }
         .header .theme-toggle {
             background-color: #536878;
@@ -39,42 +44,15 @@
             background-color: #6a7e92;
             transform: scale(1.05);
         }
-        .search-bar {
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .search-bar input {
-            width: 60%;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #d1d9e0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .search-bar button {
-            padding: 12px 24px;
-            font-size: 16px;
-            background-color: #5c8dbc;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        .search-bar button:hover {
-            background-color: #6f9ecc;
-            transform: scale(1.05);
-        }
         .scripts-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             padding: 20px;
         }
         .script-card {
+            position: relative;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
@@ -95,47 +73,32 @@
             height: auto;
             border-radius: 8px;
         }
-        .script-title {
-            font-size: 20px;
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
             font-weight: bold;
-            margin: 15px 0;
-            color: #283048;
-        }
-        .script-description {
-            font-size: 15px;
-            color: #666;
-        }
-        .get-button {
-            margin-top: 15px;
-            padding: 12px 24px;
-            font-size: 16px;
-            background-color: #5c8dbc;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        .get-button:hover {
-            background-color: #6f9ecc;
-            transform: scale(1.05);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2px 6px;
+            border-radius: 4px;
+            pointer-events: none;
         }
         .footer {
             background-color: #283048;
             color: white;
-            padding: 15px;
+            padding: 10px;
             margin-top: 20px;
             font-size: 14px;
         }
         .footer a {
-            color: #9dc6f2;
+            color: #ffffff;
             text-decoration: none;
             transition: color 0.3s;
         }
         .footer a:hover {
-            color: #c1d9f7;
+            color: #c0c0c0;
         }
     </style>
 </head>
@@ -143,22 +106,17 @@
 
     <!-- Header -->
     <div class="header">
-        <img src="logo.png" alt="شعار الموقع">
+        <a href="index.html"><img src="logo.png" alt="شعار الموقع" title="العودة للصفحة الرئيسية"></a>
         <button class="theme-toggle" onclick="toggleTheme()">وضع ليلي / نهاري</button>
     </div>
 
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="ابحث عن السكربتات...">
-        <button onclick="searchScripts()">بحث</button>
-    </div>
-
+    <!-- المحتوى -->
     <h2>آخر السكربتات</h2>
     <div class="scripts-container" id="scriptsContainer"></div>
 
     <!-- Footer -->
     <div class="footer">
-        <p>© جميع الحقوق يمتلكها <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
+        <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
     </div>
 
     <!-- Firebase SDK -->
@@ -166,7 +124,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
 
     <script>
-        // إعدادات Firebase الخاصة بمشروعك
         const firebaseConfig = {
             apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
             authDomain: "treng-c6027.firebaseapp.com",
@@ -179,17 +136,14 @@
 
         // تهيئة Firebase
         const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        const db = firebase.firestore(app);
 
         // تحميل آخر 5 سكربتات من Firestore
         async function loadScripts() {
             const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = ""; // تفريغ المحتوى الحالي
+            scriptsContainer.innerHTML = "";
 
-            const querySnapshot = await db.collection("scripts")
-                                         .orderBy("timestamp", "desc")
-                                         .limit(5)
-                                         .get();
+            const querySnapshot = await db.collection("scripts").orderBy("timestamp", "desc").limit(5).get();
 
             querySnapshot.forEach((doc) => {
                 const script = doc.data();
@@ -197,38 +151,7 @@
                 scriptCard.className = "script-card";
                 scriptCard.innerHTML = `
                     <img src="${script.imageUrl}" alt="${script.title}">
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="${script.link}" class="get-button">Get</a>
-                `;
-                scriptsContainer.appendChild(scriptCard);
-            });
-        }
-
-        // البحث عن السكربتات حسب العنوان
-        async function searchScripts() {
-            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
-            const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = ""; // تفريغ المحتوى الحالي
-
-            const querySnapshot = await db.collection("scripts").get();
-
-            const filteredScripts = querySnapshot.docs.filter((doc) => {
-                const script = doc.data();
-                return script.title.toLowerCase().includes(searchInput);
-            });
-
-            if (filteredScripts.length === 0) {
-                scriptsContainer.innerHTML = "<p>لم يتم العثور على نتائج</p>";
-                return;
-            }
-
-            filteredScripts.forEach((doc) => {
-                const script = doc.data();
-                const scriptCard = document.createElement("div");
-                scriptCard.className = "script-card";
-                scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="watermark">H-Scripts</div>
                     <div class="script-title">${script.title}</div>
                     <p class="script-description">${script.description}</p>
                     <a href="${script.link}" class="get-button">Get</a>
@@ -240,6 +163,8 @@
         // تفعيل الوضع الليلي/النهاري
         function toggleTheme() {
             document.body.classList.toggle("dark-theme");
+            document.body.style.backgroundColor = document.body.classList.contains("dark-theme") ? "#222" : "#e3e8ed";
+            document.body.style.color = document.body.classList.contains("dark-theme") ? "#fff" : "#333";
         }
 
         // استدعاء الدالة لتحميل السكربتات
