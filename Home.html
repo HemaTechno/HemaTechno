@@ -223,35 +223,41 @@
         }
 
         // تحميل السكربتات التي تم إضافتها اليوم فقط
-        async function loadTodayScripts() {
-            const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = "";
+        // تحميل السكربتات التي تم إضافتها اليوم فقط
+async function loadTodayScripts() {
+    const scriptsContainer = document.getElementById("scriptsContainer");
+    scriptsContainer.innerHTML = "";
 
-            const today = getTodayDate();
-            const querySnapshot = await db.collection("scripts").where("addedDate", "==", today).get();
+    const today = getTodayDate();
+    console.log("التاريخ اليوم:", today); // تصحيح: طباعة التاريخ اليوم
 
-            if (querySnapshot.empty) {
-                scriptsContainer.innerHTML = "<p>لا توجد سكربتات مضافة اليوم.</p>";
-                return;
-            }
+    const querySnapshot = await db.collection("scripts").where("addedDate", "==", today).get();
 
-            querySnapshot.forEach((doc) => {
-                const script = doc.data();
-                const scriptCard = document.createElement("div");
-                scriptCard.className = "script-card";
-                scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
-                    <div class="script-info">
-                        <span>تاريخ الإضافة: ${script.addedDate}</span>
-                        <span>اسم اللعبة: ${script.mapName}</span>
-                    </div>
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="${script.link}" class="get-button">Get</a>
-                `;
-                scriptsContainer.appendChild(scriptCard);
-            });
-        }
+    if (querySnapshot.empty) {
+        scriptsContainer.innerHTML = "<p>لا توجد سكربتات مضافة اليوم.</p>";
+        console.log("لا توجد نتائج"); // تصحيح: طباعة عدم وجود نتائج
+        return;
+    }
+
+    console.log("عدد السكربتات المضافة اليوم:", querySnapshot.size); // تصحيح: طباعة عدد السكربتات
+    querySnapshot.forEach((doc) => {
+        const script = doc.data();
+        const scriptCard = document.createElement("div");
+        scriptCard.className = "script-card";
+        scriptCard.innerHTML = `
+            <img src="${script.imageUrl}" alt="${script.title}">
+            <div class="script-info">
+                <span>تاريخ الإضافة: ${script.addedDate}</span>
+                <span>اسم اللعبة: ${script.mapName}</span>
+            </div>
+            <div class="script-title">${script.title}</div>
+            <p class="script-description">${script.description}</p>
+            <a href="${script.link}" class="get-button">Get</a>
+        `;
+        scriptsContainer.appendChild(scriptCard);
+    });
+}
+
 
         // تحميل آخر 5 سكربتات من Firestore
         async function loadLatestScripts() {
