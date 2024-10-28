@@ -172,51 +172,12 @@
                 opacity: 0;
             }
         }
+        /* أنماط CSS كما هي */
     </style>
 </head>
 <body>
     <script>
-        // إعداد Firebase وتحديث البيانات ...
-        
-        // إضافة تأثير عند النقر
-        document.addEventListener("click", function(e) {
-            const effect = document.createElement("div");
-            effect.classList.add("click-effect");
-            effect.style.left = `${e.pageX - 10}px`; // تخصيص الموقع الأفقي
-            effect.style.top = `${e.pageY - 10}px`; // تخصيص الموقع العمودي
-            document.body.appendChild(effect);
-
-            // إزالة العنصر بعد انتهاء الحركة
-            effect.addEventListener("animationend", () => {
-                effect.remove();
-            });
-        });
-    </script>
-    <!-- Header -->
-    <div class="header">
-        <a href="index.html"><img src="logo.png" alt="شعار الموقع" title="العودة للصفحة الرئيسية"></a>
-        <button class="theme-toggle" onclick="toggleTheme()">وضع ليلي / نهاري</button>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="ابحث عن السكربتات...">
-        <button onclick="searchScripts()">بحث</button>
-    </div>
-
-    <h2>آخر السكربتات</h2>
-    <div class="scripts-container" id="scriptsContainer"></div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
-    </div>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-
-    <script>
+        // إعداد Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
             authDomain: "treng-c6027.firebaseapp.com",
@@ -227,41 +188,43 @@
             measurementId: "G-3JFKFT2LT0"
         };
 
-        // تهيئة Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore(app);
 
-        // تحميل آخر 5 سكربتات من Firestore// تحميل آخر 5 سكربتات من Firestore
-async function loadScripts() {
-    const scriptsContainer = document.getElementById("scriptsContainer");
-    scriptsContainer.innerHTML = "";
+        async function loadScripts() {
+            const scriptsContainer = document.getElementById("scriptsContainer");
+            scriptsContainer.innerHTML = "";
 
-    const querySnapshot = await db.collection("scripts").orderBy("timestamp", "desc").limit(5).get();
+            const querySnapshot = await db.collection("scripts").orderBy("timestamp", "desc").limit(5).get();
 
-    querySnapshot.forEach((doc) => {
-        const script = doc.data();
-        const scriptCard = document.createElement("div");
-        scriptCard.className = "script-card";
-        scriptCard.innerHTML = `
-            <img src="${script.imageUrl}" alt="${script.title}">
-            <div class="script-info">
-                <span>تاريخ الإضافة: ${script.addedDate}</span>
-                <span>اسم اللعبة: ${script.mapName}</span>
-            </div>
-            <div class="script-title">${script.title}</div>
-            <p class="script-description">${script.description}</p>
-            <a href="${script.link || '#'}" class="get-button">Get</a>
-        `;
-        scriptsContainer.appendChild(scriptCard);
-    });
-}
+            querySnapshot.forEach((doc) => {
+                const script = doc.data();
+                const scriptCard = document.createElement("div");
+                scriptCard.className = "script-card";
+                scriptCard.innerHTML = `
+                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="script-info">
+                        <span>تاريخ الإضافة: ${script.addedDate}</span>
+                        <span>اسم اللعبة: ${script.mapName}</span>
+                    </div>
+                    <div class="script-title">${script.title}</div>
+                    <p class="script-description">${script.description}</p>
+                    <a href="${script.link}" class="get-button">Get</a>
+                `;
+                scriptsContainer.appendChild(scriptCard);
+            });
+        }
 
-
-        // البحث عن السكربتات
         async function searchScripts() {
             const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
             const scriptsContainer = document.getElementById("scriptsContainer");
             scriptsContainer.innerHTML = "";
+
+            // تحقق من وجود نص للبحث
+            if (searchInput === "") {
+                loadScripts(); // إعادة تحميل آخر 5 سكربتات إذا كان المدخل فارغًا
+                return;
+            }
 
             const querySnapshot = await db.collection("scripts")
                                          .where("title", ">=", searchInput)
@@ -298,8 +261,30 @@ async function loadScripts() {
             document.body.style.color = document.body.classList.contains("dark-theme") ? "#fff" : "#333";
         }
 
-        // استدعاء الدالة لتحميل السكربتات
-        loadScripts();
+        // استدعاء الدالة لتحميل السكربتات عند تحميل الصفحة
+        window.onload = loadScripts; // تحميل السكربتات تلقائيًا عند تحميل الصفحة
     </script>
+    
+    <!-- HTML الخاص بالواجهة -->
+    <div class="header">
+        <a href="index.html"><img src="logo.png" alt="شعار الموقع" title="العودة للصفحة الرئيسية"></a>
+        <button class="theme-toggle" onclick="toggleTheme()">وضع ليلي / نهاري</button>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="ابحث عن السكربتات...">
+        <button onclick="searchScripts()">بحث</button>
+    </div>
+
+    <h2>آخر السكربتات</h2>
+    <div class="scripts-container" id="scriptsContainer"></div>
+
+    <div class="footer">
+        <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
 </body>
 </html>
