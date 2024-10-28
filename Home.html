@@ -6,75 +6,89 @@
     <title>موقع سكربتات روبلوكس</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Cairo', sans-serif;
             text-align: center;
-            background-color: #f0f4f8;
+            background-color: #e3e8ed;
             color: #333;
             padding: 0;
             margin: 0;
         }
         .header {
-            background-color: #b0b0b0;
+            background-color: #283048;
             color: #ffffff;
-            padding: 10px 20px;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .header img {
             height: 50px;
         }
         .header .theme-toggle {
-            background-color: #888;
-            color: white;
+            background-color: #536878;
+            color: #fff;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .header .theme-toggle:hover {
-            background-color: #999;
+            background-color: #6a7e92;
+            transform: scale(1.05);
         }
         .search-bar {
-            margin: 20px;
+            margin: 30px 0;
             display: flex;
             justify-content: center;
             gap: 10px;
         }
         .search-bar input {
             width: 60%;
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            border-radius: 8px;
+            border: 1px solid #d1d9e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .search-bar button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 16px;
-            background-color: #7ba6d6;
+            background-color: #5c8dbc;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .search-bar button:hover {
+            background-color: #6f9ecc;
+            transform: scale(1.05);
         }
         .scripts-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             padding: 20px;
         }
         .script-card {
-            background-color: #f0f4f8;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            width: 250px;
-            padding: 10px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            width: 270px;
+            padding: 20px;
             text-align: left;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .script-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
         }
         .script-card img {
             width: 100%;
@@ -82,47 +96,46 @@
             border-radius: 8px;
         }
         .script-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            margin: 10px 0;
-            color: #333;
+            margin: 15px 0;
+            color: #283048;
         }
         .script-description {
-            font-size: 14px;
+            font-size: 15px;
             color: #666;
         }
         .get-button {
-            margin-top: 10px;
-            padding: 10px 20px;
+            margin-top: 15px;
+            padding: 12px 24px;
             font-size: 16px;
-            background-color: #7ba6d6;
+            background-color: #5c8dbc;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .get-button:hover {
+            background-color: #6f9ecc;
+            transform: scale(1.05);
         }
         .footer {
-            background-color: #b0b0b0;
+            background-color: #283048;
             color: white;
-            padding: 10px;
+            padding: 15px;
             margin-top: 20px;
+            font-size: 14px;
         }
-        .dark-theme {
-            background-color: #333;
-            color: #ccc;
+        .footer a {
+            color: #9dc6f2;
+            text-decoration: none;
+            transition: color 0.3s;
         }
-        .dark-theme .script-card {
-            background-color: #444;
-            color: #eee;
-        }
-        .dark-theme .header,
-        .dark-theme .footer {
-            background-color: #555;
-        }
-        .dark-theme .get-button {
-            background-color: #5c9ecf;
+        .footer a:hover {
+            color: #c1d9f7;
         }
     </style>
 </head>
@@ -145,7 +158,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        <p>© جميع الحقوق يمتلكها إبراهيم منصور</p>
+        <p>© جميع الحقوق يمتلكها <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
     </div>
 
     <!-- Firebase SDK -->
@@ -198,10 +211,8 @@
             const scriptsContainer = document.getElementById("scriptsContainer");
             scriptsContainer.innerHTML = ""; // تفريغ المحتوى الحالي
 
-            // جلب جميع السكربتات من Firestore
             const querySnapshot = await db.collection("scripts").get();
 
-            // فلترة السكربتات حسب العنوان
             const filteredScripts = querySnapshot.docs.filter((doc) => {
                 const script = doc.data();
                 return script.title.toLowerCase().includes(searchInput);
@@ -212,7 +223,6 @@
                 return;
             }
 
-            // عرض السكربتات المتطابقة
             filteredScripts.forEach((doc) => {
                 const script = doc.data();
                 const scriptCard = document.createElement("div");
