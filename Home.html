@@ -250,9 +250,9 @@
             scriptsContainer.innerHTML = "";
 
             const querySnapshot = await db.collection("scripts")
-                                         .where("title", ">=", searchInput)
-                                         .where("title", "<=", searchInput + '\uf8ff')
-                                         .get();
+                .where("title", ">=", searchInput)
+                .where("title", "<=", searchInput + '\uf8ff')
+                .get();
 
             if (querySnapshot.empty) {
                 scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
