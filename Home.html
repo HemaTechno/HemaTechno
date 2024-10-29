@@ -123,29 +123,57 @@
             color: #555;
             text-align: center;
         }
-        .box-container {
+        
+        .info-section {
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .info-title {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .info-container {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 30px;
+            flex-wrap: wrap;
         }
+
         .info-box {
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 280px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             transition: transform 0.3s;
         }
-        .info-box img {
-            width: 100%;
-            height: 150px;
-            border-radius: 5px;
-        }
+
         .info-box:hover {
             transform: scale(1.05);
         }
+
+        .info-box img {
+            width: 50px;
+            margin-bottom: 15px;
+        }
+
+        .info-box h3 {
+            color: #4caf50;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
         .get-button {
             display: block;
             width: 100%;
@@ -228,25 +256,29 @@
     <h2>آخر السكربتات</h2>
     <div class="scripts-container" id="scriptsContainer"></div>
 
-    <!-- أزرار التنقل -->
-    <div class="box-container">
-        <div class="info-box">
-            <img src="page1.png" alt="صفحة 1">
-            <h3>صفحة 1</h3>
-            <p>وصف مختصر لصفحة 1</p>
-            <a href="page1.html" class="get-button">الذهاب إلى صفحة 1</a>
-        </div>
-        <div class="info-box">
-            <img src="page2.png" alt="صفحة 2">
-            <h3>صفحة 2</h3>
-            <p>وصف مختصر لصفحة 2</p>
-            <a href="page2.html" class="get-button">الذهاب إلى صفحة 2</a>
-        </div>
-        <div class="info-box">
-            <img src="page3.png" alt="صفحة 3">
-            <h3>صفحة 3</h3>
-            <p>وصف مختصر لصفحة 3</p>
-            <a href="page3.html" class="get-button">الذهاب إلى صفحة 3</a>
+        <div class="info-section">
+        <h2 class="info-title">لماذا نحن؟</h2>
+        <div class="info-container">
+            <!-- صندوق الأمان -->
+            <div class="info-box">
+                <img src="shield_icon.png" alt="أمان">
+                <h3>أمان</h3>
+                <p>نعم، قد يتعرف بعض برامج مكافحة الفيروسات على المحتوى الذي نقدمه كمحتوى ضار بسبب نقص شهرة الشركة. للأسف، بعض المواقع تنشر معلومات مضللة بناءً على ذلك.</p>
+            </div>
+            
+            <!-- صندوق التحديثات اليومية -->
+            <div class="info-box">
+                <img src="update_icon.png" alt="تحديثات يومية">
+                <h3>تحديثات يومية</h3>
+                <p>فريقنا يعمل بجد لإضافة محتوى جديد يوميًا. يمكنك رؤية أكثر من 5 سكربتات جديدة كل يوم على موقعنا!</p>
+            </div>
+            
+            <!-- صندوق الجودة -->
+            <div class="info-box">
+                <img src="quality_icon.png" alt="جودة">
+                <h3>جودة</h3>
+                <p>يتم فحص جميع الملفات والسكربتات لضمان الجودة والأمان. يمكنك الوثوق بجميع المحتويات لدينا!</p>
+            </div>
         </div>
     </div>
 
