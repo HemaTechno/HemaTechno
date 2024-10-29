@@ -30,7 +30,7 @@
             height: 50px;
             cursor: pointer;
         }
-        .header .theme-toggle {
+        .theme-toggle {
             background-color: #536878;
             color: #fff;
             border: none;
@@ -40,7 +40,7 @@
             font-size: 16px;
             transition: background-color 0.3s, transform 0.2s;
         }
-        .header .theme-toggle:hover {
+        .theme-toggle:hover {
             background-color: #6a7e92;
             transform: scale(1.05);
         }
@@ -70,6 +70,26 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+        }
+        .info-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+        .info-box {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button-container {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
         .scripts-container {
             display: flex;
@@ -140,55 +160,31 @@
             background-color: #283048;
             color: white;
             padding: 10px;
-            margin-top: 20px;
             font-size: 14px;
         }
         .footer a {
             color: #ffffff;
             text-decoration: none;
+            margin: 0 10px;
             transition: color 0.3s;
         }
         .footer a:hover {
             color: #c0c0c0;
         }
+        /* الوضع الليلي */
         body.dark-mode {
-    background-color: #333;
-    color: #fff;
-}
-
-.header.dark-mode {
-    background-color: #222;
-}
-
-.footer.dark-mode {
-    background-color: #222;
-}
-
-.script-card.dark-mode {
-    background-color: #444;
-    color: #fff;
-}
-
+            background-color: #333;
+            color: #fff;
+        }
+        .header.dark-mode, .footer.dark-mode {
+            background-color: #222;
+        }
+        .info-box.dark-mode, .script-card.dark-mode {
+            background-color: #444;
+        }
     </style>
 </head>
 <body>
-    <script>
-        // إعداد Firebase وتحديث البيانات ...
-        
-        // إضافة تأثير عند النقر
-        document.addEventListener("click", function(e) {
-            const effect = document.createElement("div");
-            effect.classList.add("click-effect");
-            effect.style.left = `${e.pageX - 10}px`; // تخصيص الموقع الأفقي
-            effect.style.top = `${e.pageY - 10}px`; // تخصيص الموقع العمودي
-            document.body.appendChild(effect);
-
-            // إزالة العنصر بعد انتهاء الحركة
-            effect.addEventListener("animationend", () => {
-                effect.remove();
-            });
-        });
-    </script>
     <!-- Header -->
     <div class="header">
         <a href="index.html"><img src="logo.png" alt="شعار الموقع" title="العودة للصفحة الرئيسية"></a>
@@ -201,14 +197,41 @@
         <button onclick="searchScripts()">بحث</button>
     </div>
 
+    <!-- Information Boxes -->
+    <div class="info-boxes">
+        <div class="info-box">معلومات 1</div>
+        <div class="info-box">معلومات 2</div>
+        <div class="info-box">معلومات 3</div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-container">
+        <button onclick="window.location.href='browse.html'">تصفح</button>
+        <button onclick="window.location.href='support.html'">الدعم الفني</button>
+    </div>
+
     <h2>آخر السكربتات</h2>
     <div class="scripts-container" id="scriptsContainer"></div>
 
-    
     <!-- Footer -->
     <div class="footer">
         <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
+        <a href="index.html">الرئيسية</a> |
+        <a href="contact.html">التواصل</a> |
+        <a href="privacy.html">الخصوصية</a> |
+        <a href="partners.html">الشركاء</a>
     </div>
+
+    <!-- JavaScript للتحكم في الوضع الليلي/النهاري -->
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('.header').classList.toggle('dark-mode');
+            document.querySelector('.footer').classList.toggle('dark-mode');
+            document.querySelectorAll('.info-box').forEach(box => box.classList.toggle('dark-mode'));
+            document.querySelectorAll('.script-card').forEach(card => card.classList.toggle('dark-mode'));
+        }
+    </script>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
@@ -225,132 +248,46 @@
             measurementId: "G-3JFKFT2LT0"
         };
 
-        // تهيئة Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore(app);
 
-        // الحصول على تاريخ اليوم
-        // دالة للحصول على تاريخ اليوم بالتنسيق YYYY-MM-DD
-function getTodayDate() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${day}/${month}/${year}`;
-}
-
-// تحميل السكربتات التي تم إضافتها اليوم فقط
-async function loadTodayScripts() {
-    const scriptsContainer = document.getElementById("scriptsContainer");
-    scriptsContainer.innerHTML = "";
-
-    const today = getTodayDate();
-    console.log("التاريخ اليوم:", today); // تصحيح: طباعة التاريخ اليوم
-
-    const querySnapshot = await db.collection("scripts").where("addedDate", "==", today).get();
-
-    if (querySnapshot.empty) {
-        scriptsContainer.innerHTML = "<p>لا توجد سكربتات مضافة اليوم.</p>";
-        console.log("لا توجد نتائج"); // تصحيح: طباعة عدم وجود نتائج
-        return;
-    }
-
-    console.log("عدد السكربتات المضافة اليوم:", querySnapshot.size); // تصحيح: طباعة عدد السكربتات
-    querySnapshot.forEach((doc) => {
-        const script = doc.data();
-        const scriptCard = document.createElement("div");
-        scriptCard.className = "script-card";
-        scriptCard.innerHTML = `
-            <img src="${script.imageUrl}" alt="${script.title}">
-            <div class="script-info">
-                <span>تاريخ الإضافة: ${script.addedDate}</span>
-                <span>اسم اللعبة: ${script.mapName}</span>
-            </div>
-            <div class="script-title">${script.title}</div>
-            <p class="script-description">${script.description}</p>
-            <a href="${script.link}" class="get-button">Get</a>
-        `;
-        scriptsContainer.appendChild(scriptCard);
-    });
-}
-
-// تحميل السكربتات عند تحميل الصفحة
-window.onload = function() {
-    loadTodayScripts(); // تأكد من استدعاء هذه الدالة
-};
-
-
-        // تحميل آخر 5 سكربتات من Firestore
-        async function loadLatestScripts() {
-            const latestScriptsContainer = document.getElementById("latestScriptsContainer");
-            latestScriptsContainer.innerHTML = "";
-
-            const querySnapshot = await db.collection("scripts").orderBy("timestamp", "desc").limit(5).get();
-
-            if (querySnapshot.empty) {
-                latestScriptsContainer.innerHTML = "<p>لا توجد سكربتات مضافة حديثًا</p>";
-                return;
-            }
-
-            querySnapshot.forEach((doc) => {
-                const script = doc.data();
-                const scriptCard = document.createElement("div");
-                scriptCard.className = "script-card";
-                scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
-                    <div class="script-info">
-                        <span>تاريخ الإضافة: ${script.addedDate}</span>
-                        <span>اسم اللعبة: ${script.mapName}</span>
-                    </div>
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="${script.link}" class="get-button">Get</a>
-                `;
-                latestScriptsContainer.appendChild(scriptCard);
-            });
+        function getTodayDate() {
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${day}/${month}/${year}`;
         }
 
-        // البحث عن السكربتات
-        async function searchScripts() {
-            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
-            const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = "";
-
-            const querySnapshot = await db.collection("scripts")
-                .where("titleLowercase", ">=", searchInput)
-                .where("titleLowercase", "<=", searchInput + '\uf8ff')
+        async function loadTodayScripts() {
+            const todayDate = getTodayDate();
+            const querySnapshot = await db.collection('scripts')
+                .where("date", "==", todayDate)
+                .limit(5)
                 .get();
 
-            if (querySnapshot.empty) {
-                scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
-                return;
-            }
+            const scriptsContainer = document.getElementById("scriptsContainer");
+            scriptsContainer.innerHTML = '';
 
             querySnapshot.forEach((doc) => {
-                const script = doc.data();
+                const scriptData = doc.data();
                 const scriptCard = document.createElement("div");
                 scriptCard.className = "script-card";
                 scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <img src="${scriptData.image}" alt="${scriptData.title}">
+                    <div class="script-title">${scriptData.title}</div>
+                    <div class="script-description">${scriptData.description}</div>
                     <div class="script-info">
-                        <span>تاريخ الإضافة: ${script.addedDate}</span>
-                        <span>اسم اللعبة: ${script.mapName}</span>
+                        <span>${scriptData.category}</span>
+                        <span>${scriptData.date}</span>
                     </div>
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="${script.link}" class="get-button">Get</a>
+                    <a href="${scriptData.link}" class="get-button" target="_blank">الحصول على السكربت</a>
                 `;
                 scriptsContainer.appendChild(scriptCard);
             });
         }
 
-        // دالة تحميل السكربتات
-        window.onload = function() {
-            loadTodayScripts();
-            loadLatestScripts();
-        };
+        loadTodayScripts();
     </script>
-    
-    
 </body>
 </html>
