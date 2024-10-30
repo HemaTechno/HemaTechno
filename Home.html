@@ -353,7 +353,7 @@ async function loadTodayScripts() {
             </div>
             <div class="script-title">${script.title}</div>
             <p class="script-description">${script.description}</p>
-            <a href="${script.link}" class="get-button">Get</a>
+            <a href="view.html?id=${doc.id}" class="get-button">Get</a>
         `;
         scriptsContainer.appendChild(scriptCard);
     });
