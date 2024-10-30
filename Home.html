@@ -226,27 +226,55 @@
     background-color: #444;
     color: #fff;
 }
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ffd700;
+            opacity: 0;
+            animation: sparkle-animation 0.6s ease-out forwards;
+        }
+
+        @keyframes sparkle-animation {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
 
     </style>
 </head>
 <body>
-    <script>
-        // إعداد Firebase وتحديث البيانات ...
-        
-        // إضافة تأثير عند النقر
-        document.addEventListener("click", function(e) {
-            const effect = document.createElement("div");
-            effect.classList.add("click-effect");
-            effect.style.left = `${e.pageX - 10}px`; // تخصيص الموقع الأفقي
-            effect.style.top = `${e.pageY - 10}px`; // تخصيص الموقع العمودي
-            document.body.appendChild(effect);
+<script>
+    document.addEventListener('click', (event) => {
+        for (let i = 0; i < 20; i++) { // عدد المفرقعات
+            createSparkle(event.clientX, event.clientY);
+        }
+    });
 
-            // إزالة العنصر بعد انتهاء الحركة
-            effect.addEventListener("animationend", () => {
-                effect.remove();
-            });
-        });
-    </script>
+    function createSparkle(x, y) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        document.body.appendChild(sparkle);
+
+        // مكان المفرقعات مع تعديل عشوائي
+        const offsetX = (Math.random() - 0.5) * 100;
+        const offsetY = (Math.random() - 0.5) * 100;
+        sparkle.style.left = `${x + offsetX}px`;
+        sparkle.style.top = `${y + offsetY}px`;
+
+        // إزالة المفرقعات بعد انتهاء التأثير
+        sparkle.addEventListener('animationend', () => sparkle.remove());
+    }
+</script>
     <!-- Header -->
     <div class="header">
         <a href="home.html"><img src="https://i.ibb.co/fdJWGJW/Untitled161-20241009100752.png" alt="شعار الموقع" title="العودة للصفحة الرئيسية"></a>
