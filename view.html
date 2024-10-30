@@ -74,7 +74,7 @@
         <img id="scriptImage" class="script-image" src="" alt="">
         <p id="scriptDescription" class="script-description"></p>
         
-        <div class="code-editor" id="codeEditor">
+        <div class="scriptName" id="codeEditor">
             <!-- سيتم تحميل كود السكربت هنا -->
         </div>
 
@@ -118,7 +118,7 @@
                 document.getElementById("scriptTitle").innerText = script.title;
                 document.getElementById("scriptImage").src = script.imageUrl;
                 document.getElementById("scriptDescription").innerText = script.description;
-                document.getElementById("codeEditor").innerText = script.scriptCode; // محتوى السكربت
+                document.getElementById("scriptName").innerText = script.scriptCode; // محتوى السكربت
             } else {
                 document.querySelector(".script-container").innerHTML = "<p>عذرًا، لا يمكن العثور على تفاصيل السكربت.</p>";
             }
@@ -131,11 +131,11 @@
         }
 
         function downloadScript() {
-            const codeContent = document.getElementById("codeEditor").innerText;
+            const codeContent = document.getElementById("scriptName").innerText;
             const blob = new Blob([codeContent], { type: "text/plain" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "script.txt";
+            link.download = "H-Scripts.txt";
             link.click();
         }
 
