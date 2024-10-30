@@ -24,8 +24,8 @@
         }
         .scripts-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
             padding: 20px;
             max-width: 800px;
             margin: auto;
@@ -35,9 +35,10 @@
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 13px; /* تصغير حجم النص */
         }
         .script-card:hover {
             transform: scale(1.05);
@@ -52,23 +53,23 @@
             display: flex;
             justify-content: space-between;
             margin-top: 8px;
-            font-size: 12px;
+            font-size: 11px; /* حجم أصغر للمعلومات */
         }
         .script-title {
-            font-size: 16px;
+            font-size: 15px; /* حجم أصغر للعنوان */
             font-weight: bold;
-            margin: 10px 0;
+            margin: 8px 0;
             color: #4caf50;
         }
         .script-description {
-            font-size: 13px;
+            font-size: 12px; /* حجم أصغر للوصف */
             color: #555;
         }
         .get-button {
             display: block;
             margin-top: 10px;
             padding: 8px;
-            font-size: 13px;
+            font-size: 12px; /* حجم أصغر للزر */
             background-color: #4caf50;
             color: white;
             border: none;
