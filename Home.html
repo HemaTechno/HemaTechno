@@ -397,37 +397,40 @@ window.onload = function() {
 
         // البحث عن السكربتات
         async function searchScripts() {
-            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
-            const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = "";
+    const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
+    const scriptsContainer = document.getElementById("scriptsContainer");
+    scriptsContainer.innerHTML = "";
 
-            const querySnapshot = await db.collection("scripts")
-                .where("titleLowercase", ">=", searchInput)
-                .where("titleLowercase", "<=", searchInput + '\uf8ff')
-                .get();
+    const querySnapshot = await db.collection("scripts").get(); // جلب جميع الوثائق
 
-            if (querySnapshot.empty) {
-                scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
-                return;
-            }
+    const results = querySnapshot.docs.filter(doc => {
+        const script = doc.data();
+        return script.titleLowercase.includes(searchInput); // التحقق من وجود الكلمة في العنوان
+    });
 
-            querySnapshot.forEach((doc) => {
-                const script = doc.data();
-                const scriptCard = document.createElement("div");
-                scriptCard.className = "script-card";
-                scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
-                    <div class="script-info">
-                        <span>تاريخ الإضافة: ${script.addedDate}</span>
-                        <span>اسم اللعبة: ${script.mapName}</span>
-                    </div>
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="${script.link}" class="get-button">Get</a>
-                `;
-                scriptsContainer.appendChild(scriptCard);
-            });
-        }
+    if (results.length === 0) {
+        scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
+        return;
+    }
+
+    results.forEach((doc) => {
+        const script = doc.data();
+        const scriptCard = document.createElement("div");
+        scriptCard.className = "script-card";
+        scriptCard.innerHTML = `
+            <img src="${script.imageUrl}" alt="${script.title}">
+            <div class="script-info">
+                <span>تاريخ الإضافة: ${script.addedDate}</span>
+                <span>اسم اللعبة: ${script.mapName}</span>
+            </div>
+            <div class="script-title">${script.title}</div>
+            <p class="script-description">${script.description}</p>
+            <a href="${script.link}" class="get-button">Get</a>
+        `;
+        scriptsContainer.appendChild(scriptCard);
+    });
+}
+
 
         // دالة تحميل السكربتات
         window.onload = function() {
