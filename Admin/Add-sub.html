@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة اشتراك</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .subscription-code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>إضافة اشتراك جديد</h2>
+    <input type="text" id="name" placeholder="الاسم">
+    <input type="file" id="image" accept="image/*">
+    <input type="text" id="expiryDate" placeholder="تاريخ انتهاء الاشتراك">
+    <button onclick="submitSubscription()">إرسال</button>
+
+    <div class="subscription-code" id="subscriptionCode"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // تهيئة flatpickr
+    flatpickr("#expiryDate", { enableTime: true, dateFormat: "Y-m-d H:i" });
+
+    function generateSubscriptionCode() {
+        return Math.random().toString(36).substring(2, 10);
+    }
+
+    async function submitSubscription() {
+        const name = document.getElementById("name").value;
+        const expiryDate = document.getElementById("expiryDate").value;
+        const imageFile = document.getElementById("image").files[0];
+
+        if (!name || !expiryDate || !imageFile) {
+            alert("يرجى ملء جميع الحقول.");
+            return;
+        }
+
+        const subscriptionCode = generateSubscriptionCode();
+
+        const reader = new FileReader();
+        reader.onload = async function(event) {
+            const imageUrl = event.target.result;
+
+            await db.collection("subscriptions").add({
+                name: name,
+                subscriptionCode: subscriptionCode,
+                createdAt: new Date(),
+                expiresAt: new Date(expiryDate),
+                imageUrl: imageUrl
+            });
+
+            document.getElementById("subscriptionCode").style.display = "block";
+            document.getElementById("subscriptionCode").innerText = `كود الاشتراك: ${subscriptionCode}`;
+        };
+        reader.readAsDataURL(imageFile);
+    }
+</script>
+
+</body>
+</html>
