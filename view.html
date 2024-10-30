@@ -131,13 +131,20 @@
         }
 
         function downloadScript() {
-            const codeContent = document.getElementById("codeEditor").innerText;
-            const blob = new Blob([codeContent], { type: "text/plain" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "title";
-            link.click();
-        }
+    const scriptTitle = document.getElementById("scriptTitle").innerText; // جلب عنوان السكربت
+    const codeContent = document.getElementById("codeEditor").innerText;
+
+    // إضافة حقوق الموقع ورابطه إلى محتوى الملف
+    const footerContent = `\n\n---\n© حقوق الطبع والنشر محفوظة لموقعنا. لمزيد من السكربتات، قم بزيارة: https://example.com`;
+    const fullContent = `${codeContent}\n${footerContent}`;
+
+    const blob = new Blob([fullContent], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${title}.txt`; // تعيين اسم الملف إلى عنوان السكربت
+    link.click();
+}
+
 
         function sharePage() {
             if (navigator.share) {
