@@ -111,15 +111,15 @@
                 const scriptCard = document.createElement("div");
                 scriptCard.className = "script-card";
                 scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}" style="width: 100%; border-radius: 10px;">
-                    <div class="script-info">
-                        <span>تاريخ الإضافة: ${script.addedDate}</span><br>
-                        <span>اسم اللعبة: ${script.mapName}</span>
-                    </div>
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="script-details.html?id=${doc.id}" class="get-button">عرض التفاصيل</a>
-                `;
+            <img src="${script.imageUrl}" alt="${script.title}">
+            <div class="script-info">
+                <span>تاريخ الإضافة: ${script.addedDate}</span>
+                <span>اسم اللعبة: ${script.mapName}</span>
+            </div>
+            <div class="script-title">${script.title}</div>
+            <p class="script-description">${script.description}</p>
+            <a href="view.html?id=${doc.id}" class="get-button">Get</a>
+        `;
                 scriptsContainer.appendChild(scriptCard);
             });
         }
