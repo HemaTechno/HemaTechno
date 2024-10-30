@@ -79,7 +79,7 @@
         </div>
 
         <div class="action-buttons">
-            <button class="copy-button" onclick="copyCode()">نسخ الكود</button>
+            <button class="copy-button" onclick="copyCode()">نسخ الاسكربت</button>
             <button class="download-button" onclick="downloadScript()">تحميل السكربت</button>
             <button class="share-button" onclick="sharePage()">مشاركة</button>
         </div>
@@ -126,7 +126,7 @@
 
         function copyCode() {
             navigator.clipboard.writeText(document.getElementById("codeEditor").innerText)
-                .then(() => alert("تم نسخ الكود!"))
+                .then(() => alert("تم نسخ الاسكربت!"))
                 .catch(err => alert("حدث خطأ أثناء النسخ"));
         }
 
