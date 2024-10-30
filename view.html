@@ -115,7 +115,7 @@
             const doc = await db.collection("scripts").doc(scriptId).get();
             if (doc.exists) {
                 const script = doc.data();
-                document.getElementById("scriptTitle").innerText = script.scriptTitle;
+                document.getElementById("scriptTitle").innerText = script.title;
                 document.getElementById("scriptImage").src = script.imageUrl;
                 document.getElementById("scriptDescription").innerText = script.description;
                 document.getElementById("codeEditor").innerText = script.scriptName; // محتوى السكربت
@@ -135,7 +135,7 @@
             const blob = new Blob([codeContent], { type: "text/plain" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "script.txt";
+            link.download = "title";
             link.click();
         }
 
