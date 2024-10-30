@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عرض جميع السكربتات</title>
     <style>
-        
         body {
             font-family: 'Cairo', sans-serif;
             text-align: center;
@@ -14,182 +13,66 @@
             padding: 0;
             margin: 0;
         }
-        .english-text {
-            font-family: 'Poppins', sans-serif;
-        }
         .header {
             background-color: #283048;
             color: #ffffff;
             padding: 15px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        .header a {
-            text-decoration: none;
-            color: #ffffff;
-        }
-        .header img {
-            height: 50px;
-            cursor: pointer;
-        }
-        .header .theme-toggle {
-            background-color: #536878;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        .header .theme-toggle:hover {
-            background-color: #6a7e92;
-            transform: scale(1.05);
-        }
-        .search-bar {
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .search-bar input {
-            width: 60%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            transition: border-color 0.3s;
-        }
-        .search-bar input:focus {
-            border-color: #4caf50;
-            outline: none;
-        }
-        .search-bar button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
         .scripts-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
             padding: 20px;
+            max-width: 800px;
+            margin: auto;
         }
         .script-card {
             background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-            width: 270px;
-            padding: 20px;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            padding: 15px;
+            text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .script-card:hover {
             transform: scale(1.05);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
         }
         .script-card img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 6px;
         }
         .script-info {
             display: flex;
             justify-content: space-between;
-            width: 100%;
-            margin-top: 10px;
-        }
-        .script-info span {
+            margin-top: 8px;
             font-size: 12px;
-            color: #666;
-            padding: 4px 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
         }
         .script-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             margin: 10px 0;
-            text-align: center;
             color: #4caf50;
         }
         .script-description {
-            font-size: 14px;
+            font-size: 13px;
             color: #555;
-            text-align: center;
         }
-        
-        .info-section {
-            margin-top: 40px;
-            padding: 20px;
-        }
-
-        .info-title {
-            font-size: 24px;
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .info-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .info-box {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 280px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .info-box:hover {
-            transform: scale(1.05);
-        }
-
-        .info-box img {
-            width: 50px;
-            margin-bottom: 15px;
-        }
-
-        .info-box h3 {
-            color: #4caf50;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .info-box p {
-            color: #555;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
         .get-button {
             display: block;
-            width: 100%;
             margin-top: 10px;
-            padding: 10px;
-            font-size: 14px;
+            padding: 8px;
+            font-size: 13px;
             background-color: #4caf50;
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
             text-decoration: none;
             text-align: center;
         }
@@ -197,7 +80,6 @@
             background-color: #283048;
             color: white;
             padding: 10px;
-            margin-top: 20px;
             font-size: 14px;
         }
         .footer a {
@@ -207,23 +89,6 @@
         }
         .footer a:hover {
             color: #c0c0c0;
-        }
-        body.dark-mode {
-    background-color: #333;
-    color: #fff;
-}
-
-.header.dark-mode {
-    background-color: #222;
-}
-
-.footer.dark-mode {
-    background-color: #222;
-}
-
-.script-card.dark-mode {
-    background-color: #444;
-    color: #fff;
         }
     </style>
 </head>
@@ -235,14 +100,13 @@
     </div>
 
     <!-- Scripts Container -->
-    <div class="container" id="scriptsContainer">
+    <div class="scripts-container" id="scriptsContainer">
         <!-- سيتم تحميل السكربتات هنا -->
     </div>
 
     <!-- Footer -->
-        <div class="footer">
+    <div class="footer">
         <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
-        <p><a href="contact.html">التواصل</a> | <a href="privacy.html">سياسة الخصوصية</a></p>
     </div>
 
     <!-- Firebase SDK -->
@@ -279,15 +143,15 @@
                 const scriptCard = document.createElement("div");
                 scriptCard.className = "script-card";
                 scriptCard.innerHTML = `
-            <img src="${script.imageUrl}" alt="${script.title}">
-            <div class="script-info">
-                <span>تاريخ الإضافة: ${script.addedDate}</span>
-                <span>اسم اللعبة: ${script.mapName}</span>
-            </div>
-            <div class="script-title">${script.title}</div>
-            <p class="script-description">${script.description}</p>
-            <a href="view.html?id=${doc.id}" class="get-button">Get</a>
-        `;
+                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="script-info">
+                        <span>تاريخ الإضافة: ${script.addedDate}</span>
+                        <span>اسم اللعبة: ${script.mapName}</span>
+                    </div>
+                    <div class="script-title">${script.title}</div>
+                    <p class="script-description">${script.description}</p>
+                    <a href="view.html?id=${doc.id}" class="get-button">Get</a>
+                `;
                 scriptsContainer.appendChild(scriptCard);
             });
         }
