@@ -3,91 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>زر التنقل</title>
+    <title>عرض جميع السكربتات</title>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-
-        .menu-container {
-            position: relative;
-        }
-
-        .nav-button {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #ffffff;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none;
-            flex-direction: column;
-            margin-top: 5px;
-            overflow: hidden;
-            min-width: 120px;
-        }
-
-        .dropdown-menu button {
-            padding: 10px;
-            font-size: 16px;
+            text-align: center;
+            background-color: #e3e8ed;
             color: #333;
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-align: left;
-            width: 100%;
+            padding: 0;
+            margin: 0;
         }
-
-        .dropdown-menu button:hover {
-            background-color: #f0f0f0;
+        .header {
+            background-color: #283048;
+            color: #ffffff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .scripts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+        .script-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            width: 270px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .script-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        .script-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .script-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #4caf50;
+        }
+        .footer {
+            background-color: #283048;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-<div class="menu-container">
-    <button class="nav-button" onclick="toggleMenu()">التنقل</button>
-    <div class="dropdown-menu" id="dropdownMenu">
-        <button onclick="redirectToPage('scripts.html')">سكربتات</button>
-        <button onclick="redirectToPage('hacks.html')">هاكات</button>
+    <!-- Header -->
+    <div class="header">
+        <h1>جميع السكربتات</h1>
     </div>
-</div>
 
-<script>
-    function toggleMenu() {
-        const menu = document.getElementById("dropdownMenu");
-        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
+    <!-- Scripts Container -->
+    <div class="scripts-container" id="scriptsContainer">
+        <!-- سيتم تحميل السكربتات هنا -->
+    </div>
 
-    function redirectToPage(page) {
-        window.location.href = page;
-    }
+    <!-- Footer -->
+    <div class="footer">
+        <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
+    </div>
 
-    // إغلاق القائمة عند النقر خارجها
-    document.addEventListener('click', function(event) {
-        const menu = document.getElementById("dropdownMenu");
-        if (!event.target.closest('.menu-container')) {
-            menu.style.display = 'none';
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+            authDomain: "treng-c6027.firebaseapp.com",
+            projectId: "treng-c6027",
+            storageBucket: "treng-c6027.appspot.com",
+            messagingSenderId: "305527546716",
+            appId: "1:305527546716:web:fd072a58200f31bb42d799",
+            measurementId: "G-3JFKFT2LT0"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        async function loadScripts() {
+            const scriptsContainer = document.getElementById("scriptsContainer");
+            scriptsContainer.innerHTML = "";
+
+            const querySnapshot = await db.collection("scripts").get();
+
+            if (querySnapshot.empty) {
+                scriptsContainer.innerHTML = "<p>لا توجد سكربتات متاحة.</p>";
+                return;
+            }
+
+            const subscriptionPromises = [];
+            querySnapshot.forEach(doc => {
+                const script = doc.data();
+                // قم بإضافة طلب استرجاع بيانات الاشتراك هنا
+                subscriptionPromises.push(db.collection("subscriptions").doc(script.subscriptionCode).get().then(subscriptionDoc => {
+                    const subscriptionData = subscriptionDoc.data();
+                    return {
+                        script,
+                        subscriptionData,
+                    };
+                }));
+            });
+
+            const scriptsWithSubscriptions = await Promise.all(subscriptionPromises);
+
+            scriptsWithSubscriptions.forEach(({ script, subscriptionData }) => {
+                const scriptCard = document.createElement("div");
+                scriptCard.className = "script-card";
+                scriptCard.innerHTML = `
+                    <img src="${script.imageUrl}" alt="${script.title}">
+                    <div class="script-title">${script.title}</div>
+                    <p>اسم الناشر: ${subscriptionData ? subscriptionData.name : 'غير متوفر'}</p>
+                    <img src="${subscriptionData ? subscriptionData.imageUrl : ''}" alt="${subscriptionData ? subscriptionData.name : ''}" style="width:50px; border-radius: 50%;">
+                    <p class="script-description">${script.description}</p>
+                    <a href="view.html?id=${doc.id}" class="get-button">Get</a>
+                `;
+                scriptsContainer.appendChild(scriptCard);
+            });
         }
-    });
-</script>
+
+        loadScripts();
+    </script>
 
 </body>
 </html>
