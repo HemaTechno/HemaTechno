@@ -3,124 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محرك بحث السكربتات</title>
+    <title>زر التنقل</title>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            text-align: center;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        .search-bar {
-            margin-bottom: 20px;
+
+        .menu-container {
+            position: relative;
         }
-        .search-input {
-            padding: 10px;
-            width: 300px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-right: 5px;
-        }
-        .search-button {
+
+        .nav-button {
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 18px;
             background-color: #4caf50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
-        .script-card {
-            background-color: #fff;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: left;
         }
-        .script-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #4caf50;
-        }
-        .get-button {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #2196f3;
-            color: white;
-            text-decoration: none;
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
             border-radius: 5px;
-            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            margin-top: 5px;
+            overflow: hidden;
+            min-width: 120px;
+        }
+
+        .dropdown-menu button {
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+        }
+
+        .dropdown-menu button:hover {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
 
-    <h1>محرك بحث السكربتات</h1>
-    
-    <div class="search-bar">
-        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن عنوان أو اسم لعبة">
-        <button onclick="searchScripts()" class="search-button">بحث</button>
+<div class="menu-container">
+    <button class="nav-button" onclick="toggleMenu()">التنقل</button>
+    <div class="dropdown-menu" id="dropdownMenu">
+        <button onclick="redirectToPage('scripts.html')">سكربتات</button>
+        <button onclick="redirectToPage('hacks.html')">هاكات</button>
     </div>
+</div>
 
-    <div id="scriptsContainer"></div>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-    
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-            authDomain: "treng-c6027.firebaseapp.com",
-            projectId: "treng-c6027",
-            storageBucket: "treng-c6027.appspot.com",
-            messagingSenderId: "305527546716",
-            appId: "1:305527546716:web:fd072a58200f31bb42d799",
-            measurementId: "G-3JFKFT2LT0"
-        };
+    function redirectToPage(page) {
+        window.location.href = page;
+    }
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        async function searchScripts() {
-            const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
-            const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = "";
-
-            const querySnapshot = await db.collection("scripts").get();
-
-            const results = querySnapshot.docs.filter(doc => {
-                const script = doc.data();
-                return (script.titleLowercase && script.titleLowercase.includes(searchInput)) ||
-                       (script.mapNameLowercase && script.mapNameLowercase.includes(searchInput));
-            });
-
-            if (results.length === 0) {
-                scriptsContainer.innerHTML = "<p>لا توجد نتائج تطابق بحثك.</p>";
-                return;
-            }
-
-            results.forEach((doc) => {
-                const script = doc.data();
-                const scriptCard = document.createElement("div");
-                scriptCard.className = "script-card";
-                scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}" style="width: 100%; border-radius: 10px;">
-                    <div class="script-info">
-                        <span>تاريخ الإضافة: ${script.addedDate}</span><br>
-                        <span>اسم اللعبة: ${script.mapName}</span>
-                    </div>
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="${script.link}" class="get-button">Get</a>
-                `;
-                scriptsContainer.appendChild(scriptCard);
-            });
+    // إغلاق القائمة عند النقر خارجها
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById("dropdownMenu");
+        if (!event.target.closest('.menu-container')) {
+            menu.style.display = 'none';
         }
-    </script>
+    });
+</script>
 
 </body>
 </html>
