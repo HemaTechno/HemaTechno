@@ -3,35 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الوقت المتبقي للاشتراك</title>
+    <title>التحقق من الاشتراك</title>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #f0f0f0;
         }
-        .container {
+        .form-container {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 100%;
             max-width: 400px;
-        }
-        .subscription-info {
-            margin-bottom: 20px;
+            width: 100%;
             text-align: center;
+        }
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div class="container" id="subscriptionsContainer">
-    <h2>الوقت المتبقي للاشتراك</h2>
+<div class="form-container">
+    <h2>التحقق من الاشتراك</h2>
+    <input type="text" id="subscriptionCode" placeholder="أدخل كود الاشتراك">
+    <button onclick="checkSubscription()">التحقق</button>
+    <div class="result" id="result"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
@@ -51,49 +62,44 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    function calculateTimeRemaining(expiryDate) {
-        const now = new Date();
-        const expiration = new Date(expiryDate);
-        
-        // تحويل الوقت إلى التوقيت المحلي لمصر (UTC+2) أو (UTC+3) في التوقيت الصيفي
-        const localOffset = 2 * 60 * 60 * 1000; // UTC+2
-        const adjustedNow = new Date(now.getTime() + localOffset);
-        const adjustedExpiration = new Date(expiration.getTime() + localOffset);
-        
-        const remainingTime = adjustedExpiration - adjustedNow;
+    async function checkSubscription() {
+        const code = document.getElementById("subscriptionCode").value;
+        const resultDiv = document.getElementById("result");
 
-        if (remainingTime < 0) {
-            return "انتهت المدة";
+        if (!code) {
+            resultDiv.innerText = "يرجى إدخال كود الاشتراك.";
+            return;
         }
 
-        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+        try {
+            const subscriptionDoc = await db.collection("subscriptions").where("subscriptionCode", "==", code).get();
 
-        return `${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية`;
+            if (subscriptionDoc.empty) {
+                resultDiv.innerText = "كود الاشتراك غير صحيح.";
+                return;
+            }
+
+            const subscriptionData = subscriptionDoc.docs[0].data();
+            const expiryDate = subscriptionData.expiresAt.toDate(); // تحويل إلى كائن تاريخ
+
+            const now = new Date();
+            const remainingTime = expiryDate - now;
+
+            if (remainingTime < 0) {
+                resultDiv.innerText = "انتهت مدة الاشتراك.";
+            } else {
+                const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                resultDiv.innerText = `الوقت المتبقي: ${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية`;
+            }
+        } catch (error) {
+            console.error("Error fetching subscription data:", error);
+            resultDiv.innerText = "حدث خطأ أثناء التحقق من الاشتراك.";
+        }
     }
-
-    async function loadSubscriptions() {
-        const subscriptionsContainer = document.getElementById("subscriptionsContainer");
-        subscriptionsContainer.innerHTML = `<h2>الوقت المتبقي للاشتراك</h2>`; // إعادة تعيين المحتوى
-
-        const querySnapshot = await db.collection("subscriptions").get();
-        querySnapshot.forEach((doc) => {
-            const subscription = doc.data();
-            const expirationTime = calculateTimeRemaining(subscription.expiresAt.toDate());
-
-            const subscriptionInfo = document.createElement("div");
-            subscriptionInfo.className = "subscription-info";
-            subscriptionInfo.innerHTML = `
-                <h3>${subscription.name}</h3>
-                <p>الوقت المتبقي: ${expirationTime}</p>
-            `;
-            subscriptionsContainer.appendChild(subscriptionInfo);
-        });
-    }
-
-    setInterval(loadSubscriptions, 1000);
 </script>
 
 </body>
