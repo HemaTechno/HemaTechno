@@ -397,15 +397,18 @@ window.onload = function() {
 
         // البحث عن السكربتات
         async function searchScripts() {
+    consasync function searchScripts() {
     const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
     const scriptsContainer = document.getElementById("scriptsContainer");
     scriptsContainer.innerHTML = "";
 
     const querySnapshot = await db.collection("scripts").get(); // جلب جميع الوثائق
 
+    // تصفية النتائج بناءً على الكلمة المدخلة في العنوان أو اسم اللعبة
     const results = querySnapshot.docs.filter(doc => {
         const script = doc.data();
-        return script.titleLowercase.includes(searchInput); // التحقق من وجود الكلمة في العنوان
+        return (script.titleLowercase && script.titleLowercase.includes(searchInput)) ||
+               (script.mapNameLowercase && script.mapNameLowercase.includes(searchInput));
     });
 
     if (results.length === 0) {
@@ -413,6 +416,7 @@ window.onload = function() {
         return;
     }
 
+    // عرض النتائج في الصفحة
     results.forEach((doc) => {
         const script = doc.data();
         const scriptCard = document.createElement("div");
@@ -430,7 +434,6 @@ window.onload = function() {
         scriptsContainer.appendChild(scriptCard);
     });
 }
-
 
         // دالة تحميل السكربتات
         window.onload = function() {
