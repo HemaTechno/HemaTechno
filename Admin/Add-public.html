@@ -17,9 +17,13 @@
             background-color: #fff;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             margin: auto;
+            transition: transform 0.2s;
+        }
+        .form-container:hover {
+            transform: scale(1.02);
         }
         .form-group {
             margin-bottom: 15px;
@@ -36,9 +40,11 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
+            transition: border-color 0.2s;
         }
-        .form-group textarea {
-            resize: vertical;
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #4caf50;
+            outline: none;
         }
         .submit-button {
             padding: 10px 20px;
@@ -49,6 +55,7 @@
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            transition: background-color 0.3s;
         }
         .submit-button:hover {
             background-color: #45a049;
@@ -67,6 +74,10 @@
 <div class="form-container">
     <form id="addScriptForm">
         <div class="form-group">
+            <label for="subscriptionCode">كود الاشتراك:</label>
+            <input type="text" id="subscriptionCode" required>
+        </div>
+        <div class="form-group">
             <label for="title">عنوان السكربت:</label>
             <input type="text" id="title" required>
         </div>
@@ -79,7 +90,7 @@
             <textarea id="description" rows="4" required></textarea>
         </div>
         <div class="form-group">
-            <label for="scriptName">اسم السكربت:</label>
+            <label for="scriptName">الاسكربت:</label>
             <input type="text" id="scriptName" required>
         </div>
         <div class="form-group">
@@ -114,12 +125,20 @@
     document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 
+        const subscriptionCode = document.getElementById("subscriptionCode").value;
         const title = document.getElementById("title").value;
         const mapName = document.getElementById("mapName").value;
         const description = document.getElementById("description").value;
         const scriptName = document.getElementById("scriptName").value;
         const imageFile = document.getElementById("image").files[0];
         const timestamp = new Date().toLocaleDateString();
+
+        // التحقق من صلاحية كود الاشتراك
+        const isValidSubscription = await checkSubscription(subscriptionCode);
+        if (!isValidSubscription) {
+            alert("كود الاشتراك غير صالح أو انتهت صلاحيته.");
+            return;
+        }
 
         if (!imageFile) {
             alert("يرجى رفع صورة.");
@@ -138,6 +157,7 @@
                 mapName,
                 description,
                 scriptName,
+                subscriptionCode, // إضافة كود الاشتراك هنا
                 imageUrl,
                 addedDate: timestamp
             });
@@ -149,6 +169,25 @@
             alert("حدث خطأ أثناء إضافة السكربت.");
         }
     });
+
+    async function checkSubscription(code) {
+        try {
+            const subscriptionDoc = await db.collection("subscriptions").where("subscriptionCode", "==", code).get();
+
+            if (subscriptionDoc.empty) {
+                return false; // كود الاشتراك غير صالح
+            }
+
+            const subscriptionData = subscriptionDoc.docs[0].data();
+            const expiryDate = subscriptionData.expiresAt.toDate(); // تحويل إلى كائن تاريخ
+
+            const now = new Date();
+            return expiryDate > now; // التحقق مما إذا كانت المدة لا تزال صالحة
+        } catch (error) {
+            console.error("خطأ أثناء التحقق من الاشتراك:", error);
+            return false; // في حالة حدوث خطأ
+        }
+    }
 </script>
 
 </body>
