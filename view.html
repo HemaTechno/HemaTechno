@@ -75,7 +75,7 @@
         <h2 id="scriptTitle" class="script-title"></h2>
         <p id="scriptDescription" class="script-description"></p>
         
-        <div id="scriptCode" class="code-editor"></div>
+        <div id="scriptName" class="code-editor"></div>
 
         <div class="button-container">
             <button class="button copy" onclick="copyCode()">نسخ</button>
@@ -97,7 +97,7 @@
                 document.getElementById("scriptImage").src = script.imageUrl;
                 document.getElementById("scriptTitle").innerText = script.title;
                 document.getElementById("scriptDescription").innerText = script.description;
-                document.getElementById("scriptCode").innerText = script.code; // Assuming the script has a "code" field
+                document.getElementById("scriptName").innerText = script.code; // Assuming the script has a "code" field
             } else {
                 alert("السكربت غير موجود!");
             }
@@ -125,11 +125,11 @@
 
         // تحميل السكربت كملف .txt
         function downloadScript() {
-            const code = document.getElementById("scriptCode").innerText;
+            const code = document.getElementById("scriptName").innerText;
             const blob = new Blob([code], { type: "text/plain" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = document.getElementById("scriptTitle").innerText + ".txt";
+            link.download = document.getElementById("h-scripts.site | scriptTitle").innerText + ".txt";
             link.click();
         }
 
