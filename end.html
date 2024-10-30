@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الوقت المتبقي للاشتراك</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        .subscription-info {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="subscriptionsContainer">
+    <h2>الوقت المتبقي للاشتراك</h2>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function calculateTimeRemaining(expiryDate) {
+        const now = new Date();
+        const expiration = new Date(expiryDate);
+        const remainingTime = expiration - now;
+
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        return `${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية`;
+    }
+
+    async function loadSubscriptions() {
+        const subscriptionsContainer = document.getElementById("subscriptionsContainer");
+        
+        const querySnapshot = await db.collection("subscriptions").get();
+        querySnapshot.forEach((doc) => {
+            const subscription = doc.data();
+            const expirationTime = calculateTimeRemaining(subscription.expiresAt.toDate());
+
+            const subscriptionInfo = document.createElement("div");
+            subscriptionInfo.className = "subscription-info";
+            subscriptionInfo.innerHTML = `
+                <h3>${subscription.name}</h3>
+                <p>الوقت المتبقي: ${expirationTime}</p>
+            `;
+            subscriptionsContainer.appendChild(subscriptionInfo);
+        });
+    }
+
+    setInterval(loadSubscriptions, 1000);
+</script>
+
+</body>
+</html>
