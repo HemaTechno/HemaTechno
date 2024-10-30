@@ -115,10 +115,10 @@
             const doc = await db.collection("scripts").doc(scriptId).get();
             if (doc.exists) {
                 const script = doc.data();
-                document.getElementById("scriptTitle").innerText = script.scriptName;
+                document.getElementById("scriptTitle").innerText = script.scriptTitle;
                 document.getElementById("scriptImage").src = script.imageUrl;
                 document.getElementById("scriptDescription").innerText = script.description;
-                document.getElementById("codeEditor").innerText = script.scriptCode; // محتوى السكربت
+                document.getElementById("codeEditor").innerText = script.scriptName; // محتوى السكربت
             } else {
                 document.querySelector(".script-container").innerHTML = "<p>عذرًا، لا يمكن العثور على تفاصيل السكربت.</p>";
             }
