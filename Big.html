@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب تكلفة المشوار واستهلاك البنزين</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .container h1 {
+            margin: 0 0 20px;
+            color: #333;
+        }
+        .container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #218838;
+        }
+        .container .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>حساب تكلفة المشوار واستهلاك البنزين</h1>
+        <input type="text" id="destination" placeholder="أدخل العنوان الذي تريد الذهاب إليه">
+        <button onclick="calculateFare()">احسب التكلفة</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let userLocation;
+
+        // الحصول على موقع المستخدم
+        function getUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    console.log("تم تحديد الموقع الحالي:", userLocation);
+                }, (error) => {
+                    alert("حدث خطأ في تحديد الموقع. الرجاء التأكد من تشغيل خدمة تحديد الموقع.");
+                });
+            } else {
+                alert("المتصفح لا يدعم خاصية تحديد الموقع.");
+            }
+        }
+
+        // حساب التكلفة واستهلاك البنزين باستخدام Google Maps API
+        function calculateFare() {
+            const destination = document.getElementById('destination').value;
+            if (!destination) {
+                alert("يرجى إدخال العنوان الوجهة.");
+                return;
+            }
+            if (!userLocation) {
+                alert("جاري تحديد الموقع الحالي. يرجى المحاولة مرة أخرى بعد لحظات.");
+                return;
+            }
+
+            // استدعاء Google Maps Distance Matrix API
+            const service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix(
+                {
+                    origins: [userLocation],
+                    destinations: [destination],
+                    travelMode: 'DRIVING',
+                    unitSystem: google.maps.UnitSystem.METRIC,
+                },
+                (response, status) => {
+                    if (status === 'OK') {
+                        const element = response.rows[0].elements[0];
+                        if (element.status === "OK") {
+                            const distance = element.distance.value / 1000; // المسافة بالكيلومترات
+                            const duration = element.duration.value / 60; // المدة بالدقائق
+
+                            // حساب التكلفة واستهلاك البنزين
+                            const baseFare = 5; // الرسوم الأساسية
+                            const costPerKm = 1.5; // تكلفة الكيلومتر الواحد
+                            const costPerMinute = 0.5; // تكلفة الدقيقة الواحدة
+                            const fuelConsumptionPerKm = 0.1; // استهلاك البنزين باللتر لكل كيلومتر
+
+                            const fare = baseFare + (distance * costPerKm) + (duration * costPerMinute);
+                            const fuelConsumption = distance * fuelConsumptionPerKm; // الاستهلاك الكلي للبنزين
+
+                            document.getElementById('result').innerHTML = `
+                                <p>تكلفة المشوار: ${fare.toFixed(2)} ريال</p>
+                                <p>استهلاك البنزين: ${fuelConsumption.toFixed(2)} لتر</p>
+                                <p>المسافة: ${distance.toFixed(2)} كم</p>
+                                <p>المدة: ${Math.round(duration)} دقيقة</p>
+                            `;
+                        } else {
+                            document.getElementById('result').innerText = "لم يتم العثور على الوجهة المحددة.";
+                        }
+                    } else {
+                        document.getElementById('result').innerText = "حدث خطأ أثناء حساب المسافة.";
+                    }
+                }
+            );
+        }
+
+        // الحصول على الموقع عند فتح الصفحة
+        window.onload = getUserLocation;
+    </script>
+
+    <!-- تضمين Google Maps API مع مفتاح API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+</body>
+</html>
