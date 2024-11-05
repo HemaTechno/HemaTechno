@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شركاؤنا</title>
+    <title>Home</title>
     <style>
         /* تطبيق الخط الأنيق */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Lobster', cursive;
+            font-family: 'Amiri', serif;
         }
 
         body {
@@ -33,12 +33,14 @@
         .logo {
             font-size: 1.8rem;
             color: #ffffff;
+            font-family: 'Poppins', sans-serif;
         }
 
         .navbar nav a {
             color: #ffffff;
             margin: 0 1rem;
             text-decoration: none;
+            font-family: 'Poppins', sans-serif;
         }
 
         .navbar nav a:hover {
@@ -52,6 +54,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-family: 'Poppins', sans-serif;
         }
 
         /* قسم الوصف والأزرار */
@@ -69,6 +72,7 @@
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
             color: #bbbbbb;
+            font-family: 'Amiri', serif;
         }
 
         .hero-buttons button {
@@ -79,6 +83,7 @@
             font-size: 1rem;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-family: 'Poppins', sans-serif;
         }
 
         .hero-buttons button:first-child {
@@ -110,6 +115,7 @@
         .partners h2 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
         }
 
         .partner-list {
@@ -167,7 +173,6 @@
                 <a href="#">الهاكات</a>
                 <a href="#">يوتيوبرز</a>
                 <a href="#">انشر سكربتك</a>
-                
             </nav>
             <button class="login-btn" onclick="window.location.href='login.html'">الدعم الفني</button>
         </div>
@@ -176,7 +181,7 @@
     <!-- قسم الوصف والأزرار -->
     <section class="hero">
         <h1>H-Scripts.site</h1>
-        <p>اهلا بك في موقعنا هذا هو الموقع الاول باللغة العربية و المصمم خصيصا للعرب و ننشر فيه سكربتات و هاكات روبلوكس مع اقوي تيم دعم فني علي مدار يوم<p>
+        <p>اهلا بك في موقعنا هذا هو الموقع الاول باللغة العربية و المصمم خصيصا للعرب و ننشر فيه سكربتات و هاكات روبلوكس مع اقوي تيم دعم فني علي مدار يوم</p>
         <div class="hero-buttons">
             <button onclick="window.location.href='explore.html'">استكشاف الاسكربتات</button>
             <button onclick="window.location.href='join.html'">انضم كشريك</button>
@@ -190,9 +195,8 @@
 
     <!-- قسم الشركاء -->
     <section class="partners">
-        <h2>partner</h2>
+        <h2>الشركاء</h2>
         <div class="partner-list">
-            <!-- عنصر شريك -->
             <div class="partner">
                 <img src="hema.jpg" alt="شريك 1">
                 <p>HemaTech</p>
@@ -201,8 +205,6 @@
                 <img src="channels4_profile.jpg" alt="TPC_TubeRblx">
                 <p>TPC_TubeRblx</p>
             </div>
-            
-            <!-- أضف المزيد حسب الحاجة -->
         </div>
     </section>
 
@@ -215,7 +217,6 @@
             effect.style.top = `${e.pageY - 10}px`;
             document.body.appendChild(effect);
 
-            // إزالة العنصر بعد انتهاء التأثير
             setTimeout(() => {
                 effect.remove();
             }, 500);
