@@ -1,49 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&family=Lobster&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>شركاؤنا</title>
     <style>
-        /* تطبيق الخطوط الأنيقة */
-body {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    font-family: 'Cairo', sans-serif; /* خط عربي فخم */
-}
-
-h1, h2 {
-    font-family: 'Lobster', cursive; /* خط عنوان أنيق */
-}
-
-.navbar .logo {
-    font-family: 'Lobster', cursive;
-    font-size: 1.8rem;
-}
-
-.hero p {
-    font-family: 'Cairo', sans-serif;
-    color: #bbbbbb;
-}
-
-.hero-buttons button {
-    font-family: 'Cairo', sans-serif;
-    font-weight: 600;
-}
-
-        /* إعادة تعيين القيم الافتراضية */
+        /* تطبيق الخط الأنيق */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Lobster', cursive;
         }
 
         body {
             background-color: #1a1a1a;
             color: #ffffff;
+            overflow: hidden;
+            position: relative;
         }
 
         /* الشريط العلوي */
@@ -56,8 +31,7 @@ h1, h2 {
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
             color: #ffffff;
         }
 
@@ -69,12 +43,6 @@ h1, h2 {
 
         .navbar nav a:hover {
             text-decoration: underline;
-        }
-
-        .search input {
-            padding: 0.5rem;
-            border: none;
-            border-radius: 5px;
         }
 
         .login-btn {
@@ -110,6 +78,7 @@ h1, h2 {
             border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .hero-buttons button:first-child {
@@ -120,6 +89,10 @@ h1, h2 {
         .hero-buttons button:last-child {
             background-color: #008CBA;
             color: #ffffff;
+        }
+
+        .hero-buttons button:hover {
+            background-color: #555555;
         }
 
         .user-stats {
@@ -161,8 +134,26 @@ h1, h2 {
             margin-bottom: 0.5rem;
         }
 
-        .partner p {
-            color: #ffffff;
+        /* تأثير النقر على الشاشة */
+        .click-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 191, 255, 0.5); /* لون أزرق سماوي */
+            border-radius: 50%;
+            pointer-events: none;
+            animation: clickEffect 0.5s ease-out;
+        }
+
+        @keyframes clickEffect {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(5);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -178,8 +169,7 @@ h1, h2 {
                 <a href="#">رفع</a>
                 <a href="#">API</a>
             </nav>
-            
-            <button class="login-btn">تسجيل الدخول</button>
+            <button class="login-btn" onclick="window.location.href='login.html'">تسجيل الدخول</button>
         </div>
     </header>
 
@@ -204,7 +194,7 @@ h1, h2 {
         <div class="partner-list">
             <!-- عنصر شريك -->
             <div class="partner">
-                <img src="partner1.jpg" alt="شريك 1">
+                <img src="checkmark.svg" alt="شريك 1">
                 <p>Hema_Tech1</p>
             </div>
             <div class="partner">
@@ -218,5 +208,21 @@ h1, h2 {
             <!-- أضف المزيد حسب الحاجة -->
         </div>
     </section>
+
+    <script>
+        // كود لإضافة تأثير عند النقر على الشاشة
+        document.addEventListener('click', function(e) {
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.style.left = `${e.pageX - 10}px`;
+            effect.style.top = `${e.pageY - 10}px`;
+            document.body.appendChild(effect);
+
+            // إزالة العنصر بعد انتهاء التأثير
+            setTimeout(() => {
+                effect.remove();
+            }, 500);
+        });
+    </script>
 </body>
 </html>
