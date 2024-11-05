@@ -3,187 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حساب تكلفة المشوار واستهلاك البنزين</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>شركاؤنا</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 100vh;
+        /* إعادة تعيين القيم الافتراضية */
+        * {
             margin: 0;
-            background-color: #f4f4f9;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            text-align: center;
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
         }
-        .container h1 {
-            margin: 0 0 20px;
-            color: #333;
+
+        /* الشريط العلوي */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #333333;
         }
-        #map {
-            width: 100%;
-            height: 400px;
-            margin-bottom: 15px;
-            border-radius: 8px;
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
         }
-        .container input, .container button {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
+
+        .navbar nav a {
+            color: #ffffff;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        .navbar nav a:hover {
+            text-decoration: underline;
+        }
+
+        .search input {
+            padding: 0.5rem;
+            border: none;
             border-radius: 5px;
         }
-        .container button {
-            background-color: #28a745;
-            color: #fff;
+
+        .login-btn {
+            padding: 0.5rem 1rem;
+            background-color: #555555;
+            color: #ffffff;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        .container button:hover {
-            background-color: #218838;
+
+        /* قسم الوصف والأزرار */
+        .hero {
+            text-align: center;
+            padding: 2rem;
         }
-        .container .result {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #333;
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #bbbbbb;
+        }
+
+        .hero-buttons button {
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .hero-buttons button:first-child {
+            background-color: #4CAF50;
+            color: #ffffff;
+        }
+
+        .hero-buttons button:last-child {
+            background-color: #008CBA;
+            color: #ffffff;
+        }
+
+        .user-stats {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #bbbbbb;
+        }
+
+        /* قسم الشركاء */
+        .partners {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .partners h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .partner-list {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .partner {
+            background-color: #333333;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 150px;
+            text-align: center;
+        }
+
+        .partner img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .partner p {
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>حساب تكلفة المشوار واستهلاك البنزين</h1>
-        <input type="text" id="search" placeholder="ابحث عن وجهة (أدخل اسم المكان)">
-        <button onclick="searchLocation()">بحث</button>
-        <div id="map"></div>
-        <button onclick="calculateFare()">احسب التكلفة</button>
-        <div class="result" id="result"></div>
-    </div>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="navbar">
+            <div class="logo">شركاؤنا</div>
+            <nav>
+                <a href="#">الشركاء</a>
+                <a href="#">الأكثر شهرة</a>
+                <a href="#">المفضلة</a>
+                <a href="#">رفع</a>
+                <a href="#">API</a>
+            </nav>
+            <div class="search">
+                <input type="text" placeholder="بحث..." />
+            </div>
+            <button class="login-btn">تسجيل الدخول</button>
+        </div>
+    </header>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        let userLocation;
-        let destinationLocation;
-        const apiKey = '5b3ce3597851110001cf62489a514629445a4a48a769344edda41520';
+    <!-- قسم الوصف والأزرار -->
+    <section class="hero">
+        <h1>ابحث عن شركاؤنا بسهولة</h1>
+        <p>هذا هو المكان المثالي للعثور على شركاء رائعين يدعمون مجالات متنوعة. هنا تجد كل ما تحتاج لبناء علاقات جديدة.</p>
+        <div class="hero-buttons">
+            <button onclick="window.location.href='explore.html'">استكشاف الشركاء</button>
+            <button onclick="window.location.href='join.html'">انضم كشريك</button>
+        </div>
+        <div class="user-stats">
+            <span>المستخدمون الآن:</span>
+            <span>المسجلون: <strong>59</strong></span>
+            <span>الضيوف: <strong>419</strong></span>
+        </div>
+    </section>
 
-        // إعداد الخريطة
-        const map = L.map('map').setView([24.7136, 46.6753], 12); // إعداد موقع مبدئي في الرياض
-
-        // إضافة طبقة الخريطة من OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        let userMarker, destinationMarker;
-
-        // الحصول على موقع المستخدم
-        function getUserLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    userLocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    map.setView(userLocation, 12);
-                    userMarker = L.marker(userLocation).addTo(map).bindPopup("موقعك الحالي").openPopup();
-                }, () => {
-                    alert("حدث خطأ في تحديد الموقع.");
-                });
-            } else {
-                alert("المتصفح لا يدعم خاصية تحديد الموقع.");
-            }
-        }
-
-        // البحث عن الموقع بالاسم باستخدام Nominatim API
-        function searchLocation() {
-            const locationName = document.getElementById('search').value;
-            if (!locationName) {
-                alert("يرجى إدخال اسم الوجهة.");
-                return;
-            }
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${locationName}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        const location = data[0];
-                        destinationLocation = {
-                            lat: parseFloat(location.lat),
-                            lng: parseFloat(location.lon)
-                        };
-                        map.setView(destinationLocation, 14);
-                        if (destinationMarker) {
-                            map.removeLayer(destinationMarker);
-                        }
-                        destinationMarker = L.marker(destinationLocation).addTo(map).bindPopup("الوجهة").openPopup();
-                    } else {
-                        alert("لم يتم العثور على الوجهة.");
-                    }
-                })
-                .catch(() => alert("حدث خطأ أثناء البحث عن الوجهة."));
-        }
-
-        // تحديد الوجهة بالنقر على الخريطة
-        map.on('click', function(e) {
-            destinationLocation = e.latlng;
-            if (destinationMarker) {
-                map.removeLayer(destinationMarker);
-            }
-            destinationMarker = L.marker(destinationLocation).addTo(map).bindPopup("الوجهة").openPopup();
-        });
-
-        // حساب التكلفة واستهلاك البنزين باستخدام OpenRouteService
-        function calculateFare() {
-            if (!userLocation) {
-                alert("يرجى الانتظار حتى يتم تحديد الموقع الحالي.");
-                return;
-            }
-            if (!destinationLocation) {
-                alert("يرجى تحديد الوجهة إما بالنقر على الخريطة أو بالبحث.");
-                return;
-            }
-
-            const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${userLocation.lng},${userLocation.lat}&end=${destinationLocation.lng},${destinationLocation.lat}`;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.routes && data.routes.length > 0) {
-                        const distance = data.routes[0].summary.distance / 1000; // المسافة بالكيلومترات
-                        const duration = data.routes[0].summary.duration / 60; // المدة بالدقائق
-
-                        // حساب التكلفة واستهلاك البنزين
-                        const baseFare = 5; // الرسوم الأساسية
-                        const costPerKm = 1.5; // تكلفة الكيلومتر الواحد
-                        const costPerMinute = 0.5; // تكلفة الدقيقة الواحدة
-                        const fuelConsumptionPerKm = 0.1; // استهلاك البنزين باللتر لكل كيلومتر
-
-                        const fare = baseFare + (distance * costPerKm) + (duration * costPerMinute);
-                        const fuelConsumption = distance * fuelConsumptionPerKm; // الاستهلاك الكلي للبنزين
-
-                        document.getElementById('result').innerHTML = `
-                            <p>تكلفة المشوار: ${fare.toFixed(2)} ريال</p>
-                            <p>استهلاك البنزين: ${fuelConsumption.toFixed(2)} لتر</p>
-                            <p>المسافة: ${distance.toFixed(2)} كم</p>
-                            <p>المدة: ${Math.round(duration)} دقيقة</p>
-                        `;
-                    } else {
-                        document.getElementById('result').innerText = "لم يتم العثور على المسار. يرجى المحاولة مرة أخرى.";
-                    }
-                })
-                .catch(() => document.getElementById('result').innerText = "حدث خطأ أثناء حساب المسافة.");
-        }
-
-        // الحصول على الموقع عند فتح الصفحة
-        window.onload = getUserLocation;
-    </script>
+    <!-- قسم الشركاء -->
+    <section class="partners">
+        <h2>آخر الشركاء</h2>
+        <div class="partner-list">
+            <!-- عنصر شريك -->
+            <div class="partner">
+                <img src="partner1.jpg" alt="شريك 1">
+                <p>شريك 1</p>
+            </div>
+            <div class="partner">
+                <img src="partner2.jpg" alt="شريك 2">
+                <p>شريك 2</p>
+            </div>
+            <div class="partner">
+                <img src="partner3.jpg" alt="شريك 3">
+                <p>شريك 3</p>
+            </div>
+            <!-- أضف المزيد حسب الحاجة -->
+        </div>
+    </section>
 </body>
 </html>
