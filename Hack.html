@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
-<!-- وصف الموقع -->
+<head> 
+    <!-- وصف الموقع -->
     <meta name="description" content="أفضل موقع لمشاركة السكربتات و الهاكات الخاصة بأنظمة التشغيل المختلفة.">
-
     <!-- وسم Open Graph الخاص بالفيسبوك ومنصات أخرى -->
     <meta property="og:title" content="H-Scripts - أفضل موقع للسكربتات">
     <meta property="og:description" content="افضل موقع سكربتات و هاكات روبلوكس و تقدر اسكربت الان">
     <meta property="og:image" content="https://i.ibb.co/FVr4b2z/20240926-203252.jpg">
     <meta property="og:url" content="https://h-scripts.site">
     <meta property="og:type" content="website">
-
     <!-- وسم Twitter Card الخاص بتويتر -->
     <meta name="twitter:card" content="https://i.ibb.co/FVr4b2z/20240926-203252.jpg">
     <meta name="twitter:title" content="H-Scripts - أفضل موقع للسكربتات">
     <meta name="twitter:description" content="شارك أفضل السكربتات مع الآخرين وتعلم المزيد حول الهاكات.">
     <meta name="twitter:image" content="https://i.ibb.co/FVr4b2z/20240926-203252.jpg">
-
     <!-- أيقونة الموقع -->
     <link rel="icon" href="https://i.ibb.co/FVr4b2z/20240926-203252.jpg" type="image/x-icon">
     
@@ -24,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عرض السكربتات</title>
     <style>
+        /* إعدادات عامة للصفحة */
         * {
             margin: 0;
             padding: 0;
@@ -31,59 +29,42 @@
         }
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #090913; /* خلفية الصفحة */
+            background-color: #090913;
             color: #fff;
             padding: 20px;
             direction: rtl;
         }
-        h1 {
-            text-align: left; /* محاذاة العنوان إلى اليسار */
-            color: #948DFF; /* لون العنوان */
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            margin-left: 20px; /* مسافة من اليسار */
-        }
-        /* القائمة الجانبية */
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            right: -250px; /* تبدأ خارج الشاشة */
-            background-color: rgba(0, 0, 0, 0.95); /* خلفية القائمة الجانبية */
-            overflow-x: hidden;
-            padding-top: 60px;
-            transition: 0.5s; /* انتقال سلس عند الفتح والإغلاق */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* ظل للقائمة */
-        }
-        .sidebar a {
-            padding: 10px;
-            text-decoration: none;
-            font-size: 20px;
-            color: #fff;
-            display: block;
-            text-align: right; /* محاذاة النص إلى اليمين */
-            transition: 0.3s;
-            margin: 10px 0; /* مسافة بين الروابط */
+
+        /* الشريط العلوي */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1E1E2E;
+            padding: 15px 20px;
             border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1); /* خلفية شفافة */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
         }
-        .sidebar a:hover {
-            color: #f1f1f1; /* لون النص عند التحويم */
-            background-color: rgba(255, 204, 0, 0.2); /* خلفية عند التحويم */
+        .navbar a {
+            color: #FFF;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-right: 20px;
+            transition: color 0.3s;
         }
-        .menu-btn {
-            font-size: 30px;
-            position: fixed;
-            top: 20px;
-            right: 20px; /* نقل الزر إلى اليمين */
-            cursor: pointer;
-            color: white;
-            z-index: 2;
+        .navbar a:hover {
+            color: #948DFF;
+        }
+        
+        /* إعدادات العناوين والصناديق */
+        h1 {
+            color: #948DFF;
+            font-size: 2.5em;
+            margin-left: 20px;
         }
         .script-box {
-            background: #1e1e1e; /* لون خلفية الصندوق */
+            background: #1e1e1e;
             border-radius: 10px;
             padding: 20px;
             margin: 15px 0;
@@ -91,73 +72,64 @@
             transition: transform 0.3s;
             display: flex;
             flex-direction: column;
-            align-items: center; /* توسيط العناصر داخل الصندوق */
+            align-items: center;
         }
         .script-box:hover {
-            transform: scale(1.02); /* تأثير التحويم */
+            transform: scale(1.02);
         }
         .script-title {
             font-size: 24px;
-            color: #948DFF; /* لون عنوان السكربت */
+            color: #948DFF;
             text-align: center;
         }
         .script-description {
             margin: 10px 0;
             font-size: 16px;
-            text-align: center; /* توسيط الوصف */
+            text-align: center;
         }
         .script-platform {
             margin: 10px 0;
             text-align: center;
         }
         .platform-image {
-            border: 1px solid #948DFF; /* إطار للصورة */
-            border-radius: 2px; /* زوايا مدورة للإطار */
-            padding: 2px; /* مسافة داخلية للإطار */
-            width: 60px; /* زيادة العرض */
-            height: 60px; /* زيادة الارتفاع */
+            border: 1px solid #948DFF;
+            border-radius: 5px;
+            padding: 2px;
+            width: 60px;
+            height: 60px;
         }
         .script-link, .share-button {
             display: inline-block;
             margin-top: 15px;
             text-decoration: none;
             color: #fff;
-            background-color: #948DFF; /* لون زر التحميل */
-            border: none;
+            background-color: #948DFF;
             padding: 10px 20px;
             border-radius: 5px;
             font-size: 18px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            text-align: center;
             transition: background-color 0.3s, transform 0.3s;
-            width: 100%; /* جعل الأزرار تأخذ عرض الصندوق */
-            text-align: center; /* توسيط النص داخل الأزرار */
         }
         .script-link:hover, .share-button:hover {
-            background-color: #7b79e8; /* لون زر التحميل عند التحويم */
-            transform: translateY(-2px); /* تأثير التحويم */
-        }
-        /* لإخفاء القائمة الجانبية */
-        .closebtn {
-            color: white;
-            font-size: 30px;
-            position: absolute;
-            top: 10px;
-            left: 20px;
+            background-color: #7b79e8;
+            transform: translateY(-2px);
         }
     </style>
+    
     <!-- روابط Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
-    <span class="menu-btn" onclick="openNav()">&#9776;</span>
-    <div class="sidebar" id="mySidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="public-scripts">سكربتات</a>
+    <!-- الشريط العلوي -->
+    <div class="navbar">
+        <a href="public-scripts">السكربتات العامة</a>
         <a href="Scripts.html">سكربتات يوتيوب</a>
-        <a href="Hack.html">هاكات</a>
-        <a href="https://youtube.com/@hema_tech1?si=It1Tn77jTgsUZDWJ">شريك</a>
+        <a href="Hack.html">الهاكات</a>
+        <a href="https://youtube.com/@hema_tech1?si=It1Tn77jTgsUZDWJ">الشريك</a>
     </div>
 
     <h1>H-Scripts</h1>
@@ -191,7 +163,7 @@
                     <div class="script-title">${scriptData.title}</div>
                     <div class="script-description">${scriptData.description}</div>
                     <div class="script-platform">
-                        <img src="${getPlatformImage(scriptData.platform)}" alt="${scriptData.platform}" class="platform-image" style="width: 60px; height: 60px;">
+                        <img src="${getPlatformImage(scriptData.platform)}" alt="${scriptData.platform}" class="platform-image">
                     </div>
                     <a href="${scriptData.downloadLink}" class="script-link" target="_blank">رابط التحميل</a>
                     <button class="share-button" onclick="shareLink('${doc.id}')">مشاركة</button>
@@ -199,16 +171,6 @@
                 scriptsContainer.appendChild(scriptBox);
             });
         });
-
-        // دالة فتح القائمة الجانبية
-        function openNav() {
-            document.getElementById("mySidebar").style.right = "0"; // إظهار القائمة
-        }
-
-        // دالة إغلاق القائمة الجانبية
-        function closeNav() {
-            document.getElementById("mySidebar").style.right = "-250px"; // إخفاء القائمة
-        }
 
         // دالة مشاركة الرابط
         function shareLink(id) {
@@ -222,14 +184,13 @@
 
         // دالة لجلب صورة المنصة
         function getPlatformImage(platform) {
-            // عودة بصورة المنصة بناءً على النظام
             const images = {
                 "android": "https://i.ibb.co/qxNW56g/Android-robot.png",
                 "ios": "https://i.ibb.co/DVYptjt/download-9.png",
                 "windows": "https://i.ibb.co/jkGKs5t/Windows-logo-2012.png",
                 "linux": "https://i.ibb.co/XVqYwdS/unnamed.png"
             };
-            return images[platform.toLowerCase()] || "default.png"; // صورة افتراضية إذا لم توجد
+            return images[platform.toLowerCase()] || "default.png";
         }
     </script>
 </body>
