@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="أفضل موقع يقدم شروحات و سكربتات و هاكات روبلوكس.">
+    <meta name="keywords" content="هيما تيك, روبلوكس, شروحات, سكربتات, هاكات">
+    <meta name="author" content="Hema_Tech1">
+    <title>YouTube Scripts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Amiri', serif;
+        }
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            direction: rtl;
+        }
+        
+        /* الشريط العلوي */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #333333;
+        }
+        .logo {
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar nav a {
+            color: #ffffff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar nav a:hover {
+            text-decoration: underline;
+        }
+        .login-btn {
+            padding: 0.5rem 1rem;
+            background-color: #555555;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        #boxContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #2c3140;
+            border-radius: 12px;
+            width: 340px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+        .card-content .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #b3b3b3;
+            margin-bottom: 10px;
+        }
+        .card-content h1 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #f1f1f1;
+        }
+        .card-content p {
+            font-size: 1.1em;
+            color: #d4d4d4;
+            margin: 10px 0;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+        }
+        .card-content .author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #b3b3b3;
+        }
+        .card-content .author img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <!-- الشريط العلوي -->
+    <div class="navbar">
+        <div class="logo">H-Scripts</div>
+        <nav>
+            <a href="public-scripts.html">scripts</a>
+            <a href="Scripts.html">YouTube Scripts</a>
+            <a href="Hack.html">exploits</a>
+            <a href="https://youtube.com/@hema_tech1?si=It1Tn77jTgsUZDWJ">Partner</a>
+        </nav>
+        <button class="login-btn">Login</button>
+    </div>
+
+    <div id="boxContainer"></div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJ6erh48TqECEM-OfZPQO0voOaTu7f_Og",
+            authDomain: "scripts-b35e3.firebaseapp.com",
+            projectId: "scripts-b35e3",
+            storageBucket: "scripts-b35e3.appspot.com",
+            messagingSenderId: "536349347913",
+            appId: "1:536349347913:web:7c4266a79eefc76e212f98"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        db.collection("scripts").get().then((querySnapshot) => {
+            const data = [];
+            querySnapshot.forEach((doc) => {
+                data.push(doc.data());
+            });
+            createBoxes(data);
+        }).catch((error) => {
+            console.error("Error getting documents: ", error);
+        });
+
+        function createBoxes(data) {
+            const boxContainer = document.getElementById('boxContainer');
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                card.innerHTML = `
+                    <a href="page.html?id=${item.id}">
+                        <video src="${item.videoUrl}" controls></video>
+                    </a>
+                    <div class="card-content">
+                        <div class="meta">
+                            <span>${item.category}</span>
+                            <span>${item.date}</span>
+                        </div>
+                        <h1>${item.title}</h1>
+                        <p>${item.description}</p>
+                        <div class="author">
+                            <img src="${item.authorImage}" alt="${item.author}">
+                            <span>${item.author}</span>
+                        </div>
+                    </div>
+                `;
+
+                boxContainer.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
