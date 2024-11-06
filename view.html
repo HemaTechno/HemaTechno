@@ -127,6 +127,15 @@
         .footer a:hover {
             color: #c0c0c0;
         }
+        .click-effect {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 191, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: clickEffect 0.5s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -230,5 +239,19 @@
         loadScriptDetails();
     </script>
 
+    <script>
+        // كود لإضافة تأثير عند النقر على الشاشة
+        document.addEventListener('click', function(e) {
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.style.left = `${e.pageX - 10}px`;
+            effect.style.top = `${e.pageY - 10}px`;
+            document.body.appendChild(effect);
+
+            setTimeout(() => {
+                effect.remove();
+            }, 500);
+        });
+    </script>
 </body>
 </html>
