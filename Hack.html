@@ -21,16 +21,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عرض السكربتات</title>
     <style>
-        /* إعدادات عامة للصفحة */
+        /* تطبيق الخط الأنيق */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Amiri', serif;
         }
+
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #1c1e26;
-            color: #fff;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
             padding: 20px;
             direction: rtl;
         }
@@ -38,33 +41,37 @@
         /* الشريط العلوي */
         .navbar {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
-            background-color: #282a36;
-            padding: 15px 20px;
+            padding: 1rem 2rem;
+            background-color: #333333;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin-bottom: 30px;
         }
-        .navbar a {
-            color: #bd93f9;
-            text-decoration: none;
-            font-size: 1.1em;
-            margin-left: 20px;
-            transition: color 0.3s;
+        .logo {
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
         }
-        .navbar a:hover {
-            color: #ff79c6;
+        .navbar nav a {
+            color: #ffffff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar nav a:hover {
+            text-decoration: underline;
         }
         
         /* إعدادات العناوين والصناديق */
         h1 {
-            color: #ff79c6;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
         .script-box {
-            background: #282a36;
+            background: #333333;
             border-radius: 8px;
             padding: 20px;
             margin: 15px 0;
@@ -73,20 +80,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 1px solid #44475a;
+            border: 1px solid #555555;
         }
         .script-box:hover {
             transform: scale(1.03);
         }
         .script-title {
-            font-size: 22px;
-            color: #bd93f9;
+            font-size: 1.5rem;
+            color: #ffffff;
             margin-bottom: 10px;
             text-align: center;
         }
         .script-description {
-            font-size: 16px;
-            color: #f8f8f2;
+            font-size: 1.2rem;
+            color: #bbbbbb;
             margin-bottom: 10px;
             text-align: center;
         }
@@ -95,7 +102,7 @@
             text-align: center;
         }
         .platform-image {
-            border: 1px solid #ff79c6;
+            border: 1px solid #4CAF50;
             border-radius: 8px;
             padding: 3px;
             width: 60px;
@@ -105,17 +112,18 @@
             display: inline-block;
             margin-top: 10px;
             text-decoration: none;
-            color: #fff;
-            background-color: #bd93f9;
+            color: #ffffff;
+            background-color: #008CBA;
             padding: 10px 20px;
             border-radius: 5px;
-            font-size: 16px;
-            width: 100%;
+            font-size: 1rem;
             text-align: center;
+            font-family: 'Poppins', sans-serif;
             transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
         }
         .script-link:hover, .share-button:hover {
-            background-color: #ff79c6;
+            background-color: #555555;
             transform: translateY(-2px);
         }
     </style>
@@ -128,13 +136,16 @@
 
     <!-- الشريط العلوي -->
     <div class="navbar">
-        <a href="public-scripts">السكربتات العامة</a>
-        <a href="Scripts.html">سكربتات يوتيوب</a>
-        <a href="Hack.html">الهاكات</a>
-        <a href="https://youtube.com/@hema_tech1?si=It1Tn77jTgsUZDWJ">الشريك</a>
+        <div class="logo">H-Scripts</div>
+        <nav>
+            <a href="public-scripts">السكربتات العامة</a>
+            <a href="Scripts.html">سكربتات يوتيوب</a>
+            <a href="Hack.html">الهاكات</a>
+            <a href="https://youtube.com/@hema_tech1?si=It1Tn77jTgsUZDWJ">الشريك</a>
+        </nav>
     </div>
 
-    <h1>H-Scripts</h1>
+    <h1>عرض السكربتات</h1>
     <div id="scriptsContainer"></div>
 
     <script>
