@@ -68,11 +68,10 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .card video {
+        .card iframe {
             width: 100%;
             height: 200px;
-            object-fit: cover;
-            cursor: pointer;
+            border: none;
         }
         .card-content {
             padding: 20px;
@@ -162,9 +161,14 @@
                 const card = document.createElement('div');
                 card.classList.add('card');
 
+                // استخراج معرف الفيديو وتكوين رابط تضمين
+                const videoId = item.videoUrl.includes("watch?v=") ? 
+                    item.videoUrl.split("watch?v=")[1].split("&")[0] : 
+                    item.videoUrl.split("/").pop();
+
                 card.innerHTML = `
                     <a href="page.html?id=${item.id}">
-                        <video src="${item.videoUrl}" controls></video>
+                        <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
                     </a>
                     <div class="card-content">
                         <div class="meta">
