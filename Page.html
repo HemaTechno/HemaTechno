@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل السكربت</title>
+    <style>
+        /* تنسيقات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Amiri', serif;
+        }
+
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* الشريط العلوي */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #333333;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: #ffffff;
+        }
+
+        .navbar nav a {
+            color: #ffffff;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        .navbar nav a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            padding: 0.5rem 1rem;
+            background-color: #555555;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* صندوق السكربت */
+        .script-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: #333;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .script-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4caf50;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .script-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .script-description {
+            margin: 20px 0;
+            font-size: 1rem;
+            color: #dddddd;
+            text-align: center;
+        }
+
+        .code-editor {
+            background-color: #444;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: monospace;
+            overflow-x: auto;
+            color: #ffffff;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .action-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .copy-button { background-color: #4caf50; color: #fff; }
+        .download-button { background-color: #ff9800; color: #fff; }
+        .share-button { background-color: #2196f3; color: #fff; }
+
+        /* Footer */
+        .footer {
+            background-color: #333333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #c0c0c0;
+        }
+        .click-effect {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 191, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: clickEffect 0.5s ease-out;
+        }
+        @keyframes clickEffect {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(5);
+        opacity: 0;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="navbar">
+            <div class="logo">H-Scripts</div>
+            <nav>
+                <a href="All-scripts.html">الاسكربتات</a>
+                <a href="Hack.html">الهاكات</a>
+                <a href="youtube-scripts.html">يوتيوبرز</a>
+                <a href="upload.html">انشر سكربتك</a>
+            </nav>
+            <button class="login-btn" onclick="window.location.href='https://t.me/hscripts'">الدعم الفني</button>
+        </div>
+    </header>
+
+    <!-- قسم تفاصيل السكربت -->
+    <div class="script-container">
+        <h2 id="scriptTitle" class="script-title"></h2>
+        <img id="scriptImage" class="script-image" src="" alt="">
+        <p id="scriptDescription" class="script-description"></p>
+        
+        <div id="codeEditor" class="code-editor">
+            <!-- سيتم تحميل كود السكربت هنا -->
+        </div>
+
+        <div class="action-buttons">
+            <button class="copy-button" onclick="copyCode()">نسخ الاسكربت</button>
+            <button class="download-button" onclick="downloadScript()">تحميل السكربت</button>
+            <button class="share-button" onclick="sharePage()">مشاركة</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© جميع الحقوق محفوظة <a href="privacy.html">سياسة الخصوصية</a> | <a href="contact.html">التواصل</a></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+            authDomain: "treng-c6027.firebaseapp.com",
+            projectId: "treng-c6027",
+            storageBucket: "treng-c6027.appspot.com",
+            messagingSenderId: "305527546716",
+            appId: "1:305527546716:web:fd072a58200f31bb42d799",
+            measurementId: "G-3JFKFT2LT0"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const scriptId = urlParams.get('id');
+
+        async function loadScriptDetails() {
+            const doc = await db.collection("scripts").doc(scriptId).get();
+            if (doc.exists) {
+                const script = doc.data();
+                document.getElementById("scriptTitle").innerText = script.title;
+                document.getElementById("scriptImage").src = script.imageUrl;
+                document.getElementById("scriptDescription").innerText = script.description;
+                document.getElementById("codeEditor").innerText = script.scriptName;
+            } else {
+                document.querySelector(".script-container").innerHTML = "<p>عذرًا، لا يمكن العثور على تفاصيل السكربت.</p>";
+            }
+        }
+
+        function copyCode() {
+            navigator.clipboard.writeText(document.getElementById("codeEditor").innerText)
+                .then(() => alert("تم نسخ الاسكربت!"))
+                .catch(err => alert("حدث خطأ أثناء النسخ"));
+        }
+
+        function downloadScript() {
+            const codeContent = document.getElementById("codeEditor").innerText;
+            const blob = new Blob([codeContent], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "script.txt";
+            link.click();
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.getElementById("scriptTitle").innerText,
+                    url: window.location.href
+                }).catch(err => alert("حدث خطأ أثناء المشاركة"));
+            } else {
+                alert("المشاركة غير مدعومة على هذا المتصفح.");
+            }
+        }
+
+        loadScriptDetails();
+    </script>
+
+    <script>
+        // كود لإضافة تأثير عند النقر على الشاشة
+        document.addEventListener('click', function(e) {
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.style.left = `${e.pageX - 10}px`;
+            effect.style.top = `${e.pageY - 10}px`;
+            document.body.appendChild(effect);
+
+            setTimeout(() => {
+                effect.remove();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
