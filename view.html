@@ -1,74 +1,151 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل السكربت</title>
     <style>
+        /* تنسيقات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #e3e8ed;
-            color: #333;
-        }
-        .header, .footer {
-            background-color: #283048;
+            background-color: #1a1a1a;
             color: #ffffff;
-            padding: 10px;
-            text-align: center;
         }
+
+        /* الشريط العلوي */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #333333;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: #ffffff;
+        }
+
+        .navbar nav a {
+            color: #ffffff;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        .navbar nav a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            padding: 0.5rem 1rem;
+            background-color: #555555;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* صندوق السكربت */
         .script-container {
             max-width: 800px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
+            margin: 2rem auto;
+            background-color: #333;
+            padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
+
         .script-title {
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #4caf50;
             text-align: center;
             margin-bottom: 15px;
         }
+
         .script-image {
             width: 100%;
             border-radius: 10px;
         }
+
         .script-description {
             margin: 20px 0;
-            font-size: 16px;
+            font-size: 1rem;
+            color: #dddddd;
+            text-align: center;
         }
+
         .code-editor {
-            background-color: #f4f4f4;
-            padding: 15px;
+            background-color: #444;
+            padding: 1rem;
             border-radius: 10px;
             font-family: monospace;
             overflow-x: auto;
+            color: #ffffff;
         }
+
         .action-buttons {
             margin-top: 20px;
             text-align: center;
         }
+
         .action-buttons button {
             padding: 10px 20px;
             margin: 5px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
         }
+
         .copy-button { background-color: #4caf50; color: #fff; }
         .download-button { background-color: #ff9800; color: #fff; }
         .share-button { background-color: #2196f3; color: #fff; }
+
+        /* Footer */
+        .footer {
+            background-color: #333333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #c0c0c0;
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>H-Scripts</h1>
-    </div>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="navbar">
+            <div class="logo">H-Scripts</div>
+            <nav>
+                <a href="#">الاسكربتات</a>
+                <a href="#">الهاكات</a>
+                <a href="#">يوتيوبرز</a>
+                <a href="#">انشر سكربتك</a>
+            </nav>
+            <button class="login-btn" onclick="window.location.href='login.html'">الدعم الفني</button>
+        </div>
+    </header>
 
+    <!-- قسم تفاصيل السكربت -->
     <div class="script-container">
         <h2 id="scriptTitle" class="script-title"></h2>
         <img id="scriptImage" class="script-image" src="" alt="">
@@ -85,6 +162,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         <p>© جميع الحقوق محفوظة <a href="privacy.html">سياسة الخصوصية</a> | <a href="contact.html">التواصل</a></p>
     </div>
@@ -107,7 +185,6 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // استخراج معرف السكربت من الرابط
         const urlParams = new URLSearchParams(window.location.search);
         const scriptId = urlParams.get('id');
 
@@ -118,7 +195,7 @@
                 document.getElementById("scriptTitle").innerText = script.title;
                 document.getElementById("scriptImage").src = script.imageUrl;
                 document.getElementById("scriptDescription").innerText = script.description;
-                document.getElementById("codeEditor").innerText = script.scriptName; // محتوى السكربت
+                document.getElementById("codeEditor").innerText = script.scriptName;
             } else {
                 document.querySelector(".script-container").innerHTML = "<p>عذرًا، لا يمكن العثور على تفاصيل السكربت.</p>";
             }
@@ -130,17 +207,14 @@
                 .catch(err => alert("حدث خطأ أثناء النسخ"));
         }
 
-        
         function downloadScript() {
             const codeContent = document.getElementById("codeEditor").innerText;
             const blob = new Blob([codeContent], { type: "text/plain" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "scriptTitle"         
-                link.click();
+            link.download = "script.txt";
+            link.click();
         }
-
-
 
         function sharePage() {
             if (navigator.share) {
