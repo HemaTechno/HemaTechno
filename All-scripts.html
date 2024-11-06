@@ -1,107 +1,34 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عرض جميع السكربتات</title>
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            text-align: center;
-            background-color: #e3e8ed;
-            color: #333;
-            padding: 0;
-            margin: 0;
-        }
-        .header {
-            background-color: #283048;
-            color: #ffffff;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .scripts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* تقليل حجم البطاقة */
-            gap: 15px; /* مسافات بين البطاقات */
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        .script-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            padding: 10px;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-size: 12px; /* تصغير حجم النص */
-        }
-        .script-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        .script-card img {
-            width: 80%; /* تصغير عرض الصورة */
-            height: auto;
-            border-radius: 6px;
-        }
-        .script-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 6px;
-            font-size: 10px; /* حجم أصغر للمعلومات */
-        }
-        .script-title {
-            font-size: 13px; /* حجم أصغر للعنوان */
-            font-weight: bold;
-            margin: 8px 0;
-            color: #4caf50;
-        }
-        .script-description {
-            font-size: 11px; /* حجم أصغر للوصف */
-            color: #555;
-            margin-bottom: 5px;
-        }
-        .get-button {
-            display: block;
-            margin-top: 5px;
-            padding: 6px;
-            font-size: 11px; /* حجم أصغر للزر */
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            text-align: center;
-        }
-        .footer {
-            background-color: #283048;
-            color: white;
-            padding: 10px;
-            font-size: 14px;
-        }
-        .footer a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer a:hover {
-            color: #c0c0c0;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>جميع السكربتات</h1>
-    </div>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="navbar">
+            <div class="logo">H-Scripts</div>
+            <nav>
+                <a href="#">الاسكربتات</a>
+                <a href="#">الهاكات</a>
+                <a href="#">يوتيوبرز</a>
+                <a href="#">انشر سكربتك</a>
+            </nav>
+            <button class="login-btn" onclick="window.location.href='login.html'">الدعم الفني</button>
+        </div>
+    </header>
 
-    <!-- Scripts Container -->
+    <!-- قسم العنوان -->
+    <section class="hero">
+        <h1>جميع السكربتات</h1>
+    </section>
+
+    <!-- قسم السكربتات -->
     <div class="scripts-container" id="scriptsContainer">
         <!-- سيتم تحميل السكربتات هنا -->
     </div>
