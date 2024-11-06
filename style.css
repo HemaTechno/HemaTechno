@@ -1,0 +1,155 @@
+/* تطبيق الخط الأنيق */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Amiri', serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+
+/* الشريط العلوي */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #333333;
+}
+
+.logo {
+    font-size: 1.8rem;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar nav a {
+    color: #ffffff;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar nav a:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    padding: 0.5rem 1rem;
+    background-color: #555555;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* قسم الوصف والأزرار */
+.hero {
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #bbbbbb;
+    font-family: 'Amiri', serif;
+}
+
+.hero-buttons button {
+    padding: 0.75rem 1.5rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero-buttons button:first-child {
+    background-color: #4CAF50;
+    color: #ffffff;
+}
+
+.hero-buttons button:last-child {
+    background-color: #008CBA;
+    color: #ffffff;
+}
+
+.hero-buttons button:hover {
+    background-color: #555555;
+}
+
+.user-stats {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #bbbbbb;
+}
+
+/* قسم الشركاء */
+.partners {
+    text-align: center;
+    padding: 2rem;
+}
+
+.partners h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.partner-list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.partner {
+    background-color: #333333;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+}
+
+.partner img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+/* تأثير النقر على الشاشة */
+.click-effect {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 191, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: clickEffect 0.5s ease-out;
+}
+
+@keyframes clickEffect {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(5);
+        opacity: 0;
+    }
+}
