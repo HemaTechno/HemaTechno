@@ -277,13 +277,15 @@
 
         // منع فتح الموقع في متصفح Kiwi
         (function() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            // تحقق إذا كان المتصفح هو Kiwi
-            if (/Android.*Chrome\/([0-9.]+)/.test(userAgent) && /Kiwi/.test(userAgent)) {
-                alert("متصفح Kiwi غير مدعوم. يرجى استخدام متصفح آخر.");
-                window.location.href = "https://www.google.com";  // إعادة التوجيه إلى صفحة أخرى (مثل Google)
-            }
+    // تحقق ما إذا كان المتصفح هو Kiwi بشكل دقيق
+    if (/Android.*Chrome\/([0-9.]+)/.test(userAgent) && /Kiwi/.test(userAgent) && /Chrome/.test(userAgent)) {
+        alert("متصفح Kiwi غير مدعوم. يرجى استخدام متصفح آخر.");
+        window.location.href = "https://www.google.com";  // إعادة التوجيه إلى صفحة أخرى (مثل Google)
+    }
+})();
+
         })();
     </script>
     
