@@ -235,10 +235,10 @@
     };
 
     firebase.initializeApp(firebaseConfg);
-    const db = firebase.firestore();
+    const dd = firebase.firestore();
 
     async function checkMaintenanceStatus() {
-        const doc = await db.collection("settings").doc("maintenance").get();
+        const doc = await dd.collection("settings").doc("maintenance").get();
         if (doc.exists && doc.data().isActive) {
             document.body.innerHTML = `
                 <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10%; font-family: Arial, sans-serif;">
