@@ -63,6 +63,12 @@
         .header {
             margin-bottom: 20px;
         }
+        .copy-message, .exists-message {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -99,6 +105,8 @@
         </div>
         <button type="submit" class="submit-button">إضافة السكربت</button>
     </form>
+    <div class="copy-message" id="copyMessage">تم نسخ رابط السكربت بنجاح!</div>
+    <div class="exists-message" id="existsMessage"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
@@ -106,7 +114,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-storage-compat.js"></script>
 
 <script>
-    // إعداد Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
         authDomain: "treng-c6027.firebaseapp.com",
@@ -121,7 +128,6 @@
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    // معالجة إرسال النموذج
     document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -133,10 +139,15 @@
         const imageFile = document.getElementById("image").files[0];
         const timestamp = new Date().toLocaleDateString();
 
-        // التحقق من صلاحية كود الاشتراك
         const isValidSubscription = await checkSubscription(subscriptionCode);
         if (!isValidSubscription) {
             alert("كود الاشتراك غير صالح أو انتهت صلاحيته.");
+            return;
+        }
+
+        const existingScript = await checkIfScriptExists(scriptName);
+        if (existingScript) {
+            displayExistingScriptMessage(existingScript.id);
             return;
         }
 
@@ -146,23 +157,24 @@
         }
 
         try {
-            // رفع الصورة إلى Firebase Storage
             const storageRef = storage.ref(`scripts/${imageFile.name}`);
             await storageRef.put(imageFile);
             const imageUrl = await storageRef.getDownloadURL();
 
-            // إضافة البيانات إلى Firestore
-            await db.collection("scripts").add({
+            const docRef = await db.collection("scripts").add({
                 title,
                 mapName,
                 description,
                 scriptName,
-                subscriptionCode, // إضافة كود الاشتراك هنا
+                subscriptionCode,
                 imageUrl,
                 addedDate: timestamp
             });
 
-            alert("تمت إضافة السكربت بنجاح!");
+            const scriptUrl = `https://newupdateh.netlify.app/page.html?id=${docRef.id}`;
+            copyToClipboard(scriptUrl);
+            showCopyMessage();
+
             document.getElementById("addScriptForm").reset();
         } catch (error) {
             console.error("حدث خطأ:", error);
@@ -170,23 +182,55 @@
         }
     });
 
+    async function checkIfScriptExists(scriptName) {
+        try {
+            const scriptSnapshot = await db.collection("scripts").where("scriptName", "==", scriptName).get();
+            return scriptSnapshot.empty ? null : scriptSnapshot.docs[0];
+        } catch (error) {
+            console.error("خطأ أثناء التحقق من وجود السكربت:", error);
+            return null;
+        }
+    }
+
     async function checkSubscription(code) {
         try {
             const subscriptionDoc = await db.collection("subscriptions").where("subscriptionCode", "==", code).get();
-
             if (subscriptionDoc.empty) {
-                return false; // كود الاشتراك غير صالح
+                return false;
             }
 
             const subscriptionData = subscriptionDoc.docs[0].data();
-            const expiryDate = subscriptionData.expiresAt.toDate(); // تحويل إلى كائن تاريخ
-
+            const expiryDate = subscriptionData.expiresAt.toDate();
             const now = new Date();
-            return expiryDate > now; // التحقق مما إذا كانت المدة لا تزال صالحة
+            return expiryDate > now;
         } catch (error) {
             console.error("خطأ أثناء التحقق من الاشتراك:", error);
-            return false; // في حالة حدوث خطأ
+            return false;
         }
+    }
+
+    function copyToClipboard(text) {
+        const tempInput = document.createElement("input");
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+    }
+
+    function showCopyMessage() {
+        const copyMessage = document.getElementById("copyMessage");
+        copyMessage.style.display = "block";
+        setTimeout(() => {
+            copyMessage.style.display = "none";
+        }, 3000);
+    }
+
+    function displayExistingScriptMessage(scriptId) {
+        const existsMessage = document.getElementById("existsMessage");
+        const scriptUrl = `https://newupdateh.netlify.app/page.html?id=${scriptId}`;
+        existsMessage.innerHTML = `هذا السكربت موجود مسبقًا. <a href="${scriptUrl}" target="_blank">افتح السكربت هنا</a>`;
+        existsMessage.style.display = "block";
     }
 </script>
 
