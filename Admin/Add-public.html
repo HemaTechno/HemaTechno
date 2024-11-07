@@ -171,7 +171,7 @@
                 addedDate: timestamp
             });
 
-            const scriptUrl = `https://newupdateh.netlify.app/page.html?id=${docRef.id}`;
+            const scriptUrl = `https://newupdateh.netlify.app/view.html?id=${docRef.id}`;
             copyToClipboard(scriptUrl);
             showCopyMessage();
 
@@ -228,7 +228,7 @@
 
     function displayExistingScriptMessage(scriptId) {
         const existsMessage = document.getElementById("existsMessage");
-        const scriptUrl = `https://newupdateh.netlify.app/page.html?id=${scriptId}`;
+        const scriptUrl = `https://newupdateh.netlify.app/view.html?id=${scriptId}`;
         existsMessage.innerHTML = `هذا السكربت موجود مسبقًا. <a href="${scriptUrl}" target="_blank">افتح السكربت هنا</a>`;
         existsMessage.style.display = "block";
     }
