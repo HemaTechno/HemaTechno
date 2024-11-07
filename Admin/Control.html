@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - الصيانة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .maintenance-button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .maintenance-button.active {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<h1>لوحة التحكم</h1>
+<button id="maintenanceButton" class="maintenance-button">جاري التحميل...</button>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "API_KEY",
+        authDomain: "AUTH_DOMAIN",
+        projectId: "PROJECT_ID",
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const maintenanceButton = document.getElementById("maintenanceButton");
+
+    // استعلام عن حالة الصيانة
+    async function getMaintenanceStatus() {
+        const doc = await db.collection("settings").doc("maintenance").get();
+        return doc.exists ? doc.data().isActive : false;
+    }
+
+    // تحديث حالة الصيانة
+    async function toggleMaintenanceStatus(currentStatus) {
+        await db.collection("settings").doc("maintenance").set({ isActive: !currentStatus });
+        updateButton(!currentStatus);
+    }
+
+    // تحديث الزر بناءً على الحالة
+    function updateButton(isActive) {
+        maintenanceButton.textContent = isActive ? "إلغاء الصيانة" : "تفعيل الصيانة";
+        maintenanceButton.classList.toggle("active", isActive);
+    }
+
+    // إعداد الزر عند التحميل
+    getMaintenanceStatus().then(updateButton);
+
+    // حدث النقر على الزر
+    maintenanceButton.addEventListener("click", async () => {
+        const currentStatus = await getMaintenanceStatus();
+        toggleMaintenanceStatus(currentStatus);
+    });
+</script>
+
+</body>
+</html>
+
