@@ -3,145 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض جميع السكربتات</title>
+    <title>أقسام الهاكات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
-            text-align: center;
-            background-color: #e3e8ed;
-            color: #333;
-            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-family: 'Amiri', serif;
+            direction: rtl;
             margin: 0;
+            padding: 20px;
         }
-        .header {
-            background-color: #283048;
-            color: #ffffff;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
-        .scripts-container {
+
+        .categories-container {
             display: flex;
             flex-wrap: wrap;
+            gap: 20px;
             justify-content: center;
-            gap: 15px;
-            padding: 20px;
         }
-        .script-card {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-            width: 270px;
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .script-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-        }
-        .script-card img {
-            width: 100%;
-            height: auto;
+
+        .category-box {
+            background-color: #333;
             border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
         }
-        .script-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 10px 0;
-            color: #4caf50;
+
+        .category-box:hover {
+            transform: scale(1.05);
         }
-        .footer {
-            background-color: #283048;
-            color: white;
-            padding: 10px;
-            margin-top: 20px;
-            font-size: 14px;
+
+        .category-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .category-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .category-description {
+            font-size: 1rem;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .explore-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .explore-btn:hover {
+            background-color: #005f73;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>جميع السكربتات</h1>
+    <h1>أقسام الهاكات</h1>
+    <div class="categories-container" id="categoriesContainer">
+        <!-- الأقسام ستضاف هنا ديناميكيًا -->
     </div>
 
-    <!-- Scripts Container -->
-    <div class="scripts-container" id="scriptsContainer">
-        <!-- سيتم تحميل السكربتات هنا -->
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
-    </div>
-
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-
     <script>
+        // إعدادات Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-            authDomain: "treng-c6027.firebaseapp.com",
-            projectId: "treng-c6027",
-            storageBucket: "treng-c6027.appspot.com",
-            messagingSenderId: "305527546716",
-            appId: "1:305527546716:web:fd072a58200f31bb42d799",
-            measurementId: "G-3JFKFT2LT0"
+            apiKey: "API_KEY",
+            authDomain: "PROJECT_ID.firebaseapp.com",
+            projectId: "PROJECT_ID",
+            storageBucket: "PROJECT_ID.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID",
         };
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        async function loadScripts() {
-            const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = "";
+        // جلب الأقسام وعرضها
+        db.collection("categories").get().then((querySnapshot) => {
+            const categoriesContainer = document.getElementById("categoriesContainer");
+            querySnapshot.forEach((doc) => {
+                const categoryData = doc.data();
+                const categoryBox = document.createElement("div");
+                categoryBox.classList.add("category-box");
 
-            const querySnapshot = await db.collection("scripts").get();
-
-            if (querySnapshot.empty) {
-                scriptsContainer.innerHTML = "<p>لا توجد سكربتات متاحة.</p>";
-                return;
-            }
-
-            const subscriptionPromises = [];
-            querySnapshot.forEach(doc => {
-                const script = doc.data();
-                // قم بإضافة طلب استرجاع بيانات الاشتراك هنا
-                subscriptionPromises.push(db.collection("subscriptions").doc(script.subscriptionCode).get().then(subscriptionDoc => {
-                    const subscriptionData = subscriptionDoc.data();
-                    return {
-                        script,
-                        subscriptionData,
-                    };
-                }));
-            });
-
-            const scriptsWithSubscriptions = await Promise.all(subscriptionPromises);
-
-            scriptsWithSubscriptions.forEach(({ script, subscriptionData }) => {
-                const scriptCard = document.createElement("div");
-                scriptCard.className = "script-card";
-                scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
-                    <div class="script-title">${script.title}</div>
-                    <p>اسم الناشر: ${subscriptionData ? subscriptionData.name : 'غير متوفر'}</p>
-                    <img src="${subscriptionData ? subscriptionData.imageUrl : ''}" alt="${subscriptionData ? subscriptionData.name : ''}" style="width:50px; border-radius: 50%;">
-                    <p class="script-description">${script.description}</p>
-                    <a href="view.html?id=${doc.id}" class="get-button">Get</a>
+                categoryBox.innerHTML = `
+                    <img src="${categoryData.image}" alt="${categoryData.title}" class="category-image">
+                    <div class="category-content">
+                        <div class="category-title">${categoryData.title}</div>
+                        <div class="category-description">${categoryData.description}</div>
+                        <a href="explore.html?category=${doc.id}" class="explore-btn">استكشاف</a>
+                    </div>
                 `;
-                scriptsContainer.appendChild(scriptCard);
+                categoriesContainer.appendChild(categoryBox);
             });
-        }
-
-        loadScripts();
+        });
     </script>
 
 </body>
