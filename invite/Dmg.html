@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دمج الرابط مع الكود</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            direction: rtl;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>دمج الرابط مع الكود</h1>
+    <form id="mergeForm">
+        <label for="siteUrl">رابط الموقع:</label>
+        <input type="text" id="siteUrl" required>
+        
+        <label for="inviteCode">كود المستخدم:</label>
+        <input type="text" id="inviteCode" required>
+        
+        <button type="submit">إنشاء الرابط</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('mergeForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const siteUrl = document.getElementById('siteUrl').value;
+            const inviteCode = document.getElementById('inviteCode').value;
+            const result = `${siteUrl}?ref=${inviteCode}`;
+            document.getElementById('result').innerHTML = `<p>الرابط الجديد: <a href="${result}" target="_blank">${result}</a></p>`;
+        });
+    </script>
+</body>
+</html>
