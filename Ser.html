@@ -3,125 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أقسام الهاكات</title>
+    <title>تفاصيل السكربت</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #1a1a1a;
-            color: #fff;
             font-family: 'Amiri', serif;
-            direction: rtl;
+            background-color: #1a1a1a;
+            color: white;
             margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 80px auto 40px;
             padding: 20px;
         }
 
-        h1 {
+        .title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #4caf50;
+        }
+
+        .description {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .instructions, .rating-section, .comments-section {
             margin-bottom: 20px;
         }
 
-        .categories-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .category-box {
-            background-color: #333;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            width: 300px;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .category-box:hover {
-            transform: scale(1.05);
-        }
-
-        .category-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .category-content {
-            padding: 15px;
+        .youtube-video {
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        .category-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+        .youtube-video iframe {
+            width: 100%;
+            height: 400px;
         }
 
-        .category-description {
-            font-size: 1rem;
-            color: #bbb;
+        .rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #ccc;
+        }
+
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: gold;
+        }
+
+        .comments {
+            border-top: 1px solid #555;
+            padding-top: 20px;
+        }
+
+        .comment {
             margin-bottom: 15px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
         }
 
-        .explore-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #008CBA;
-            color: #fff;
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+        }
+
+        .footer a {
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .explore-btn:hover {
-            background-color: #005f73;
+            color: white;
         }
     </style>
 </head>
 <body>
-
-    <h1>أقسام الهاكات</h1>
-    <div class="categories-container" id="categoriesContainer">
-        <!-- الأقسام ستضاف هنا ديناميكيًا -->
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#">🏠</a>
+        <a href="#">📜</a>
+        <a href="#">📩</a>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-    <script>
-        // إعدادات Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyBoPJbx5v6EkOqxOJkbhzHqIJdAByh79Rg",
-  authDomain: "hhhhhh-d4fb8.firebaseapp.com",
-  projectId: "hhhhhh-d4fb8",
-  storageBucket: "hhhhhh-d4fb8.appspot.com",
-  messagingSenderId: "24512338206",
-  appId: "1:24512338206:web:dfe045db59bd3434a2110f",
-  measurementId: "G-HD4R7GNQ5H"
-        };
+    <!-- Content -->
+    <div class="content">
+        <h1 id="scriptTitle" class="title">تفاصيل السكربت</h1>
+        <p id="scriptDescription" class="description"></p>
 
+        <!-- Instructions -->
+        <div class="instructions">
+            <h2>إرشادات التثبيت</h2>
+            <p id="scriptInstructions">سيتم تحميل الإرشادات...</p>
+        </div>
+
+        <!-- Video -->
+        <div class="youtube-video">
+            <iframe id="scriptVideo" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <!-- Rating -->
+        <div class="rating-section">
+            <h2>التقييم</h2>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">⭐</label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">⭐</label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">⭐</label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">⭐</label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">⭐</label>
+            </div>
+            <button onclick="submitRating()">إرسال التقييم</button>
+            <p id="ratingStats"></p>
+        </div>
+
+        <!-- Comments -->
+        <div class="comments-section">
+            <h2>التعليقات</h2>
+            <textarea id="commentInput" rows="3" placeholder="اكتب تعليقك هنا..."></textarea>
+            <button onclick="submitComment()">إرسال التعليق</button>
+            <div id="comments" class="comments">
+                <!-- سيتم تحميل التعليقات هنا -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© جميع الحقوق محفوظة <a href="#">تيم هيما تيك</a></p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+            authDomain: "treng-c6027.firebaseapp.com",
+            projectId: "treng-c6027",
+            storageBucket: "treng-c6027.appspot.com",
+            messagingSenderId: "305527546716",
+            appId: "1:305527546716:web:fd072a58200f31bb42d799",
+            measurementId: "G-3JFKFT2LT0"
+        };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // جلب الأقسام وعرضها
-        db.collection("categories").get().then((querySnapshot) => {
-            const categoriesContainer = document.getElementById("categoriesContainer");
-            querySnapshot.forEach((doc) => {
-                const categoryData = doc.data();
-                const categoryBox = document.createElement("div");
-                categoryBox.classList.add("category-box");
+        const scriptId = new URLSearchParams(window.location.search).get("id");
 
-                categoryBox.innerHTML = `
-                    <img src="${categoryData.image}" alt="${categoryData.title}" class="category-image">
-                    <div class="category-content">
-                        <div class="category-title">${categoryData.title}</div>
-                        <div class="category-description">${categoryData.description}</div>
-                        <a href="explore.html?category=${doc.id}" class="explore-btn">استكشاف</a>
-                    </div>
-                `;
-                categoriesContainer.appendChild(categoryBox);
+        async function loadScriptDetails() {
+            const doc = await db.collection("scripts").doc(scriptId).get();
+            if (doc.exists) {
+                const data = doc.data();
+                document.getElementById("scriptTitle").textContent = data.title || "بدون عنوان";
+                document.getElementById("scriptDescription").textContent = data.description || "بدون وصف";
+                document.getElementById("scriptInstructions").textContent = data.instructions || "بدون إرشادات";
+                document.getElementById("scriptVideo").src = data.videoUrl || "";
+                loadComments();
+            } else {
+                alert("لم يتم العثور على السكربت.");
+            }
+        }
+
+        function submitRating() {
+            const rating = document.querySelector('input[name="rating"]:checked')?.value;
+            if (!rating) return alert("يرجى اختيار تقييم.");
+            db.collection("ratings").add({
+                scriptId,
+                rating: Number(rating),
+                createdAt: new Date()
+            }).then(() => alert("تم إرسال التقييم!"));
+        }
+
+        function loadComments() {
+            db.collection("comments").where("scriptId", "==", scriptId).orderBy("createdAt", "desc").onSnapshot(snapshot => {
+                const commentsContainer = document.getElementById("comments");
+                commentsContainer.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const commentDiv = document.createElement("div");
+                    commentDiv.classList.add("comment");
+                    commentDiv.innerHTML = `<p><strong>${data.username || "H-Scripts User 👤"}</strong></p><p>${data.comment}</p>`;
+                    commentsContainer.appendChild(commentDiv);
+                });
             });
-        });
-    </script>
+        }
 
+        function submitComment() {
+            const comment = document.getElementById("commentInput").value.trim();
+            if (!comment) return alert("يرجى إدخال تعليق.");
+            db.collection("comments").add({
+                scriptId,
+                username: "H-Scripts User 👤",
+                comment,
+                createdAt: new Date()
+            }).then(() => {
+                document.getElementById("commentInput").value = "";
+                alert("تم إرسال التعليق!");
+            });
+        }
+
+        loadScriptDetails();
+    </script>
 </body>
 </html>
