@@ -1,226 +1,135 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>إضافة سكربت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* تطبيق الخط الأنيق */
-        * {
+        body {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Amiri', serif;
-        }
-
-        body {
             background-color: #1a1a1a;
-            color: #ffffff;
-            overflow: hidden;
-            position: relative;
+            color: #fff;
         }
-
-        /* الشريط العلوي */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: #333333;
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
         }
-
-        .logo {
-            font-size: 1.8rem;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
+        label {
+            display: block;
+            margin: 10px 0 5px;
         }
-
-        .navbar nav a {
-            color: #ffffff;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .navbar nav a:hover {
-            text-decoration: underline;
-        }
-
-        .login-btn {
-            padding: 0.5rem 1rem;
-            background-color: #555555;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* قسم الوصف والأزرار */
-        .hero {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: #bbbbbb;
-            font-family: 'Amiri', serif;
-        }
-
-        .hero-buttons button {
-            padding: 0.75rem 1.5rem;
-            margin: 0.5rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .hero-buttons button:first-child {
-            background-color: #4CAF50;
-            color: #ffffff;
-        }
-
-        .hero-buttons button:last-child {
-            background-color: #008CBA;
-            color: #ffffff;
-        }
-
-        .hero-buttons button:hover {
-            background-color: #555555;
-        }
-
-        .user-stats {
-            margin-top: 1.5rem;
-            font-size: 1rem;
-            color: #bbbbbb;
-        }
-
-        /* قسم الشركاء */
-        .partners {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .partners h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .partner-list {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .partner {
-            background-color: #333333;
-            padding: 1rem;
-            border-radius: 10px;
-            width: 150px;
-            text-align: center;
-        }
-
-        .partner img {
+        input, textarea, button {
             width: 100%;
-            height: auto;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
             border-radius: 5px;
-            margin-bottom: 0.5rem;
+            font-size: 16px;
         }
-
-        /* تأثير النقر على الشاشة */
-        .click-effect {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: rgba(0, 191, 255, 0.5); /* لون أزرق سماوي */
-            border-radius: 50%;
-            pointer-events: none;
-            animation: clickEffect 0.5s ease-out;
+        button {
+            background: #00ffcc;
+            color: #000;
+            cursor: pointer;
         }
-
-        @keyframes clickEffect {
-            from {
-                transform: scale(1);
-                opacity: 1;
-            }
-            to {
-                transform: scale(5);
-                opacity: 0;
-            }
+        .copy-link {
+            background: #444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
-    <!-- الشريط العلوي -->
-    <header>
-        <div class="navbar">
-            <div class="logo">H-Scripts</div>
-            <nav>
-                <a href="#">الاسكربتات</a>
-                <a href="#">الهاكات</a>
-                <a href="#">يوتيوبرز</a>
-                <a href="#">انشر سكربتك</a>
-            </nav>
-            <button class="login-btn" onclick="window.location.href='login.html'">الدعم الفني</button>
-        </div>
-    </header>
+    <div class="container">
+        <h2>إضافة سكربت جديد</h2>
+        <form id="addScriptForm">
+            <label for="title">عنوان السكربت</label>
+            <input type="text" id="title" required>
+            
+            <label for="description">وصف السكربت</label>
+            <textarea id="description" rows="5" required></textarea>
 
-    <!-- قسم الوصف والأزرار -->
-    <section class="hero">
-        <h1>H-Scripts.site</h1>
-        <p>اهلا بك في موقعنا هذا هو الموقع الاول باللغة العربية و المصمم خصيصا للعرب و ننشر فيه سكربتات و هاكات روبلوكس مع اقوي تيم دعم فني علي مدار يوم</p>
-        <div class="hero-buttons">
-            <button onclick="window.location.href='explore.html'">استكشاف الاسكربتات</button>
-            <button onclick="window.location.href='join.html'">انضم كشريك</button>
-        </div>
-        <div class="user-stats">
-            <span>المستخدمون الآن:</span>
-            <span>المسجلون: <strong>59</strong></span>
-            <span>الضيوف: <strong>100k</strong></span>
-        </div>
-    </section>
+            <label for="tags">التاجات (افصل بينها بفاصلة)</label>
+            <input type="text" id="tags" required>
 
-    <!-- قسم الشركاء -->
-    <section class="partners">
-        <h2>الشركاء</h2>
-        <div class="partner-list">
-            <div class="partner">
-                <img src="hema.jpg" alt="شريك 1">
-                <p>HemaTech</p>
-            </div>
-            <div class="partner">
-                <img src="channels4_profile.jpg" alt="TPC_TubeRblx">
-                <p>TPC_TubeRblx</p>
-            </div>
+            <label for="supported">مدعوم</label>
+            <input type="checkbox" id="supported">
+
+            <button type="submit">إضافة</button>
+        </form>
+
+        <!-- قسم لعرض رابط السكربت وزر النسخ -->
+        <div id="scriptLinkContainer" style="display: none;">
+            <p>رابط السكربت:</p>
+            <input type="text" id="scriptLink" readonly>
+            <button class="copy-link" onclick="copyLink()">نسخ الرابط</button>
         </div>
-    </section>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
 
     <script>
-        // كود لإضافة تأثير عند النقر على الشاشة
-        document.addEventListener('click', function(e) {
-            const effect = document.createElement('div');
-            effect.className = 'click-effect';
-            effect.style.left = `${e.pageX - 10}px`;
-            effect.style.top = `${e.pageY - 10}px`;
-            document.body.appendChild(effect);
+        // إعداد Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+        authDomain: "treng-c6027.firebaseapp.com",
+        projectId: "treng-c6027",
+        storageBucket: "treng-c6027.appspot.com",
+        messagingSenderId: "305527546716",
+        appId: "1:305527546716:web:fd072a58200f31bb42d799",
+        measurementId: "G-3JFKFT2LT0"
+    };
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-            setTimeout(() => {
-                effect.remove();
-            }, 500);
+        // التعامل مع الإضافة
+        document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const tags = document.getElementById("tags").value.split(",");
+            const supported = document.getElementById("supported").checked;
+
+            // إضافة البيانات إلى Firebase
+            const docRef = await db.collection("scripts").add({
+                title,
+                description,
+                tags,
+                supported,
+                likes: 0
+            });
+
+            // إنشاء الرابط وعرضه
+            const scriptId = docRef.id;
+            const scriptLink = `${window.location.origin}/script.html?id=${scriptId}`;
+            document.getElementById("scriptLink").value = scriptLink;
+
+            // إظهار قسم الرابط
+            document.getElementById("scriptLinkContainer").style.display = "block";
+
+            alert("تم إضافة السكربت بنجاح!");
+            e.target.reset();
         });
+
+        // نسخ الرابط إلى الحافظة
+        function copyLink() {
+            const linkInput = document.getElementById("scriptLink");
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999); // لأجهزة الموبايل
+            document.execCommand("copy");
+            alert("تم نسخ الرابط!");
+        }
     </script>
 </body>
 </html>
