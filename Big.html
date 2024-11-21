@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة بفوتر وشريحة متحركة</title>
+    <title>شريحة متحركة</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -20,39 +20,32 @@
 
         .slider-container {
             background-color: #121a2b; /* نفس لون خلفية الفوتر */
-            padding: 20px;
-            margin-bottom: 5px;
-            overflow: hidden; /* لإخفاء المربعات عند خروجها */
+            padding: 20px 0;
+            overflow: hidden;
             position: relative;
         }
 
         .slider {
             display: flex;
             gap: 20px;
-            position: relative;
+            justify-content: space-around;
+            align-items: center;
+            animation: scroll-left 10s linear infinite; /* حركة التمرير */
         }
 
         .slider .card {
-            position: absolute;
-            width: 30%;
+            width: 25%;
             max-width: 300px;
             text-align: center;
             padding: 15px;
             background-color: #1c2438;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: slide-in-out 6s ease-in-out infinite;
+            transition: transform 0.3s ease-in-out;
         }
 
-        /* ضبط التأخير لكل مربع */
-        .slider .card:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .slider .card:nth-child(2) {
-            animation-delay: 2s;
-        }
-        .slider .card:nth-child(3) {
-            animation-delay: 4s;
+        .slider .card:hover {
+            transform: scale(1.05); /* تأثير عند التمرير */
         }
 
         .slider .card img {
@@ -73,22 +66,12 @@
             color: #bbb;
         }
 
-        @keyframes slide-in-out {
+        @keyframes scroll-left {
             0% {
-                transform: translateX(-120%);
-                opacity: 0;
-            }
-            10% {
                 transform: translateX(0);
-                opacity: 1;
-            }
-            70% {
-                transform: translateX(0);
-                opacity: 1;
             }
             100% {
-                transform: translateX(120%);
-                opacity: 0;
+                transform: translateX(-100%);
             }
         }
 
