@@ -3,133 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة سكربت</title>
+    <title>صفحة بفوتر كامل</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a;
+            background-color: #0b1120; /* لون الخلفية الأساسي */
             color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
         }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #2a2a2a;
+
+        .content {
+            text-align: center;
+            margin: auto;
             padding: 20px;
-            border-radius: 8px;
+            color: #bbb;
+            font-size: 18px;
         }
-        label {
+
+        footer {
+            background-color: #121a2b; /* لون الخلفية للفوتر */
+            text-align: center;
+            padding: 20px 10px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        footer .logo-container {
             display: block;
-            margin: 10px 0 5px;
+            margin: 0 auto 10px;
+            width: 150px; /* عرض الصورة */
         }
-        input, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        button {
-            background: #00ffcc;
-            color: #000;
+
+        footer .logo-container img {
+            width: 100%; /* ضبط الصورة لتتناسب مع العرض */
             cursor: pointer;
         }
-        .copy-link {
-            background: #444;
+
+        footer .discord-button {
+            background-color: #5865F2; /* لون Discord */
             color: #fff;
             border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
             cursor: pointer;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-top: 15px;
+        }
+
+        footer .discord-button:hover {
+            background-color: #4752C4; /* تغيير اللون عند التمرير */
+        }
+
+        footer .social-icons {
+            margin-top: 20px;
+        }
+
+        footer .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer .social-icons img {
+            width: 32px; /* حجم الصورة */
+            height: 32px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        footer .social-icons img:hover {
+            transform: scale(1.2); /* تكبير الصورة عند التمرير */
+        }
+
+        footer .links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        footer .links a {
+            color: #00ffcc;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer .links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>إضافة سكربت جديد</h2>
-        <form id="addScriptForm">
-            <label for="title">عنوان السكربت</label>
-            <input type="text" id="title" required>
-            
-            <label for="description">وصف السكربت</label>
-            <textarea id="description" rows="5" required></textarea>
-
-            <label for="tags">التاجات (افصل بينها بفاصلة)</label>
-            <input type="text" id="tags" required>
-
-            <label for="supported">مدعوم</label>
-            <input type="checkbox" id="supported">
-
-            <button type="submit">إضافة</button>
-        </form>
-
-        <!-- قسم لعرض رابط السكربت وزر النسخ -->
-        <div id="scriptLinkContainer" style="display: none;">
-            <p>رابط السكربت:</p>
-            <input type="text" id="scriptLink" readonly>
-            <button class="copy-link" onclick="copyLink()">نسخ الرابط</button>
-        </div>
+    <div class="content">
+        <p>الصفحة قيد الصيانة، سيتم تحديثها قريبًا. شكرًا لتفهمكم!</p>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    <footer>
+        <!-- استبدال النص بالصورة -->
+        <a href="index.html" class="logo-container">
+            <img src="https://via.placeholder.com/150" alt="ScriptBlox Logo">
+        </a>
+        
+        <p>2024 All Rights Reserved.</p>
+        <a href="https://discord.com" class="discord-button" target="_blank">Join our Discord</a>
+        
+        <div class="social-icons">
+            <!-- استبدال روابط الصور هنا -->
+            <a href="https://www.instagram.com" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            </a>
+            <a href="https://www.twitter.com" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+            </a>
+        </div>
 
-    <script>
-        // إعداد Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-        authDomain: "treng-c6027.firebaseapp.com",
-        projectId: "treng-c6027",
-        storageBucket: "treng-c6027.appspot.com",
-        messagingSenderId: "305527546716",
-        appId: "1:305527546716:web:fd072a58200f31bb42d799",
-        measurementId: "G-3JFKFT2LT0"
-    };
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        // التعامل مع الإضافة
-        document.getElementById("addScriptForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const title = document.getElementById("title").value;
-            const description = document.getElementById("description").value;
-            const tags = document.getElementById("tags").value.split(",");
-            const supported = document.getElementById("supported").checked;
-
-            // إضافة البيانات إلى Firebase
-            const docRef = await db.collection("scripts").add({
-                title,
-                description,
-                tags,
-                supported,
-                likes: 0
-            });
-
-            // إنشاء الرابط وعرضه
-            const scriptId = docRef.id;
-            const scriptLink = `${window.location.origin}/script.html?id=${scriptId}`;
-            document.getElementById("scriptLink").value = scriptLink;
-
-            // إظهار قسم الرابط
-            document.getElementById("scriptLinkContainer").style.display = "block";
-
-            alert("تم إضافة السكربت بنجاح!");
-            e.target.reset();
-        });
-
-        // نسخ الرابط إلى الحافظة
-        function copyLink() {
-            const linkInput = document.getElementById("scriptLink");
-            linkInput.select();
-            linkInput.setSelectionRange(0, 99999); // لأجهزة الموبايل
-            document.execCommand("copy");
-            alert("تم نسخ الرابط!");
-        }
-    </script>
+        <div class="links">
+            <a href="privacy-policy.html" target="_blank">سياسة الخصوصية</a>
+            <a href="contact-us.html" target="_blank">التواصل بنا</a>
+        </div>
+    </footer>
 </body>
 </html>
