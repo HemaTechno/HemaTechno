@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة بفوتر كامل</title>
+    <title>صفحة بفوتر وشريحة متحركة</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0b1120; /* لون الخلفية الأساسي */
+            background-color: #0b1120;
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -18,16 +18,62 @@
             height: 100vh;
         }
 
-        .content {
-            text-align: center;
-            margin: auto;
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            background-color: #1a1a1a;
             padding: 20px;
-            color: #bbb;
+        }
+
+        .slider {
+            display: flex;
+            animation: slide 10s linear infinite;
+        }
+
+        .slider .card {
+            flex: 0 0 33%;
+            text-align: center;
+            padding: 15px;
+            margin: 0 10px;
+            background-color: #121a2b;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .slider .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .slider .card h3 {
+            margin: 10px 0 5px;
             font-size: 18px;
+            color: #00ffcc;
+        }
+
+        .slider .card p {
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .slider .card:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
         footer {
-            background-color: #121a2b; /* لون الخلفية للفوتر */
+            background-color: #121a2b;
             padding: 20px 10px;
             color: #fff;
             font-size: 14px;
@@ -46,7 +92,7 @@
         }
 
         .logo-left img {
-            width: 150px; /* عرض الصورة */
+            width: 150px;
         }
 
         .logo-left p {
@@ -60,7 +106,7 @@
         }
 
         .center-button .discord-button {
-            background-color: #5865F2; /* لون Discord */
+            background-color: #5865F2;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -71,7 +117,7 @@
         }
 
         .center-button .discord-button:hover {
-            background-color: #4752C4; /* تغيير اللون عند التمرير */
+            background-color: #4752C4;
         }
 
         .social-right {
@@ -80,13 +126,13 @@
         }
 
         .social-right img {
-            width: 32px; /* حجم الصور */
+            width: 32px;
             height: 32px;
             transition: transform 0.2s ease-in-out;
         }
 
         .social-right img:hover {
-            transform: scale(1.2); /* تكبير الصورة عند التمرير */
+            transform: scale(1.2);
         }
 
         .footer-bottom {
@@ -106,30 +152,42 @@
     </style>
 </head>
 <body>
-    <div class="content">
-        <p>الصفحة قيد الصيانة، سيتم تحديثها قريبًا. شكرًا لتفهمكم!</p>
+    <!-- شريحة متحركة -->
+    <div class="slider-container">
+        <div class="slider">
+            <div class="card">
+                <img src="https://via.placeholder.com/100" alt="Profile Picture">
+                <h3>محمد علي</h3>
+                <p>مصمم مواقع</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/100" alt="Profile Picture">
+                <h3>سارة أحمد</h3>
+                <p>مطور برامج</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/100" alt="Profile Picture">
+                <h3>أحمد مصطفى</h3>
+                <p>مسوق رقمي</p>
+            </div>
+        </div>
     </div>
 
+    <!-- الفوتر -->
     <footer>
-        <!-- القسم العلوي -->
         <div class="footer-top">
-            <!-- الصورة وحقوق النشر -->
             <div class="logo-left">
                 <img src="https://i.ibb.co/PZ8tyms/20241122-010827.png" alt="ScriptBlox Logo">
                 <p>2024 All Rights Reserved.</p>
             </div>
-
-            <!-- زر Discord -->
             <div class="center-button">
                 <a href="https://discord.com" class="discord-button" target="_blank">Join our Discord</a>
             </div>
-
-            <!-- أيقونات التواصل -->
             <div class="social-right">
                 <a href="https://www.instagram.com" target="_blank">
                     <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
                 </a>
-                <a href="https://www.facebook.com/profile.php?id=61568792473008&mibextid=ZbWKwL" target="_blank">
+                <a href="https://www.facebook.com" target="_blank">
                     <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
                 </a>
                 <a href="https://www.twitter.com" target="_blank">
@@ -137,8 +195,6 @@
                 </a>
             </div>
         </div>
-
-        <!-- القسم السفلي -->
         <div class="footer-bottom">
             <a href="privacy-policy.html" target="_blank">سياسة الخصوصية</a>
             <a href="contact-us.html" target="_blank">التواصل بنا</a>
