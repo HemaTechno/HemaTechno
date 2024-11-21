@@ -1,322 +1,139 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل السكربت</title>
-    <style>
-        /* تنسيقات عامة */
-        * {
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>  body {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Amiri', serif;
-        }
-
-        body {
-            background-color: #000;
+            background-color: #1a1a1a;
             color: #fff;
-            overflow-x: hidden;
         }
-
-        /* الشريط العلوي */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
         .navbar {
+            background-color: #333;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
         }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
+        .navbar a {
             color: #fff;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        .navbar nav a {
-            color: #fff;
-            margin: 0 1rem;
             text-decoration: none;
-            font-size: 1.2rem;
-            text-shadow: 0 0 8px #ff0099, 0 0 15px #ff0099;
-        }
-
-        .navbar nav a:hover {
-            text-shadow: 0 0 15px #ff33cc, 0 0 25px #ff33cc;
-        }
-
-        .login-btn {
-            padding: 0.5rem 1rem;
-            background: #ff0099;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .login-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #ff33cc, 0 0 30px #ff33cc;
-        }
-
-        /* صندوق السكربت */
-        .script-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: linear-gradient(145deg, #1c1c1c, #222);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 200, 0.5);
-        }
-
-        .script-title {
-            font-size: 2rem;
+            margin: 0 10px;
             font-weight: bold;
+        }
+        .navbar a:hover {
             color: #00ffcc;
-            text-align: center;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
         }
-
-        .script-image {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 15px #00ffcc, 0 0 30px #00ffcc;
-        }
-
-        .script-description {
+        .script-card {
+            background-color: #2a2a2a;
             margin: 20px 0;
-            font-size: 1.2rem;
-            color: #fff;
-            text-align: center;
-            text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
         }
-
-        .code-editor {
-            background: #222;
-            padding: 1rem;
-            border-radius: 10px;
-            font-family: monospace;
-            overflow-x: auto;
+        .script-card h2 {
+            font-size: 20px;
             color: #00ffcc;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-            box-shadow: 0 0 15px rgba(0, 255, 200, 0.5);
         }
-
-        .action-buttons {
-            margin-top: 20px;
-            text-align: center;
+        .script-card p {
+            color: #ccc;
         }
-
-        .action-buttons button {
-            padding: 10px 20px;
-            margin: 5px;
+        .script-card .tags {
+            margin: 10px 0;
+        }
+        .tag {
+            display: inline-block;
+            background: #444;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        .like-button {
+            background: #00ffcc;
             border: none;
+            color: #000;
+            padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
         }
-
-        .copy-button {
-            background: #00ffcc;
-            color: #fff;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        .copy-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc;
-        }
-
-        .download-button {
-            background: #ff33cc;
-            color: #fff;
-            text-shadow: 0 0 10px #ff33cc, 0 0 20px #ff33cc;
-        }
-
-        .download-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #ff33cc, 0 0 30px #ff33cc;
-        }
-
-        .share-button {
-            background: #3333ff;
-            color: #fff;
-            text-shadow: 0 0 10px #3333ff, 0 0 20px #3333ff;
-        }
-
-        .share-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #3333ff, 0 0 30px #3333ff;
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-size: 0.9rem;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-            text-shadow: 0 0 8px #ff0099, 0 0 15px #ff0099;
-        }
-
-        .footer a:hover {
-            text-shadow: 0 0 15px #ff33cc, 0 0 25px #ff33cc;
-        }
-
-        .click-effect {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: rgba(0, 191, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: clickEffect 0.5s ease-out;
-        }
-
-        @keyframes clickEffect {
-            from {
-                transform: scale(1);
-                opacity: 1;
-            }
-            to {
-                transform: scale(5);
-                opacity: 0;
-            }
+        .like-button:hover {
+            background: #00d1a1;
         }
     </style>
 </head>
 <body>
-    <!-- الشريط العلوي -->
-    <!-- باقي الكود كما هو -->
-
-
-    <!-- الشريط العلوي -->
-    <header>
-        <div class="navbar">
-            <div class="logo">H-Scripts</div>
-            <nav>
-                <a href="All-scripts.html">الاسكربتات</a>
-                <a href="Hack.html">الهاكات</a>
-                <a href="youtube-scripts.html">يوتيوبرز</a>
-                <a href="admin/add-public">انشر سكربتك</a>
-            </nav>
-            <button class="login-btn" onclick="window.location.href='https://t.me/hscripts'">الدعم الفني</button>
-        </div>
-    </header>
-
-    <!-- قسم تفاصيل السكربت -->
-    <div class="script-container">
-        <h2 id="scriptTitle" class="script-title"></h2>
-        <img id="scriptImage" class="script-image" src="" alt="">
-        <p id="scriptDescription" class="script-description"></p>
-        
-        <div id="codeEditor" class="code-editor">
-            <!-- سيتم تحميل كود السكربت هنا -->
-        </div>
-
-        <div class="action-buttons">
-            <button class="copy-button" onclick="copyCode()">نسخ الاسكربت</button>
-            <button class="download-button" onclick="downloadScript()">تحميل السكربت</button>
-            <button class="share-button" onclick="sharePage()">مشاركة</button>
-        </div>
+    <div class="container" id="scriptContainer">
+        <h1>تحميل البيانات...</h1>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>© جميع الحقوق محفوظة <a href="privacy.html">سياسة الخصوصية</a> | <a href="contact.html">التواصل</a></p>
-    </div>
-
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-    
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-            authDomain: "treng-c6027.firebaseapp.com",
-            projectId: "treng-c6027",
-            storageBucket: "treng-c6027.appspot.com",
-            messagingSenderId: "305527546716",
-            appId: "1:305527546716:web:fd072a58200f31bb42d799",
-            measurementId: "G-3JFKFT2LT0"
-        };
 
+    <script>
+        // إعداد Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyXXXXX",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
+        };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // استخراج الـ ID من رابط الصفحة
         const urlParams = new URLSearchParams(window.location.search);
-        const scriptId = urlParams.get('id');
+        const scriptId = urlParams.get('id'); // الحصول على قيمة id
 
+        // تحميل بيانات السكربت
         async function loadScriptDetails() {
-            const doc = await db.collection("scripts").doc(scriptId).get();
-            if (doc.exists) {
+            if (!scriptId) {
+                document.getElementById("scriptContainer").innerHTML = "<h1>لم يتم العثور على السكربت!</h1>";
+                return;
+            }
+
+            const scriptRef = db.collection("scripts").doc(scriptId);
+            const doc = await scriptRef.get();
+
+            if (!doc.exists) {
+                document.getElementById("scriptContainer").innerHTML = "<h1>السكربت غير موجود!</h1>";
+            } else {
                 const script = doc.data();
-                document.getElementById("scriptTitle").innerText = script.title;
-                document.getElementById("scriptImage").src = script.imageUrl;
-                document.getElementById("scriptDescription").innerText = script.description;
-                document.getElementById("codeEditor").innerText = script.scriptName;
-            } else {
-                document.querySelector(".script-container").innerHTML = "<p>عذرًا، لا يمكن العثور على تفاصيل السكربت.</p>";
+                document.getElementById("scriptContainer").innerHTML = `
+                    <h1>${script.title}</h1>
+                    <p>${script.description}</p>
+                    <div class="tags">
+                        ${script.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <button class="like-button" onclick="likeScript('${scriptId}')">أعجبني (${script.likes || 0})</button>
+                `;
             }
         }
 
-        function copyCode() {
-            navigator.clipboard.writeText(document.getElementById("codeEditor").innerText)
-                .then(() => alert("تم نسخ الاسكربت!"))
-                .catch(err => alert("حدث خطأ أثناء النسخ"));
-        }
-
-        function downloadScript() {
-            const codeContent = document.getElementById("codeEditor").innerText;
-            const blob = new Blob([codeContent], { type: "text/plain" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "script.txt";
-            link.click();
-        }
-
-        function sharePage() {
-            if (navigator.share) {
-                navigator.share({
-                    title: document.getElementById("scriptTitle").innerText,
-                    url: window.location.href
-                }).catch(err => alert("حدث خطأ أثناء المشاركة"));
-            } else {
-                alert("المشاركة غير مدعومة على هذا المتصفح.");
-            }
+        // إضافة لايك
+        function likeScript(scriptId) {
+            const scriptRef = db.collection("scripts").doc(scriptId);
+            scriptRef.update({
+                likes: firebase.firestore.FieldValue.increment(1)
+            }).then(() => {
+                alert("تم تسجيل الإعجاب!");
+                location.reload();
+            });
         }
 
         loadScriptDetails();
-    </script>
-
-    <script>
-        // كود لإضافة تأثير عند النقر على الشاشة
-        document.addEventListener('click', function(e) {
-            const effect = document.createElement('div');
-            effect.className = 'click-effect';
-            effect.style.left = `${e.pageX - 10}px`;
-            effect.style.top = `${e.pageY - 10}px`;
-            document.body.appendChild(effect);
-
-            setTimeout(() => {
-                effect.remove();
-            }, 500);
-        });
     </script>
 </body>
 </html>
