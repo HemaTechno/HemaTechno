@@ -18,11 +18,13 @@
             min-height: 100vh;
         }
 
+        /* الشريحة */
         .slider-container {
             background-color: #121a2b; /* نفس لون خلفية الفوتر */
             padding: 20px 0;
-            overflow: hidden;
             position: relative;
+            z-index: 1;
+            margin-top: auto; /* وضع الشريحة فوق الفوتر */
         }
 
         .slider {
@@ -75,6 +77,7 @@
             }
         }
 
+        /* الفوتر */
         footer {
             background-color: #121a2b;
             padding: 20px 10px;
