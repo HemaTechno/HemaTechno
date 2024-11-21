@@ -20,25 +20,41 @@
 
         .slider-container {
             position: relative;
-            overflow: hidden;
-            background-color: #1a1a1a;
+            background-color: #121a2b; /* نفس خلفية الفوتر */
             padding: 20px;
+            margin-bottom: 5px; /* فاصل بين الشريحة والفوتر */
+            overflow: hidden; /* لإخفاء العناصر التي تخرج عن الإطار */
         }
 
         .slider {
+            position: relative;
             display: flex;
-            animation: slide 10s linear infinite;
+            justify-content: space-between;
+            animation: none; /* لا حاجة لتحريك الكل */
         }
 
         .slider .card {
-            flex: 0 0 33%;
+            position: absolute;
+            width: 30%; /* عرض كل مربع */
+            max-width: 200px;
             text-align: center;
             padding: 15px;
-            margin: 0 10px;
-            background-color: #121a2b;
+            background-color: #1c2438;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
+            animation: slide-in-out 6s ease-in-out infinite;
+        }
+
+        /* تعيين التأخير الخاص بكل مربع */
+        .slider .card:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .slider .card:nth-child(2) {
+            animation-delay: 2s;
+        }
+        .slider .card:nth-child(3) {
+            animation-delay: 4s;
         }
 
         .slider .card img {
@@ -59,16 +75,22 @@
             color: #bbb;
         }
 
-        .slider .card:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes slide {
+        @keyframes slide-in-out {
             0% {
-                transform: translateX(0);
+                transform: translateX(-120%); /* يبدأ المربع خارج الشاشة */
+                opacity: 0;
+            }
+            10% {
+                transform: translateX(0); /* دخول كامل */
+                opacity: 1;
+            }
+            70% {
+                transform: translateX(0); /* يبقى داخل الشاشة */
+                opacity: 1;
             }
             100% {
-                transform: translateX(-100%);
+                transform: translateX(120%); /* يخرج من الشاشة */
+                opacity: 0;
             }
         }
 
@@ -157,8 +179,8 @@
         <div class="slider">
             <div class="card">
                 <img src="https://via.placeholder.com/100" alt="Profile Picture">
-                <h3>محمد علي</h3>
-                <p>مصمم مواقع</p>
+                <h3>HemaTech</h3>
+                <p>CEO & Dev</p>
             </div>
             <div class="card">
                 <img src="https://via.placeholder.com/100" alt="Profile Picture">
