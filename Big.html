@@ -28,72 +28,79 @@
 
         footer {
             background-color: #121a2b; /* لون الخلفية للفوتر */
-            text-align: center;
             padding: 20px 10px;
             color: #fff;
             font-size: 14px;
         }
 
-        footer .logo-container {
-            display: block;
-            margin: 0 auto 10px;
+        .footer-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-left img {
             width: 150px; /* عرض الصورة */
         }
 
-        footer .logo-container img {
-            width: 100%; /* ضبط الصورة لتتناسب مع العرض */
-            cursor: pointer;
+        .logo-left p {
+            margin-left: 10px;
+            font-size: 14px;
         }
 
-        footer .discord-button {
+        .center-button {
+            text-align: center;
+            flex: 1;
+        }
+
+        .center-button .discord-button {
             background-color: #5865F2; /* لون Discord */
             color: #fff;
             border: none;
             padding: 10px 20px;
             border-radius: 8px;
             font-size: 16px;
-            margin-top: 10px;
-            text-decoration: none;
-            display: inline-block;
             cursor: pointer;
+            text-decoration: none;
         }
 
-        footer .discord-button:hover {
+        .center-button .discord-button:hover {
             background-color: #4752C4; /* تغيير اللون عند التمرير */
         }
 
-        footer .social-icons {
-            margin-top: 20px;
+        .social-right {
+            display: flex;
+            gap: 10px;
         }
 
-        footer .social-icons a {
-            display: inline-block;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-
-        footer .social-icons img {
-            width: 32px; /* حجم الصورة */
+        .social-right img {
+            width: 32px; /* حجم الصور */
             height: 32px;
             transition: transform 0.2s ease-in-out;
         }
 
-        footer .social-icons img:hover {
+        .social-right img:hover {
             transform: scale(1.2); /* تكبير الصورة عند التمرير */
         }
 
-        footer .links {
+        .footer-bottom {
             margin-top: 20px;
-            font-size: 14px;
+            text-align: center;
         }
 
-        footer .links a {
+        .footer-bottom a {
             color: #00ffcc;
             text-decoration: none;
             margin: 0 10px;
         }
 
-        footer .links a:hover {
+        .footer-bottom a:hover {
             text-decoration: underline;
         }
     </style>
@@ -104,28 +111,35 @@
     </div>
 
     <footer>
-        <!-- استبدال النص بالصورة -->
-        <a href="index.html" class="logo-container">
-            <img src="https://via.placeholder.com/150" alt="ScriptBlox Logo">
-        </a>
-        
-        <p>2024 All Rights Reserved.</p>
-        <a href="https://discord.com" class="discord-button" target="_blank">Join our Discord</a>
-        
-        <div class="social-icons">
-            <!-- استبدال روابط الصور هنا -->
-            <a href="https://www.instagram.com" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
-            </a>
-            <a href="https://www.facebook.com" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-            </a>
-            <a href="https://www.twitter.com" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
-            </a>
+        <!-- القسم العلوي -->
+        <div class="footer-top">
+            <!-- الصورة وحقوق النشر -->
+            <div class="logo-left">
+                <img src="https://via.placeholder.com/150" alt="ScriptBlox Logo">
+                <p>2024 All Rights Reserved.</p>
+            </div>
+
+            <!-- زر Discord -->
+            <div class="center-button">
+                <a href="https://discord.com" class="discord-button" target="_blank">Join our Discord</a>
+            </div>
+
+            <!-- أيقونات التواصل -->
+            <div class="social-right">
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+                </a>
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                </a>
+                <a href="https://www.twitter.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+                </a>
+            </div>
         </div>
 
-        <div class="links">
+        <!-- القسم السفلي -->
+        <div class="footer-bottom">
             <a href="privacy-policy.html" target="_blank">سياسة الخصوصية</a>
             <a href="contact-us.html" target="_blank">التواصل بنا</a>
         </div>
