@@ -15,38 +15,36 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         .slider-container {
-            position: relative;
-            background-color: #121a2b; /* نفس خلفية الفوتر */
+            background-color: #121a2b; /* نفس لون خلفية الفوتر */
             padding: 20px;
-            margin-bottom: 5px; /* فاصل بين الشريحة والفوتر */
-            overflow: hidden; /* لإخفاء العناصر التي تخرج عن الإطار */
+            margin-bottom: 5px;
+            overflow: hidden; /* لإخفاء المربعات عند خروجها */
+            position: relative;
         }
 
         .slider {
-            position: relative;
             display: flex;
-            justify-content: space-between;
-            animation: none; /* لا حاجة لتحريك الكل */
+            gap: 20px;
+            position: relative;
         }
 
         .slider .card {
             position: absolute;
-            width: 30%; /* عرض كل مربع */
-            max-width: 200px;
+            width: 30%;
+            max-width: 300px;
             text-align: center;
             padding: 15px;
             background-color: #1c2438;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
             animation: slide-in-out 6s ease-in-out infinite;
         }
 
-        /* تعيين التأخير الخاص بكل مربع */
+        /* ضبط التأخير لكل مربع */
         .slider .card:nth-child(1) {
             animation-delay: 0s;
         }
@@ -77,19 +75,19 @@
 
         @keyframes slide-in-out {
             0% {
-                transform: translateX(-120%); /* يبدأ المربع خارج الشاشة */
+                transform: translateX(-120%);
                 opacity: 0;
             }
             10% {
-                transform: translateX(0); /* دخول كامل */
+                transform: translateX(0);
                 opacity: 1;
             }
             70% {
-                transform: translateX(0); /* يبقى داخل الشاشة */
+                transform: translateX(0);
                 opacity: 1;
             }
             100% {
-                transform: translateX(120%); /* يخرج من الشاشة */
+                transform: translateX(120%);
                 opacity: 0;
             }
         }
@@ -174,7 +172,11 @@
     </style>
 </head>
 <body>
-    <!-- شريحة متحركة -->
+    <div class="content">
+        <p>الصفحة قيد الصيانة، سيتم تحديثها قريبًا. شكرًا لتفهمكم!</p>
+    </div>
+
+    <!-- شريحة المربعات -->
     <div class="slider-container">
         <div class="slider">
             <div class="card">
@@ -209,7 +211,7 @@
                 <a href="https://www.instagram.com" target="_blank">
                     <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
                 </a>
-                <a href="https://www.facebook.com" target="_blank">
+                <a href="https://www.facebook.com/profile.php?id=61568792473008&mibextid=ZbWKwL" target="_blank">
                     <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
                 </a>
                 <a href="https://www.twitter.com" target="_blank">
