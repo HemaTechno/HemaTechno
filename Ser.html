@@ -77,36 +77,47 @@
 
         /* الشريط المتحرك */
         .slider-container {
-            overflow: hidden;
-            margin: 40px 0;
-            background-color: #121a2b;
+            background-color: #121a2b; /* نفس لون خلفية الفوتر */
             padding: 20px 0;
+            position: relative;
+            z-index: 1;
+            margin-top: auto; /* وضع الشريحة فوق الفوتر */
         }
 
         .slider {
             display: flex;
-            animation: scroll 10s linear infinite;
-            gap: 30px;
+            gap: 20px;
+            justify-content: space-around;
+            align-items: center;
         }
 
         .slider .card {
-            flex: 0 0 20%;
+            width: 25%;
             max-width: 300px;
             text-align: center;
             padding: 15px;
             background-color: #1c2438;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            opacity: 0; /* إخفاء المربعات في البداية */
+            animation: slide-in 10s ease-in-out infinite;
         }
 
-        .slider .card:hover {
-            transform: scale(1.1);
+        .slider .card:nth-child(1) {
+            animation-delay: 0s; /* يبدأ فورًا */
+        }
+
+        .slider .card:nth-child(2) {
+            animation-delay: 3s; /* يبدأ بعد 3 ثواني */
+        }
+
+        .slider .card:nth-child(3) {
+            animation-delay: 6s; /* يبدأ بعد 6 ثواني */
         }
 
         .slider .card img {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             margin-bottom: 10px;
         }
@@ -122,12 +133,19 @@
             color: #bbb;
         }
 
-        @keyframes scroll {
+        /* حركة المربعات */
+        @keyframes slide-in {
             0% {
-                transform: translateX(0);
+                transform: translateX(100%); /* يبدأ من اليمين خارج الشاشة */
+                opacity: 0;
+            }
+            50% {
+                transform: translateX(0); /* في منتصف الحركة */
+                opacity: 1;
             }
             100% {
-                transform: translateX(-100%);
+                transform: translateX(-100%); /* يخرج من اليسار */
+                opacity: 0;
             }
         }
 
