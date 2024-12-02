@@ -6,12 +6,58 @@
     <title>تسجيل الدخول</title>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #6200ea;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4500b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>تسجيل الدخول باستخدام Google</h1>
-    <button id="login">تسجيل الدخول</button>
-    <button id="logout" style="display:none;">تسجيل الخروج</button>
-    <p id="status"></p>
+    <div class="login-container">
+        <h2>تسجيل الدخول</h2>
+        <input type="email" id="email" placeholder="البريد الإلكتروني">
+        <input type="password" id="password" placeholder="كلمة المرور">
+        <button id="login">تسجيل الدخول</button>
+        <button id="signup">إنشاء حساب</button>
+        <p class="error" id="error"></p>
+    </div>
 
     <script>
         // إعداد Firebase
@@ -30,47 +76,33 @@
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.getAuth();
 
-        // تسجيل الدخول باستخدام Google
+        // تسجيل الدخول
         document.getElementById("login").addEventListener("click", async () => {
-            const provider = new firebase.GoogleAuthProvider();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorElement = document.getElementById("error");
             try {
-                const result = await firebase.signInWithPopup(auth, provider);
-                const user = result.user;
-
-                // حفظ معلومات الجلسة مع انتهاء بعد يوم واحد
-                const expirationDate = new Date();
-                expirationDate.setDate(expirationDate.getDate() + 1); // يوم واحد
-                document.cookie = `userToken=${user.accessToken}; expires=${expirationDate.toUTCString()}; path=/`;
-
-                document.getElementById("status").textContent = `مرحبًا ${user.displayName}`;
-                document.getElementById("login").style.display = "none";
-                document.getElementById("logout").style.display = "block";
+                const userCredential = await firebase.signInWithEmailAndPassword(auth, email, password);
+                alert("تم تسجيل الدخول بنجاح");
+                console.log("المستخدم:", userCredential.user);
             } catch (error) {
-                console.error("حدث خطأ أثناء تسجيل الدخول:", error);
+                errorElement.textContent = "فشل تسجيل الدخول: " + error.message;
             }
         });
 
-        // تسجيل الخروج
-        document.getElementById("logout").addEventListener("click", () => {
-            firebase.signOut(auth).then(() => {
-                document.cookie = "userToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                document.getElementById("status").textContent = "تم تسجيل الخروج.";
-                document.getElementById("login").style.display = "block";
-                document.getElementById("logout").style.display = "none";
-            });
-        });
-
-        // التحقق من انتهاء صلاحية الجلسة
-        window.onload = () => {
-            const userToken = document.cookie
-                .split("; ")
-                .find(row => row.startsWith("userToken="));
-            if (userToken) {
-                document.getElementById("status").textContent = "تم تسجيل الدخول.";
-                document.getElementById("login").style.display = "none";
-                document.getElementById("logout").style.display = "block";
+        // إنشاء حساب جديد
+        document.getElementById("signup").addEventListener("click", async () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorElement = document.getElementById("error");
+            try {
+                const userCredential = await firebase.createUserWithEmailAndPassword(auth, email, password);
+                alert("تم إنشاء الحساب بنجاح");
+                console.log("المستخدم:", userCredential.user);
+            } catch (error) {
+                errorElement.textContent = "فشل إنشاء الحساب: " + error.message;
             }
-        };
+        });
     </script>
 </body>
 </html>
