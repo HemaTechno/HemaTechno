@@ -1,109 +1,80 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="style.css">
+    <title>هيما تيك - Space Theme</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: url('https://source.unsplash.com/1920x1080/?space,stars') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #f8c102;
+        }
+
+        main {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            margin: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #f8c102;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .rights {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- الشريط العلوي -->
     <header>
-        <div class="navbar">
-            <div class="logo">H-Scripts</div>
-            <nav>
-                <a href="All-scripts.html">الاسكربتات</a>
-                <a href="Hack.html">الهاكات</a>
-                <a href="youtube-scripts.html">يوتيوبرز</a>
-                <a href="admin/add-public.html">انشر سكربتك</a>
-            </nav>
-            <button class="login-btn" onclick="window.location.href='https://t.me/hscripts'">الدعم الفني</button>
-        </div>
+        <h1>مرحبًا بكم في هيما تيك</h1>
     </header>
-    <!-- قسم الوصف والأزرار -->
-    <section class="hero">
-        <h1>H-Scripts.site</h1>
-        <p>اهلا بك في موقعنا هذا هو الموقع الاول باللغة العربية و المصمم خصيصا للعرب و ننشر فيه سكربتات و هاكات روبلوكس مع اقوي تيم دعم فني علي مدار يوم</p>
-        <div class="hero-buttons">
-            <button onclick="window.location.href='All-scripts.html'">استكشاف الاسكربتات</button>
-            <button onclick="window.location.href='join.html'">انضم كشريك</button>
+
+    <main>
+        <h2>موقعنا يقدم كل ما هو جديد ومبتكر</h2>
+        <p>استمتعوا بتجربة استثنائية من خلال محتوياتنا الخرافية.</p>
+    </main>
+
+    <footer>
+        <div>
+            <a href="#">سياسة الخصوصية</a> | 
+            <a href="#">الاتصال بنا</a>
         </div>
-        <div class="user-stats">
-            <span>المستخدمون الآن:</span>
-            <span>المسجلون: <strong>59</strong></span>
-            <span>الضيوف: <strong>1000000</strong></span>
-        </div>
-    </section>
-
-    <!-- قسم الشركاء -->
-    <section class="partners">
-        <h2>الشركاء</h2>
-        <div class="partner-list">
-            <div class="partner">
-                <img src="hema.jpg" alt="شريك 1">
-                <p>HemaTech</p>
-            </div>
-            <div class="partner">
-                <img src="channels4_profile.jpg" alt="TPC_TubeRblx">
-                <p>TPC_TubeRblx</p>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // كود لإضافة تأثير عند النقر على الشاشة
-        document.addEventListener('click', function(e) {
-            const effect = document.createElement('div');
-            effect.className = 'click-effect';
-            effect.style.left = `${e.pageX - 10}px`;
-            effect.style.top = `${e.pageY - 10}px`;
-            document.body.appendChild(effect);
-
-            setTimeout(() => {
-                effect.remove();
-            }, 500);
-        });
-    </script>
-<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-
-<script>
-    const firebaseConfig = {
-        apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-        authDomain: "treng-c6027.firebaseapp.com",
-        projectId: "treng-c6027",
-        storageBucket: "treng-c6027.appspot.com",
-        messagingSenderId: "305527546716",
-        appId: "1:305527546716:web:fd072a58200f31bb42d799",
-        measurementId: "G-3JFKFT2LT0"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    async function checkMaintenanceStatus() {
-        const doc = await myDb.collection("settings").doc("maintenance").get();
-        if (doc.exists && doc.data().isActive) {
-            document.body.innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10%; font-family: Arial, sans-serif;">
-                    <img src="https://i.ibb.co/W077gdL/images-1-removebg-preview.png" alt="صورة الصيانة" style="max-width: 200px; border-radius: 10px; margin-bottom: 20px;">
-                    <h1 style="font-size: 32px; color: #333; margin-bottom: 10px;">الموقع تحت الصيانة</h1>
-                    <p style="font-size: 18px; color: #666; margin-bottom: 20px;">
-                        نحن نعمل حاليًا على تحسين تجربة المستخدم. يرجى التحقق مرة أخرى لاحقًا.
-                    </p>
-                    <a href="https://t.me/hscripts" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #fff; font-size: 18px; border-radius: 5px; text-decoration: none; transition: background-color 0.3s;">
-                        تواصل مع الدعم
-                    </a>
-                </div>
-            `;
-        }
-    }
-
-    // التحقق من حالة الصيانة عند تحميل الصفحة
-    checkMaintenanceStatus();
-</script>
-
-    
+        <div class="rights">&copy; 2024 جميع الحقوق محفوظة لـ هيما تيك</div>
+    </footer>
 </body>
 </html>
