@@ -3,50 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هيما تيك - Space Theme</title>
+    <title>هيما تيك - تصميم فضائي</title>
     <style>
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             color: #fff;
-            background: url('https://source.unsplash.com/1920x1080/?space,stars') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(to bottom, #000428, #004e92);
+            background-attachment: fixed;
         }
 
         header {
             text-align: center;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            color: #fff;
         }
 
         header h1 {
-            font-size: 3rem;
-            color: #f8c102;
+            font-size: 3.5rem;
+            color: #e3c567;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
             text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            margin: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #f0f0f0;
+            padding: 1rem;
+        }
+
+        main h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        main p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 700px;
         }
 
         footer {
             background: rgba(0, 0, 0, 0.9);
             color: #fff;
-            padding: 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            font-size: 1rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
         }
 
         footer a {
-            color: #f8c102;
+            color: #e3c567;
             text-decoration: none;
+            margin: 0 10px;
         }
 
         footer a:hover {
@@ -56,6 +70,7 @@
         footer .rights {
             margin-top: 1rem;
             font-size: 0.9rem;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -65,13 +80,16 @@
     </header>
 
     <main>
-        <h2>موقعنا يقدم كل ما هو جديد ومبتكر</h2>
-        <p>استمتعوا بتجربة استثنائية من خلال محتوياتنا الخرافية.</p>
+        <div>
+            <h2>انطلق معنا إلى عالم الإبداع</h2>
+            <p>موقعنا يقدم لك أحدث التقنيات وأفضل الحلول. نسعى دائمًا لتقديم تجربة استثنائية تجعل كل شيء أكثر إبداعًا وتألقًا.</p>
+        </div>
     </main>
 
     <footer>
         <div>
-            <a href="#">سياسة الخصوصية</a> | 
+            <a href="#">سياسة الخصوصية</a>
+            |
             <a href="#">الاتصال بنا</a>
         </div>
         <div class="rights">&copy; 2024 جميع الحقوق محفوظة لـ هيما تيك</div>
