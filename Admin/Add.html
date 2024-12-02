@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة سكربت جديد</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+        }
+        .submit-button {
+            padding: 12px;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .submit-button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .notifications-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .succes-svg {
+            width: 20px;
+            height: 20px;
+        }
+        .success-prompt-heading {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="addScriptForm">
+        <div class="form-group">
+            <label for="subscriptionCode">كود الاشتراك:</label>
+            <input type="text" id="subscriptionCode" required>
+        </div>
+        <div class="form-group">
+            <label for="title">عنوان السكربت:</label>
+            <input type="text" id="title" required>
+        </div>
+        <div class="form-group">
+            <label for="mapName">اسم اللعبة:</label>
+            <input type="text" id="mapName" required>
+        </div>
+        <div class="form-group">
+            <label for="description">الوصف:</label>
+            <textarea id="description" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="scriptName">الاسكربت:</label>
+            <input type="text" id="scriptName" required>
+        </div>
+        <button type="submit" class="submit-button">إضافة السكربت</button>
+    </form>
+</div>
+
+<div class="notifications-container" id="notification">
+    <div class="success">
+        <svg class="succes-svg" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <div>
+            <p class="success-prompt-heading">تمت إضافة السكربت بنجاح!</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("addScriptForm");
+    const notification = document.getElementById("notification");
+    const submitButton = document.querySelector(".submit-button");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // تعطيل الزر لمنع تكرار الإرسال
+        submitButton.disabled = true;
+
+        try {
+            // محاكاة عملية إضافة السكربت
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+
+            // عرض الإشعار
+            notification.style.display = "block";
+
+            // إعادة تمكين الزر بعد 5 ثوانٍ
+            setTimeout(() => {
+                notification.style.display = "none";
+                submitButton.disabled = false;
+                form.reset();
+            }, 5000);
+        } catch (error) {
+            alert("حدث خطأ أثناء إضافة السكربت.");
+            submitButton.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>
