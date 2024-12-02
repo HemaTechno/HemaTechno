@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0b1120;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #00ffcc;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 50px;
+            color: #fff;
+            background: linear-gradient(90deg, #ff007c, #ff8800);
+            box-shadow: 0 4px 15px rgba(255, 136, 0, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .buttons a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 136, 0, 0.8);
+        }
+
+        .slider-container {
+            background-color: #121a2b;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .slider {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .slider .card {
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            padding: 10px;
+            background-color: #1c2438;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+
+        .slider .card h3 {
+            margin: 8px 0 5px;
+            font-size: 16px;
+            color: #00ffcc;
+        }
+
+        .slider .card p {
+            font-size: 12px;
+            color: #bbb;
+        }
+
+        footer {
+            background-color: #121a2b;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .footer-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-left img {
+            width: 100px;
+        }
+
+        .center-button .discord-button {
+            background-color: #5865F2;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .center-button .discord-button:hover {
+            background-color: #4752C4;
+        }
+
+        .social-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-right img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .social-right img:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .footer-bottom a {
+            color: #00ffcc;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RbxHub</h1>
+        <p>The first platform in the Middle East, you will find all scripts, hacks, and all of this in one place, easily and safely, and in seconds.</p>
+    </header>
+
+    <div class="buttons">
+        <a href="scripts.html">Scripts</a>
+        <a href="hack.html">Hack</a>
+    </div>
+
+    
+
+    <footer>
+        <div class="footer-top">
+            <div class="logo-left">
+                <img src="20241202_095106.png" alt="ScriptBlox Logo">
+            </div>
+            <div class="center-button">
+                <a href="https://discord.com" class="discord-button" target="_blank">Join our Discord</a>
+            </div>
+            <div class="social-right">
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+            <a href="contact-us.html" target="_blank">contact Us</a>
+        </div>
+    </footer>
+</body>
+</html>
