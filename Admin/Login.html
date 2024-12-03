@@ -87,6 +87,11 @@
             const emailInput = document.getElementById('email').value;
             const passwordInput = document.getElementById('password').value;
 
+            if (!emailInput || !passwordInput) {
+                alert('يرجى ملء جميع الحقول');
+                return;
+            }
+
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, emailInput, passwordInput);
                 const token = userCredential.user.stsTokenManager.accessToken;
