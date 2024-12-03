@@ -110,13 +110,13 @@
   <script>
     // Firebase Configuration
     const firebaseConfig = {
-    apiKey: "AIzaSyCJ6erh48TqECEM-OfZPQO0voOaTu7f_Og",
-  authDomain: "scripts-b35e3.firebaseapp.com",
-  projectId: "scripts-b35e3",
-  storageBucket: "scripts-b35e3.appspot.com",
-  messagingSenderId: "536349347913",
-  appId: "1:536349347913:web:7c4266a79eefc76e212f98"
-};
+      apiKey: "AIzaSyDN6hj_5iKkC76RWGXax4f5DQOj8E4syTQ",
+      authDomain: "hema-fcf76.firebaseapp.com",
+      projectId: "hema-fcf76",
+      storageBucket: "hema-fcf76.appspot.com",
+      messagingSenderId: "76044728790",
+      appId: "1:76044728790:web:776cd44b329beee03ccc77",
+      measurementId: "G-MB5N3JM8M8"
     };
 
     // Initialize Firebase
@@ -133,12 +133,12 @@
 
       try {
         const userRef = db.collection('users');
-        const userDoc = await userRef.doc(email).get();
+        const userSnapshot = await userRef.where('email', '==', email).get();
 
-        if (userDoc.exists) {
+        if (!userSnapshot.empty) {
           alert('Email is already registered.');
         } else {
-          await userRef.doc(email).set({
+          await userRef.add({
             fullName,
             email,
             password
