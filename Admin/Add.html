@@ -1,110 +1,167 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل بيانات المستخدم</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة مستخدم جديد</title>
     <style>
-    body {
-      font-family: Arial, sans-serif;
-      direction: rtl;
-      text-align: center;
-      margin: 20px;
-    }
-    form {
-      max-width: 400px;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #f9f9f9;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    .success-message {
-      color: green;
-      margin-top: 20px;
-    }
-  </style>
+        /* نفس التنسيقات السابقة */
+      body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #495057;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .submit-button {
+            padding: 12px 0;
+            width: 100%;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .copy-message, .exists-message {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .copy-message {
+            color: #28a745;
+        }
+        .exists-message {
+            color: #dc3545;
+        }
+        .exists-message a {
+            color: #dc3545;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <h1>تسجيل البيانات</h1>
-  <form id="userForm">
-    <input type="text" id="name" placeholder="الاسم" required>
-    <input type="email" id="email" placeholder="الإيميل" required>
-    <input type="password" id="password" placeholder="كلمة المرور" required>
-    <button type="submit">إرسال</button>
-  </form>
-  <div id="successMessage" class="success-message" style="display: none;">
-    تم حفظ البيانات بنجاح!
-  </div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
-  
-  <script>
-    
-    // تكوين Firebase
+<div class="header">
+    <h1>إضافة مستخدم جديد</h1>
+</div>
+
+<div class="form-container">
+    <form id="addUserForm">
+        <div class="form-group">
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">الإيميل:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" required>
+        </div>
+        <button type="submit" class="submit-button">إضافة المستخدم</button>
+    </form>
+    <div id="successMessage" style="display:none; color: green; margin-top: 15px;">تمت إضافة المستخدم بنجاح!</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+<script>
     const firebaseConfig = {
-      apiKey: "AIzaSyDN6hj_5iKkC76RWGXax4f5DQOj8E4syTQ",
-      authDomain: "hema-fcf76.firebaseapp.com",
-      projectId: "hema-fcf76",
-      storageBucket: "hema-fcf76.appspot.com",
-      messagingSenderId: "76044728790",
-      appId: "1:76044728790:web:776cd44b329beee03ccc77",
-      measurementId: "G-MB5N3JM8M8"
+        apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+        authDomain: "treng-c6027.firebaseapp.com",
+        projectId: "treng-c6027",
+        storageBucket: "treng-c6027.appspot.com",
+        messagingSenderId: "305527546716",
+        appId: "1:305527546716:web:fd072a58200f31bb42d799",
+        measurementId: "G-3JFKFT2LT0"
     };
 
-    // تهيئة Firebase
-    const app = firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // التعامل مع الفورم
-    const userForm = document.getElementById('userForm');
-    const successMessage = document.getElementById('successMessage');
+    document.getElementById("addUserForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    userForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+        try {
+            await db.collection("users").add({
+                name,
+                email,
+                password,
+                createdAt: new Date().toISOString()
+            });
 
-      try {
-        // إضافة البيانات إلى Firestore
-        await db.collection('users').add({
-          name: name,
-          email: email,
-          password: password,
-          createdAt: new Date()
-        });
+            document.getElementById("addUserForm").reset();
+            document.getElementById("successMessage").style.display = "block";
 
-        // إظهار رسالة النجاح
-        successMessage.style.display = 'block';
-
-        // إعادة تعيين الحقول
-        userForm.reset();
-      } catch (error) {
-        console.error('حدث خطأ أثناء حفظ البيانات:', error);
-        alert('تعذر حفظ البيانات، يرجى المحاولة مرة أخرى.');
-      }
+            setTimeout(() => {
+                document.getElementById("successMessage").style.display = "none";
+            }, 3000);
+        } catch (error) {
+            console.error("حدث خطأ أثناء إضافة المستخدم:", error);
+            alert("حدث خطأ أثناء إضافة المستخدم.");
+        }
     });
-  </script>
+</script>
 </body>
 </html>
