@@ -79,6 +79,9 @@
             if (storedToken && tokenExpiration && currentTime < tokenExpiration) {
                 window.location.href = 'main.html'; // استبدل main.html بصفحتك الرئيسية
             }
+
+            // استدعاء دالة requireLogin عند تحميل الصفحة
+            requireLogin();
         });
 
         async function login(event) {
@@ -119,7 +122,7 @@
         }
     </script>
 </head>
-<body onload="requireLogin()">
+<body>
     <div class="login-container">
         <h1>تسجيل الدخول</h1>
         <form onsubmit="login(event)">
