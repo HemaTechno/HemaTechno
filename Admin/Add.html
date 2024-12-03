@@ -1,152 +1,156 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة سكربت جديد</title>
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-        .form-container {
-            background-color: #fff;
-            border-radius: 12px;
-            padding: 40px;
-            width: 100%;
-            max-width: 500px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-        }
-        .submit-button {
-            padding: 12px;
-            width: 100%;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .submit-button:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-        }
-        .notifications-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: none;
-        }
-        .success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 15px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .succes-svg {
-            width: 20px;
-            height: 20px;
-        }
-        .success-prompt-heading {
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    .form-box {
+      max-width: 300px;
+      background: #f1f7fe;
+      overflow: hidden;
+      border-radius: 16px;
+      color: #010101;
+      margin: 50px auto;
+    }
+
+    .form {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 24px 24px;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 1.6rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .form-container {
+      overflow: hidden;
+      border-radius: 8px;
+      background-color: #fff;
+      margin: 1rem 0 .5rem;
+      width: 100%;
+    }
+
+    .input {
+      background: none;
+      border: 0;
+      outline: 0;
+      height: 40px;
+      width: 100%;
+      border-bottom: 1px solid #eee;
+      font-size: .9rem;
+      padding: 8px 15px;
+    }
+
+    .form-section {
+      padding: 16px;
+      font-size: .85rem;
+      background-color: #e0ecfb;
+      box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+    }
+
+    .form-section a {
+      font-weight: bold;
+      color: #0066ff;
+      transition: color .3s ease;
+    }
+
+    .form-section a:hover {
+      color: #005ce6;
+      text-decoration: underline;
+    }
+
+    .form button {
+      background-color: #0066ff;
+      color: #fff;
+      border: 0;
+      border-radius: 24px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color .3s ease;
+    }
+
+    .form button:hover {
+      background-color: #005ce6;
+    }
+  </style>
+  <!-- Firebase Configuration -->
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
 </head>
 <body>
-
-<div class="form-container">
-    <form id="addScriptForm">
-        <div class="form-group">
-            <label for="subscriptionCode">كود الاشتراك:</label>
-            <input type="text" id="subscriptionCode" required>
-        </div>
-        <div class="form-group">
-            <label for="title">عنوان السكربت:</label>
-            <input type="text" id="title" required>
-        </div>
-        <div class="form-group">
-            <label for="mapName">اسم اللعبة:</label>
-            <input type="text" id="mapName" required>
-        </div>
-        <div class="form-group">
-            <label for="description">الوصف:</label>
-            <textarea id="description" rows="4" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="scriptName">الاسكربت:</label>
-            <input type="text" id="scriptName" required>
-        </div>
-        <button type="submit" class="submit-button">إضافة السكربت</button>
+  <div class="form-box">
+    <form class="form" id="signUpForm">
+      <span class="title">Sign up</span>
+      <span class="subtitle">Create a free account with your email.</span>
+      <div class="form-container">
+        <input type="text" id="fullName" class="input" placeholder="Full Name" required>
+        <input type="email" id="email" class="input" placeholder="Email" required>
+        <input type="password" id="password" class="input" placeholder="Password" required>
+      </div>
+      <button type="submit">Sign up</button>
     </form>
-</div>
-
-<div class="notifications-container" id="notification">
-    <div class="success">
-        <svg class="succes-svg" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg>
-        <div>
-            <p class="success-prompt-heading">تمت إضافة السكربت بنجاح!</p>
-        </div>
+    <div class="form-section">
+      <p>Have an account? <a href="#">Log in</a></p>
     </div>
-</div>
+  </div>
 
-<script>
-    const form = document.getElementById("addScriptForm");
-    const notification = document.getElementById("notification");
-    const submitButton = document.querySelector(".submit-button");
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDN6hj_5iKkC76RWGXax4f5DQOj8E4syTQ",
+      authDomain: "hema-fcf76.firebaseapp.com",
+      projectId: "hema-fcf76",
+      storageBucket: "hema-fcf76.appspot.com",
+      messagingSenderId: "76044728790",
+      appId: "1:76044728790:web:776cd44b329beee03ccc77",
+      measurementId: "G-MB5N3JM8M8"
+    };
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore(app);
 
-        // تعطيل الزر لمنع تكرار الإرسال
-        submitButton.disabled = true;
+    // Form Submission Handler
+    document.getElementById('signUpForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-        try {
-            // محاكاة عملية إضافة السكربت
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-            // عرض الإشعار
-            notification.style.display = "block";
+      try {
+        const userRef = db.collection('users');
+        const userDoc = await userRef.doc(email).get();
 
-            // إعادة تمكين الزر بعد 5 ثوانٍ
-            setTimeout(() => {
-                notification.style.display = "none";
-                submitButton.disabled = false;
-                form.reset();
-            }, 5000);
-        } catch (error) {
-            alert("حدث خطأ أثناء إضافة السكربت.");
-            submitButton.disabled = false;
+        if (userDoc.exists) {
+          alert('Email is already registered.');
+        } else {
+          await userRef.doc(email).set({
+            fullName,
+            email,
+            password
+          });
+          alert('Sign-up successful!');
+          document.getElementById('signUpForm').reset();
         }
+      } catch (error) {
+        console.error('Error signing up:', error);
+        alert('An error occurred. Please try again.');
+      }
     });
-</script>
-
+  </script>
 </body>
 </html>
