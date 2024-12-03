@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h1 {
+            margin-bottom: 20px;
+            color: #4a4a4a;
+        }
+        .login-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #6200ea;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDN6hj_5iKkC76RWGXax4f5DQOj8E4syTQ",
+            authDomain: "hema-fcf76.firebaseapp.com",
+            projectId: "hema-fcf76",
+            storageBucket: "hema-fcf76.appspot.com",
+            messagingSenderId: "76044728790",
+            appId: "1:76044728790:web:776cd44b329beee03ccc77",
+            measurementId: "G-MB5N3JM8M8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedToken = localStorage.getItem('loginToken');
+            const tokenExpiration = localStorage.getItem('tokenExpiration');
+            const currentTime = new Date().getTime();
+
+            if (storedToken && tokenExpiration && currentTime < tokenExpiration) {
+                window.location.href = 'main.html'; // استبدل main.html بصفحتك الرئيسية
+            }
+        });
+
+        async function login(event) {
+            event.preventDefault();
+
+            const emailInput = document.getElementById('email').value;
+            const passwordInput = document.getElementById('password').value;
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, emailInput, passwordInput);
+                const token = userCredential.user.stsTokenManager.accessToken;
+                const expirationTime = new Date().getTime() + 3600 * 1000; // ساعة واحدة
+
+                localStorage.setItem('loginToken', token);
+                localStorage.setItem('tokenExpiration', expirationTime);
+
+                alert('تم تسجيل الدخول بنجاح');
+                window.location.href = 'main.html'; // استبدل main.html بصفحتك الرئيسية
+            } catch (error) {
+                alert('الإيميل أو كلمة المرور غير صحيحة');
+            }
+        }
+
+        function requireLogin() {
+            const storedToken = localStorage.getItem('loginToken');
+            const tokenExpiration = localStorage.getItem('tokenExpiration');
+            const currentTime = new Date().getTime();
+
+            if (!storedToken || !tokenExpiration || currentTime >= tokenExpiration) {
+                alert('يجب تسجيل الدخول للوصول إلى هذه الصفحة');
+                window.location.href = 'login.html'; // استبدل login.html بصفحة تسجيل الدخول
+            }
+        }
+    </script>
+</head>
+<body onload="requireLogin()">
+    <div class="login-container">
+        <h1>تسجيل الدخول</h1>
+        <form onsubmit="login(event)">
+            <label for="email">الإيميل:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+    </div>
+</body>
+</html>
