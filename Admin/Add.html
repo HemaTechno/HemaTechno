@@ -1,114 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
-  <style>
-    .form-box {
-      max-width: 300px;
-      background: #f1f7fe;
-      overflow: hidden;
-      border-radius: 16px;
-      color: #010101;
-      margin: 50px auto;
-    }
-
-    .form {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 32px 24px 24px;
-      gap: 16px;
-      text-align: center;
-    }
-
-    .title {
-      font-weight: bold;
-      font-size: 1.6rem;
-    }
-
-    .subtitle {
-      font-size: 1rem;
-      color: #666;
-    }
-
-    .form-container {
-      overflow: hidden;
-      border-radius: 8px;
-      background-color: #fff;
-      margin: 1rem 0 .5rem;
-      width: 100%;
-    }
-
-    .input {
-      background: none;
-      border: 0;
-      outline: 0;
-      height: 40px;
-      width: 100%;
-      border-bottom: 1px solid #eee;
-      font-size: .9rem;
-      padding: 8px 15px;
-    }
-
-    .form-section {
-      padding: 16px;
-      font-size: .85rem;
-      background-color: #e0ecfb;
-      box-shadow: rgb(0 0 0 / 8%) 0 -1px;
-    }
-
-    .form-section a {
-      font-weight: bold;
-      color: #0066ff;
-      transition: color .3s ease;
-    }
-
-    .form-section a:hover {
-      color: #005ce6;
-      text-decoration: underline;
-    }
-
-    .form button {
-      background-color: #0066ff;
-      color: #fff;
-      border: 0;
-      border-radius: 24px;
-      padding: 10px 16px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color .3s ease;
-    }
-
-    .form button:hover {
-      background-color: #005ce6;
-    }
-  </style>
-  <!-- Firebase Configuration -->
+  <title>تسجيل بيانات المستخدم</title>
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      text-align: center;
+      margin: 20px;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .success-message {
+      color: green;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="form-box">
-    <form class="form" id="signUpForm">
-      <span class="title">Sign up</span>
-      <span class="subtitle">Create a free account with your email.</span>
-      <div class="form-container">
-        <input type="text" id="fullName" class="input" placeholder="Full Name" required>
-        <input type="email" id="email" class="input" placeholder="Email" required>
-        <input type="password" id="password" class="input" placeholder="Password" required>
-      </div>
-      <button type="submit">Sign up</button>
-    </form>
-    <div class="form-section">
-      <p>Have an account? <a href="#">Log in</a></p>
-    </div>
+  <h1>تسجيل البيانات</h1>
+  <form id="userForm">
+    <input type="text" id="name" placeholder="الاسم" required>
+    <input type="email" id="email" placeholder="الإيميل" required>
+    <input type="password" id="password" placeholder="كلمة المرور" required>
+    <button type="submit">إرسال</button>
+  </form>
+  <div id="successMessage" class="success-message" style="display: none;">
+    تم حفظ البيانات بنجاح!
   </div>
 
   <script>
-    // Firebase Configuration
+    // تكوين Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyDN6hj_5iKkC76RWGXax4f5DQOj8E4syTQ",
       authDomain: "hema-fcf76.firebaseapp.com",
@@ -119,36 +69,38 @@
       measurementId: "G-MB5N3JM8M8"
     };
 
-    // Initialize Firebase
+    // تهيئة Firebase
     const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore(app);
+    const db = firebase.firestore();
 
-    // Form Submission Handler
-    document.getElementById('signUpForm').addEventListener('submit', async (e) => {
+    // التعامل مع الفورم
+    const userForm = document.getElementById('userForm');
+    const successMessage = document.getElementById('successMessage');
+
+    userForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const fullName = document.getElementById('fullName').value;
+      const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
       try {
-        const userRef = db.collection('users');
-        const userSnapshot = await userRef.where('email', '==', email).get();
+        // إضافة البيانات إلى Firestore
+        await db.collection('users').add({
+          name: name,
+          email: email,
+          password: password,
+          createdAt: new Date()
+        });
 
-        if (!userSnapshot.empty) {
-          alert('Email is already registered.');
-        } else {
-          await userRef.add({
-            fullName,
-            email,
-            password
-          });
-          alert('Sign-up successful!');
-          document.getElementById('signUpForm').reset();
-        }
+        // إظهار رسالة النجاح
+        successMessage.style.display = 'block';
+
+        // إعادة تعيين الحقول
+        userForm.reset();
       } catch (error) {
-        console.error('Error signing up:', error);
-        alert('An error occurred. Please try again.');
+        console.error('حدث خطأ أثناء حفظ البيانات:', error);
+        alert('تعذر حفظ البيانات، يرجى المحاولة مرة أخرى.');
       }
     });
   </script>
