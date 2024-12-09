@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - الصيانة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .maintenance-button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .maintenance-button.active {
+            background-color: #dc3545;
+        }
+         .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: #00bcd4;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.1em;
+        }
+        .notification h2 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #000;
+        }
+        .notification p {
+            margin: 10px 0;
+            color: #222;
+        }
+        .notification .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .notification button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buy-button {
+            background-color: #ffeb3b;
+            color: #333;
+        }
+        .close-button {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification">
+    <h2>وحشتنا من اخر مرة دخلت فيها موقع</h2>
+    <p>متوفر روبكس بي ارخص الأسعار 💪
+
+تخيل كدا 1000 روبكس مش صافين بي 240 جنية مصري 
+
+و تخيل ان البريميوم مع 450 روبكس بي 310 جنية 😉😇 
+
+</p>
+    <div class="buttons">
+        <button class="buy-button" onclick="openTelegram()">شراء</button>
+        <button class="close-button" onclick="closeNotification()">غير مهتم</button>
+    </div>
+</div>
+
+
+<h1>لوحة التحكم</h1>
+<button id="maintenanceButton" class="maintenance-button">جاري التحميل...</button>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
+        authDomain: "treng-c6027.firebaseapp.com",
+        projectId: "treng-c6027",
+        storageBucket: "treng-c6027.appspot.com",
+        messagingSenderId: "305527546716",
+        appId: "1:305527546716:web:fd072a58200f31bb42d799",
+        measurementId: "G-3JFKFT2LT0"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const maintenanceButton = document.getElementById("maintenanceButton");
+
+    // استعلام عن حالة الصيانة
+    async function getMaintenanceStatus() {
+        const doc = await db.collection("settings").doc("maintenance").get();
+        return doc.exists ? doc.data().isActive : false;
+    }
+
+    // تحديث حالة الصيانة
+    async function toggleMaintenanceStatus(currentStatus) {
+        await db.collection("settings").doc("maintenance").set({ isActive: !currentStatus });
+        updateButton(!currentStatus);
+    }
+
+    // تحديث الزر بناءً على الحالة
+    function updateButton(isActive) {
+        maintenanceButton.textContent = isActive ? "إلغاء الصيانة" : "تفعيل الصيانة";
+        maintenanceButton.classList.toggle("active", isActive);
+    }
+
+    // إعداد الزر عند التحميل
+    getMaintenanceStatus().then(updateButton);
+
+    // حدث النقر على الزر
+    maintenanceButton.addEventListener("click", async () => {
+        const currentStatus = await getMaintenanceStatus();
+        toggleMaintenanceStatus(currentStatus);
+    });
+</script>
+<script>
+    function openTelegram() {
+        // ضع هنا رابط تيليجرام الخاص بك
+        window.location.href = "https://t.me/Hema_tech1";
+    }
+
+    function closeNotification() {
+        document.getElementById("notification").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
