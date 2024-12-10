@@ -127,11 +127,11 @@
         }
 
         try {
-            const storageRef = storage.ref(`scripts/${imageFile.name}`);
+            const storageRef = storage.ref(`rbx/${imageFile.name}`);
             await storageRef.put(imageFile);
             const imageUrl = await storageRef.getDownloadURL();
 
-            await db.collection("scripts").add({
+            await db.collection("rbx").add({
                 title,
                 mapName,
                 description,
