@@ -1,266 +1,79 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض جميع السكربتات</title>
+    <title>عرض السكربتات</title>
     <style>
-        /* تنسيقات عامة */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Amiri', serif;
-        }
-
-
         body {
-            background-color: #1a1a1a;
-            color: #ffffff;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
         }
-
-        /* الشريط العلوي */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: #333333;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        .logo {
-            font-size: 1.8rem;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-        }
-        .navbar nav a {
-            color: #ffffff;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-family: 'Poppins', sans-serif;
-        }
-        .navbar nav a:hover {
-            text-decoration: underline;
-        }
-
-        .login-btn {
-            padding: 0.5rem 1rem;
-            background-color: #555555;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* قسم العنوان */
-        .hero {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        /* قسم السكربتات */
         .scripts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
-            padding: 2rem;
+            justify-content: center;
         }
-
-        .script-card {
-            background-color: #333;
-            border-radius: 10px;
-            padding: 1rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .script-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .script-info {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.9rem;
-            color: #bbbbbb;
-            margin-top: 10px;
-        }
-
-        .script-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #4caf50;
-            margin: 10px 0;
-        }
-
-        .script-description {
-            font-size: 1rem;
-            color: #dddddd;
-            margin-bottom: 10px;
+        .script-box {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
             text-align: center;
+            transition: transform 0.3s;
         }
-
-        .get-button {
-            background-color: #008CBA;
-            color: white;
-            padding: 0.5rem 1rem;
+        .script-box:hover {
+            transform: scale(1.05);
+        }
+        .script-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .script-box .content {
+            padding: 20px;
+        }
+        .script-box .content h3 {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .script-box .content p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .script-box .content button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
             border: none;
-            border-radius: 5px;
-            text-decoration: none;
+            border-radius: 6px;
+            cursor: pointer;
             transition: background-color 0.3s;
         }
-
-        .get-button:hover {
-            background-color: #45a049;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #333333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-size: 0.9rem;
-        }
-
-        .footer a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: #c0c0c0;
-        }
-        .click-effect {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: rgba(0, 191, 255, 0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: clickEffect 0.5s ease-out;
-        }
-        @keyframes clickEffect {
-    from {
-        transform: scale(1);
-        opacity: 1;
-    }
-    to {
-        transform: scale(5);
-        opacity: 0;
-    }
+        .script-box .content button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-    <!-- الشريط العلوي -->
-    <header>
-        <div class="navbar">
-            <div class="logo">H-Scripts</div>
-            <nav>
-                <a href="All-scripts.html">الاسكربتات</a>
-                <a href="Hack.html">الهاكات</a>
-                <a href="youtube-scripts.html">يوتيوبرز</a>
-                <a href="admin/add-public">انشر سكربتك</a>
-            </nav>
-            <button class="login-btn" onclick="window.location.href='https://t.me/hscripts'">الدعم الفني</button>
-        </div>
-    </header>
-
-    <!-- قسم العنوان -->
-    <section class="hero">
-        <h1>جميع السكربتات</h1>
-    </section>
-
-    <!-- قسم السكربتات -->
-    <div class="scripts-container" id="scriptsContainer">
-        <!-- سيتم تحميل السكربتات هنا -->
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>© جميع الحقوق محفوظة <a href="https://example.com" target="_blank">إبراهيم منصور</a></p>
-    </div>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
-            authDomain: "treng-c6027.firebaseapp.com",
-            projectId: "treng-c6027",
-            storageBucket: "treng-c6027.appspot.com",
-            messagingSenderId: "305527546716",
-            appId: "1:305527546716:web:fd072a58200f31bb42d799",
-            measurementId: "G-3JFKFT2LT0"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        async function loadScripts() {
-            const scriptsContainer = document.getElementById("scriptsContainer");
-            scriptsContainer.innerHTML = "";
-
-            const querySnapshot = await db.collection("scripts").get();
-
-            if (querySnapshot.empty) {
-                scriptsContainer.innerHTML = "<p>لا توجد سكربتات متاحة.</p>";
-                return;
-            }
-
-            querySnapshot.forEach((doc) => {
-                const script = doc.data();
-                const scriptCard = document.createElement("div");
-                scriptCard.className = "script-card";
-                scriptCard.innerHTML = `
-                    <img src="${script.imageUrl}" alt="${script.title}">
-                    <div class="script-info">
-                        <span>تاريخ الإضافة: ${script.addedDate}</span>
-                        <span>اسم اللعبة: ${script.mapName}</span>
-                    </div>
-                    <div class="script-title">${script.title}</div>
-                    <p class="script-description">${script.description}</p>
-                    <a href="view.html?id=${doc.id}" class="get-button">Get</a>
-                `;
-                scriptsContainer.appendChild(scriptCard);
-            });
-        }
-
-        loadScripts();
-    </script>
-
-    <script>
-        // كود لإضافة تأثير عند النقر على الشاشة
-        document.addEventListener('click', function(e) {
-            const effect = document.createElement('div');
-            effect.className = 'click-effect';
-            effect.style.left = `${e.pageX - 10}px`;
-            effect.style.top = `${e.pageY - 10}px`;
-            document.body.appendChild(effect);
-
-            setTimeout(() => {
-                effect.remove();
-            }, 500);
-        });
-    </script>
+<h1 style="text-align: center; color: #007bff;">جميع السكربتات</h1>
+<div class="scripts-container" id="scriptsContainer">
+    <!-- سيتم ملء السكربتات ديناميكيًا هنا -->
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
 
 <script>
-    const myFirebaseConfig = {
+    const firebaseConfig = {
         apiKey: "AIzaSyDoK427q44Fj87JhgZh2vKeUnACkjl8HDc",
         authDomain: "treng-c6027.firebaseapp.com",
         projectId: "treng-c6027",
@@ -270,34 +83,37 @@
         measurementId: "G-3JFKFT2LT0"
     };
 
-    firebase.initializeApp(myFirebaseConfig);
-    const myDb = firebase.firestore();
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-    // دالة التحقق من حالة الصيانة
-    async function checkMaintenanceStatus() {
-        const doc = await myDb.collection("settings").doc("maintenance").get();
-        if (doc.exists && doc.data().isActive) {
-            document.body.innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 10%; font-family: Arial, sans-serif;">
-                    <img src="https://i.ibb.co/W077gdL/images-1-removebg-preview.png" alt="صورة الصيانة" style="max-width: 200px; border-radius: 10px; margin-bottom: 20px;">
-                    <h1 style="font-size: 32px; color: #333; margin-bottom: 10px;">الموقع تحت الصيانة</h1>
-                    <p style="font-size: 18px; color: #666; margin-bottom: 20px;">
-                        نحن نعمل حاليًا على تحسين تجربة المستخدم. يرجى التحقق مرة أخرى لاحقًا.
-                    </p>
-                    <a href="https://t.me/hscripts" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #fff; font-size: 18px; border-radius: 5px; text-decoration: none; transition: background-color 0.3s;">
-                        تواصل مع الدعم
-                    </a>
+    const scriptsContainer = document.getElementById("scriptsContainer");
+
+    // جلب السكربتات من Firestore
+    db.collection("scripts").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const scriptBox = document.createElement("div");
+            scriptBox.classList.add("script-box");
+
+            scriptBox.innerHTML = `
+                <img src="${data.imageUrl}" alt="${data.title}">
+                <div class="content">
+                    <h3>${data.title}</h3>
+                    <p>${data.description}</p>
+                    <button onclick="viewDetails('${doc.id}')">Read More</button>
                 </div>
             `;
-        }
-    }
 
-    // التحقق من حالة الصيانة عند تحميل الصفحة
-    checkMaintenanceStatus();
+            scriptsContainer.appendChild(scriptBox);
+        });
+    }).catch((error) => {
+        console.error("حدث خطأ أثناء جلب السكربتات:", error);
+    });
+
+    function viewDetails(id) {
+        window.location.href = `script-details.html?id=${id}`;
+    }
 </script>
 
-    
-
-    
 </body>
 </html>
