@@ -5,54 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل السكربت</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            padding: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
         .script-details {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             width: 90%;
             max-width: 500px;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
         }
+
         .script-details img {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 15px;
+            border: 2px solid #fff;
         }
+
         .script-details h2 {
-            font-size: 24px;
-            color: #007bff;
+            font-size: 28px;
+            color: #f3f3f3;
             margin: 20px 0;
         }
+
         .script-details p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 10px;
+            font-size: 18px;
+            color: #e0e0e0;
+            margin-bottom: 15px;
         }
+
         .script-details button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 18px;
             color: #fff;
-            background-color: #28a745;
+            background: linear-gradient(135deg, #00c853, #009624);
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: transform 0.3s, background 0.3s;
         }
+
         .script-details button:hover {
-            background-color: #218838;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #00e676, #00c853);
         }
     </style>
 </head>
@@ -82,7 +92,7 @@
     const scriptDetails = document.getElementById("scriptDetails");
     const scriptId = new URLSearchParams(window.location.search).get("id");
 
-    db.collection("scripts").doc(scriptId).get().then((doc) => {
+    db.collection("rbx").doc(scriptId).get().then((doc) => {
         if (doc.exists) {
             const data = doc.data();
             scriptDetails.innerHTML = `
@@ -90,7 +100,7 @@
                 <h2>${data.title}</h2>
                 <p>تاريخ الإضافة: ${data.addedDate}</p>
                 <p>الوصف: ${data.description}</p>
-                <button onclick="window.location.href='${data.scriptLink}'">Get Script</button>
+                <button onclick="window.location.href='${data.scriptLink}'">الحصول على السكربت</button>
             `;
         } else {
             scriptDetails.innerHTML = "<p>لم يتم العثور على السكربت.</p>";
