@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل السكربت</title>
+    <title>Script</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* استايلات الصفحة */
@@ -120,15 +120,15 @@
                 scriptDetails.innerHTML = `
                     <img src="${data.imageUrl}" alt="${data.title}">
                     <h2>${data.title}</h2>
-                    <p>تاريخ الإضافة: ${data.addedDate}</p>
-                    <p>الوصف: ${data.description}</p>
-                    <button onclick="window.location.href='${data.scriptLink}'">الحصول على السكربت</button>
+                    <p>Date 📅 : ${data.addedDate}</p>
+                    <p>Description : ${data.description}</p>
+                    <button onclick="window.location.href='${data.scriptLink}'">Get</button>
                 `;
             } else {
-                scriptDetails.innerHTML = "<p>لم يتم العثور على السكربت.</p>";
+                scriptDetails.innerHTML = "<p>ID Wrong </p>";
             }
         }).catch((error) => {
-            console.error("حدث خطأ أثناء جلب بيانات السكربت:", error);
+            console.error("😭😭😭😭😭", error);
         });
     </script>
 </body>
