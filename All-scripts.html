@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض السكربتات</title>
+    <title>H-Scripts</title>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f4f4f9;
+            background-color: #f8f9fa;
             color: #333;
             padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #6c63ff;
+            margin-bottom: 30px;
         }
         .scripts-container {
             display: flex;
@@ -20,14 +26,15 @@
         .script-box {
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 320px;
             overflow: hidden;
             text-align: center;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .script-box:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
         .script-box img {
             width: 100%;
@@ -38,8 +45,8 @@
             padding: 20px;
         }
         .script-box .content h3 {
-            font-size: 20px;
-            color: #007bff;
+            font-size: 22px;
+            color: #6c63ff;
             margin-bottom: 10px;
         }
         .script-box .content p {
@@ -47,27 +54,36 @@
             color: #555;
             margin-bottom: 15px;
         }
+        .script-box .content .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
         .script-box .content button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #6c63ff;
             color: #fff;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
         .script-box .content button:hover {
-            background-color: #0056b3;
+            background-color: #4a42b9;
+        }
+        .loading {
+            text-align: center;
+            font-size: 18px;
+            color: #999;
         }
     </style>
 </head>
 <body>
 
-<h1 style="text-align: center; color: #007bff;">جميع السكربتات</h1>
-<div class="scripts-container" id="scriptsContainer">
-    <!-- سيتم ملء السكربتات ديناميكيًا هنا -->
-</div>
+<h1>H-Scripts</h1>
+<div class="loading" id="loadingMessage">جاري تحميل السكربتات...</div>
+<div class="scripts-container" id="scriptsContainer"></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
@@ -87,31 +103,48 @@
     const db = firebase.firestore();
 
     const scriptsContainer = document.getElementById("scriptsContainer");
+    const loadingMessage = document.getElementById("loadingMessage");
 
     // جلب السكربتات من Firestore
-    db.collection("rbx").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const scriptBox = document.createElement("div");
-            scriptBox.classList.add("script-box");
+    db.collection("rbx").get()
+        .then((querySnapshot) => {
+            loadingMessage.style.display = "none"; // إخفاء رسالة التحميل
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const scriptBox = document.createElement("div");
+                scriptBox.classList.add("script-box");
 
-            scriptBox.innerHTML = `
-                <img src="${data.imageUrl}" alt="${data.title}">
-                <div class="content">
-                    <h3>${data.title}</h3>
-                    <p>${data.description}</p>
-                    <button onclick="viewDetails('${doc.id}')">Read More</button>
-                </div>
-            `;
+                scriptBox.innerHTML = `
+                    <img src="${data.imageUrl}" alt="${data.title}">
+                    <div class="content">
+                        <h3>${data.title}</h3>
+                        <p>${data.description}</p>
+                        <div class="buttons">
+                            <button onclick="viewDetails('${doc.id}')">عرض التفاصيل</button>
+                            <button onclick="shareScript('${doc.id}')">مشاركة</button>
+                        </div>
+                    </div>
+                `;
 
-            scriptsContainer.appendChild(scriptBox);
+                scriptsContainer.appendChild(scriptBox);
+            });
+        })
+        .catch((error) => {
+            loadingMessage.textContent = "حدث خطأ أثناء جلب السكربتات. حاول مجددًا لاحقًا.";
+            console.error("Error fetching scripts:", error);
         });
-    }).catch((error) => {
-        console.error("حدث خطأ أثناء جلب السكربتات:", error);
-    });
 
     function viewDetails(id) {
         window.location.href = `script-details.html?id=${id}`;
+    }
+
+    function shareScript(id) {
+        const link = `${window.location.origin}/script-details.html?id=${id}`;
+        navigator.clipboard.writeText(link).then(() => {
+            alert("تم نسخ الرابط إلى الحافظة!");
+        }).catch(() => {
+            alert("تعذر نسخ الرابط. حاول مرة أخرى.");
+        });
     }
 </script>
 
