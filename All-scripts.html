@@ -89,7 +89,7 @@
     const scriptsContainer = document.getElementById("scriptsContainer");
 
     // جلب السكربتات من Firestore
-    db.collection("scripts").get().then((querySnapshot) => {
+    db.collection("rbx").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             const scriptBox = document.createElement("div");
