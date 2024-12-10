@@ -110,7 +110,7 @@
             const scriptsContainer = document.getElementById("scriptsContainer");
             scriptsContainer.innerHTML = "";
 
-            const querySnapshot = await db.collection("scripts").get();
+            const querySnapshot = await db.collection("rbx").get();
 
             querySnapshot.forEach((doc) => {
                 const script = doc.data();
