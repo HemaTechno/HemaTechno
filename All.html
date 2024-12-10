@@ -131,7 +131,7 @@
         // دالة لحذف السكربت من Firestore
         async function deleteScript(scriptId) {
             try {
-                await db.collection("scripts").doc(scriptId).delete();
+                await db.collection("rbx").doc(scriptId).delete();
                 loadAllScripts(); // إعادة تحميل السكربتات بعد الحذف
             } catch (error) {
                 console.error("خطأ في حذف السكربت: ", error);
