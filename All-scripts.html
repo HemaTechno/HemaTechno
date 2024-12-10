@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-Scripts</title>
+    <title>rbxhub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #0b1120;
+            color: #fff;
             padding: 20px;
             margin: 0;
         }
         h1 {
             text-align: center;
-            color: #6c63ff;
+            color: #ffbf00;
             margin-bottom: 30px;
         }
         .scripts-container {
@@ -24,9 +25,9 @@
             justify-content: center;
         }
         .script-box {
-            background: #fff;
+            background: #1a2332;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             width: 320px;
             overflow: hidden;
             text-align: center;
@@ -34,7 +35,7 @@
         }
         .script-box:hover {
             transform: translateY(-10px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
         .script-box img {
             width: 100%;
@@ -46,12 +47,12 @@
         }
         .script-box .content h3 {
             font-size: 22px;
-            color: #6c63ff;
+            color: #ffbf00;
             margin-bottom: 10px;
         }
         .script-box .content p {
             font-size: 16px;
-            color: #555;
+            color: #aaa;
             margin-bottom: 15px;
         }
         .script-box .content .buttons {
@@ -62,20 +63,34 @@
         .script-box .content button {
             padding: 10px 15px;
             font-size: 14px;
-            background-color: #6c63ff;
-            color: #fff;
+            background-color: #ffbf00;
+            color: #0b1120;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         .script-box .content button:hover {
-            background-color: #4a42b9;
+            background-color: #ffdf60;
         }
         .loading {
             text-align: center;
             font-size: 18px;
-            color: #999;
+            color: #bbb;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0a0f1a;
+            color: #bbb;
+            margin-top: 30px;
+        }
+        footer a {
+            color: #ffbf00;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -84,6 +99,12 @@
 <h1>H-Scripts</h1>
 <div class="loading" id="loadingMessage">جاري تحميل السكربتات...</div>
 <div class="scripts-container" id="scriptsContainer"></div>
+
+<footer>
+    <p>&copy; 2024 RbxHub. All rights reserved.</p>
+    <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+    <a href="contact-us.html" target="_blank">Contact Us</a>
+</footer>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
@@ -105,10 +126,9 @@
     const scriptsContainer = document.getElementById("scriptsContainer");
     const loadingMessage = document.getElementById("loadingMessage");
 
-    // جلب السكربتات من Firestore
     db.collection("rbx").get()
         .then((querySnapshot) => {
-            loadingMessage.style.display = "none"; // إخفاء رسالة التحميل
+            loadingMessage.style.display = "none";
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 const scriptBox = document.createElement("div");
