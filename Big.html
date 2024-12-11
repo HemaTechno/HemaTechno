@@ -1,229 +1,1283 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0b1120;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 100vh;
-        }
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<title>RbxScripts - Roblox Scripts for every day!</title>
+	<meta name="description" content="More 1500 Roblox Scripts. Daily script updates for various Roblox Mode, all are free and safe. Our quality control assures an unbeatable experience! There are also Executors and Roblox Mobile Mod." />
+	<meta name="keywords" content="rbxscript,rbxscripts,roblox scripts,script roblox,roblox script,roblox hack,roblox exploit,exploit roblox,roblox чит, скрипты на роблокс, читы, hack roblox, роблокс читы" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="author" content="Maded by RbxScript" />
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+	<link rel="icon" href="/images/1.png" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
 
-        /* الشريحة */
-        .slider-container {
-            background-color: #121a2b; /* نفس لون خلفية الفوتر */
-            padding: 20px 0;
-            position: relative;
-            z-index: 1;
-            margin-top: auto; /* وضع الشريحة فوق الفوتر */
-        }
-
-        .slider {
-            display: flex;
-            gap: 20px;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .slider .card {
-            width: 25%;
-            max-width: 300px;
-            text-align: center;
-            padding: 15px;
-            background-color: #1c2438;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            opacity: 0; /* إخفاء المربعات في البداية */
-            animation: slide-in 10s ease-in-out infinite;
-        }
-
-        .slider .card:nth-child(1) {
-            animation-delay: 0s; /* يبدأ فورًا */
-        }
-
-        .slider .card:nth-child(2) {
-            animation-delay: 3s; /* يبدأ بعد 3 ثواني */
-        }
-
-        .slider .card:nth-child(3) {
-            animation-delay: 6s; /* يبدأ بعد 6 ثواني */
-        }
-
-        .slider .card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .slider .card h3 {
-            margin: 10px 0 5px;
-            font-size: 18px;
-            color: #00ffcc;
-        }
-
-        .slider .card p {
-            font-size: 14px;
-            color: #bbb;
-        }
-
-        /* حركة المربعات */
-        @keyframes slide-in {
-            0% {
-                transform: translateX(100%); /* يبدأ من اليمين خارج الشاشة */
-                opacity: 0;
-            }
-            50% {
-                transform: translateX(0); /* في منتصف الحركة */
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-100%); /* يخرج من اليسار */
-                opacity: 0;
-            }
-        }
-
-        /* الفوتر */
-        footer {
-            background-color: #121a2b;
-            padding: 20px 10px;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .footer-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .logo-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-left img {
-            width: 150px;
-        }
-
-        .logo-left p {
-            margin-left: 10px;
-            font-size: 14px;
-        }
-
-        .center-button {
-            text-align: center;
-            flex: 1;
-        }
-
-        .center-button .discord-button {
-            background-color: #5865F2;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .center-button .discord-button:hover {
-            background-color: #4752C4;
-        }
-
-        .social-right {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-right img {
-            width: 32px;
-            height: 32px;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .social-right img:hover {
-            transform: scale(1.2);
-        }
-
-        .footer-bottom {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .footer-bottom a {
-            color: #00ffcc;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .footer-bottom a:hover {
-            text-decoration: underline;
-        }
-    </style>
+	<link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.11.1/css/pro.min.css" />
+	<link rel="stylesheet" id="theme2" href="/../../stylesheets/style-dark.css" />
+	<link rel="stylesheet" id="style-icon" href="/../../stylesheets/Style-icon.css" />
+	<link rel="stylesheet" href="/../../stylesheets/style.css" />
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1624058124791572"
+			crossorigin="anonymous"></script>
 </head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+	(function (m, e, t, r, i, k, a) {
+		m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+		m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+	})
+	(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	ym(67895548, "init", {
+		clickmap: true,
+		trackLinks: true,
+		accurateTrackBounce: true
+	});
+</script>
+<noscript>
+	<div><img src="https://mc.yandex.ru/watch/67895548" style="position:absolute; left:-9999px;" alt="" /></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+
 <body>
-    <div class="content">
-        <p>الصفحة قيد الصيانة، سيتم تحديثها قريبًا. شكرًا لتفهمكم!</p>
-    </div>
+<script type="text/javascript" src="/../../../javascripts/jquery.min.js"></script>
+<div class="wrapper">
+	<header>
+		<div class="header">
+			<div class="header-block container">
+				<div class="header-logo">
+					<a href="/"><img src="/images/logo.png" alt="Logo" height="75" /></a>
+				</div>
+				<div class="header-links">
+					<div class="header-link">
+						<label class="switch">
+							<span class="themes" id="themesDL">
+							<span class="box">
+								<span class="icon"  id="icon">
+						</label>
+					</div>
+					<li class="c-dropdown__origin js-dropdown__origin">
+						<a href="#" class="c-primary-nav__link js-dropdown__trigger">
+							<i class="fal fa-user" Style="font-size: 32px;"> </i>
+						</a>
+						<nav class="c-dropdown js-dropdown">
+							<ul class="c-dropdown__list">
+								
+									<li>
+										<a target="_blank" href="https://rbxscript.com" class="c-dropdown__link">
+											Main
+										</a>
+									</li>
+									
+								
+									<li>
+										<a target="_blank" href="https://rbxscript.com/partners" class="c-dropdown__link">
+											Partners
+										</a>
+									</li>
+									
+								
 
-    <!-- شريحة المربعات -->
-    <div class="slider-container">
-        <div class="slider">
-            <div class="card">
-                <img src="hema.jpg" alt="Profile Picture">
-                <h3>HemaTech</h3>
-                <p>CEO & Dev</p>
-            </div>
-            <div class="card">
-                <img src="channels4_profile.jpg" alt="Profile Picture">
-                <h3>TPC_TubeRblx</h3>
-                <p>YouTuber</p>
-            </div>
-            <div class="card">
-                <img src="IMG-20240903-WA0142.jpg" alt="Profile Picture">
-                <h3>MX_SASUKE</h3>
-                <p>YouTuber</p>
-            </div>
-        </div>
-    </div>
+							</ul>
+						</nav>
+					</li>
+				</div>
+			</div>
+		</div>
+		
+	</header>
 
-    <!-- الفوتر -->
-    <footer>
-        <div class="footer-top">
-            <div class="logo-left">
-                <img src="20241122_010827.png" alt="ScriptBlox Logo">
-                
-            </div>
-            <div class="center-button">
-                <a href="https://discord.com" class="discord-button" target="_blank">Join our Discord</a>
-            </div>
-            <div class="social-right">
-                <a href="https://www.instagram.com" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61568792473008&mibextid=ZbWKwL" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-                </a>
-                <a href="https://www.twitter.com" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
-                </a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <a href="privacy-policy.html" target="_blank">سياسة الخصوصية</a>
-            <a href="contact-us.html" target="_blank">التواصل بنا</a>
-        </div>
-    </footer>
+	<script>
+		let icon = document.getElementById("icon");
+		let theme1 = document.getElementById("theme2");
+		if (icon) {
+			icon.onclick = function() {
+				resetTheme()
+			};
+			initTheme();
+
+			function initTheme() {
+				let darkThemeSelected =
+						localStorage.getItem("themeSwitch1") !== null &&
+						localStorage.getItem("themeSwitch1") === "dark";
+
+
+				if(darkThemeSelected){
+					icon.classList.toggle("moon");
+					icon.classList.remove("sun");
+					themesDL.classList.toggle("light");
+					themesDL.classList.remove("dark");
+
+				} else {
+					icon.classList.toggle("sun");
+					icon.classList.remove("moon");
+					themesDL.classList.toggle("dark");
+					themesDL.classList.remove("light");
+				}
+
+				darkThemeSelected
+						? theme1.setAttribute("href", "/../../stylesheets/style-dark.css")
+						: theme1.setAttribute("href", "");
+			}
+
+			function resetTheme(){
+				if (icon.classList.contains("sun")) {
+					icon.classList.remove("sun");
+					icon.classList.toggle("moon");
+					theme1.setAttribute("href", "/../../stylesheets/style-dark.css");
+					localStorage.setItem("themeSwitch1", "dark");
+					themesDL.classList.remove("light");
+					themesDL.classList.toggle("dark");
+				} else if (icon.classList.contains("moon")) {
+					icon.classList.remove("moon");
+					icon.classList.toggle("sun");
+					theme1.setAttribute("href", "");
+					localStorage.setItem("themeSwitch1", "light");
+					themesDL.classList.remove("dark");
+					themesDL.classList.toggle("light");
+				}
+			}
+		}
+
+	</script>
 </body>
+
 </html>
+
+	<div class="categories">
+		
+			<a href="../../posts/roblox"
+				style="background-image: url(/images/roblox-category.png)" class="top-card">
+				
+			</a>
+			
+	</div>
+	<div>
+		<form id="search" type="submit">
+			<div style="display: flex; justify-content: center; align-items: center; padding-top:20px;">
+				<div class="search">
+					<i class="fas fa-search icon-search"></i>
+					<input type="text" id="searchinput" style="outline: none" class="search-input"
+						placeholder="Search for anything" aria-label="Search" />
+					<button id="searchbtn" type="submit" class="search-button">
+						<span>Search</span>
+					</button>
+				</div>
+				<script>
+					searchbtn.onclick = function () {
+						let input = document.getElementById("searchinput").value;
+						if (input === "") {
+							window.location.href = "/"
+						} else {
+							let link =
+								window.location.origin +
+								"/" +
+								"searchall/" +
+								input;
+							window.location.replace(link);
+							console.log(link);
+						}
+					};
+					search.addEventListener('submit', function (e) {
+						e.preventDefault()
+					});
+				</script>
+			</div>
+				 <center>
+					<ins class="adsbygoogle" style="display:block; padding-top:30px; width:1080px; width:100%;"
+						data-ad-client="ca-pub-1624058124791572" 
+						data-full-width-responsive="true"
+						data-ad-slot="3254493696" 
+						data-ad-format="auto"></ins>
+				</center>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+		</form>
+		<main class="aue">
+			<div class="container">
+				<div class="cheats-block">
+					<h1 class="cheats-header--title">Last added posts</h1>
+					<div class="cheats-grid">
+						
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-WByvJLw5Yf-preview.jpg" height="150" alt="A Universal Time: Auto Farm, Auto Quests, Equip Best" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											747
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24325">
+										A Universal Time: Auto Farm, Auto Quests, Equip Best
+									</h2>
+									
+											<div class="cheats-item--description 24325nie">
+												Auto Farm a program that can provide you with all the necessary game resources such as money, experience, and other items automatically, Auto Quests the function is a useful feature in the Roblox game that automates the completion of quests assigned to players, Equip Best this function will dress all the best that you have in your inventory.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24325nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24325'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="AUniversalTimeAutoFarmAutoQuestsEquipBest-ZRZWT">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/AUniversalTimeAutoFarmAutoQuestsEquipBest-ZRZWT">
+										<button class="cheats-item--download"
+											id="qprivet24325747">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24325747.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24325=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24325=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24325" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Tue Dec 10 2024 01:34:39 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".AUniversalTimeAutoFarmAutoQuestsEquipBest-ZRZWT");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-28u4sFisSN-preview.jpg" height="150" alt="Sonic Speed Simulator: Auto Farm, Auto Egg, Auto Quest" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											279
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24356">
+										Sonic Speed Simulator: Auto Farm, Auto Egg, Auto Quest
+									</h2>
+									
+											<div class="cheats-item--description 24356nie">
+												Auto Farm a program that can provide you with all the necessary game resources such as money, experience, and other items automatically, Auto Egg this function will open eggs automatically at a fast pace, opens those eggs that you specified, Auto Quest Auto Quest is a powerful tool that allows players to automate quests in their favorite Roblox games. This feature can save players time and effort by automatically completing quests for them.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24356nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24356'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="SonicSpeedSimulatorAutoFarmAutoEggAutoQuest-mRV37">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/SonicSpeedSimulatorAutoFarmAutoEggAutoQuest-mRV37">
+										<button class="cheats-item--download"
+											id="qprivet24356279">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24356279.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24356=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24356=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24356" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Tue Dec 10 2024 01:34:29 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".SonicSpeedSimulatorAutoFarmAutoEggAutoQuest-mRV37");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-HqHJGDz3Nz-preview.jpg" height="150" alt="Hide &amp; Sneak: Kill Aura, Esp" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											148
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24390">
+										Hide & Sneak: Kill Aura, Esp
+									</h2>
+									
+											<div class="cheats-item--description 24390nie">
+												Kill Aura is a feature in the Roblox game that allows players to automatically attack other players or NPCs within a certain range, Esp this feature enables users to visualize the location of all players or opponents on the map, even when obstructed by walls or other obstacles. It provides an edge in gameplay by allowing users to have a greater understanding of the game's dynamics.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24390nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24390'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="HideSneakKillAuraEsp-Sv9iv">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/HideSneakKillAuraEsp-Sv9iv">
+										<button class="cheats-item--download"
+											id="qprivet24390148">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24390148.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24390=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24390=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24390" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Tue Dec 10 2024 00:38:19 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".HideSneakKillAuraEsp-Sv9iv");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-NASwIH0jAK-preview.jpg" height="150" alt="Pressure: Auto Farm" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											558
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24372">
+										Pressure: Auto Farm
+									</h2>
+									
+											<div class="cheats-item--description 24372nie">
+												Auto Farm a program that can provide you with all the necessary game resources such as money, experience, and other items automatically.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24372nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24372'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="PressureAutoFarm-dOfuO">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/PressureAutoFarm-dOfuO">
+										<button class="cheats-item--download"
+											id="qprivet24372558">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24372558.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24372=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24372=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24372" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Mon Dec 09 2024 07:27:18 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".PressureAutoFarm-dOfuO");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-pR5404anxO-preview.jpg" height="150" alt="Blade Slayer: Kill All, Kill Aura" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											208
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24381">
+										Blade Slayer: Kill All, Kill Aura
+									</h2>
+									
+											<div class="cheats-item--description 24381nie">
+												Kill All this particular function has the ability to eliminate all individuals currently present on the server, and it can be utilized repeatedly without any limitations, Kill Aura is a feature in the Roblox game that allows players to automatically attack other players or NPCs within a certain range.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24381nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24381'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="BladeSlayerKillAllKillAura-YsH2W">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/BladeSlayerKillAllKillAura-YsH2W">
+										<button class="cheats-item--download"
+											id="qprivet24381208">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24381208.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24381=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24381=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24381" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Mon Dec 09 2024 07:26:58 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".BladeSlayerKillAllKillAura-YsH2W");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-ZToLQAlq3r-preview.jpg" height="150" alt="Dragon Adventures: Auto Farm, Auto Farm All Mobs, Auto Quests" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											197
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24358">
+										Dragon Adventures: Auto Farm, Auto Farm All Mobs, Auto Quests
+									</h2>
+									
+											<div class="cheats-item--description 24358nie">
+												Auto Farm a program that can provide you with all the necessary game resources such as money, experience, and other items automatically, Auto Farm All Mobs this script will autofarm all mobs and you will receive items and resources from them, Auto Quests the function is a useful feature in the Roblox game that automates the completion of quests assigned to players.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24358nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24358'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="DragonAdventuresAutoFarmAutoFarmAllMobsAutoQuests-4DDx6">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/DragonAdventuresAutoFarmAutoFarmAllMobsAutoQuests-4DDx6">
+										<button class="cheats-item--download"
+											id="qprivet24358197">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24358197.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24358=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24358=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24358" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Mon Dec 09 2024 06:27:38 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".DragonAdventuresAutoFarmAutoFarmAllMobsAutoQuests-4DDx6");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-6AYPyUV4x1-preview.jpg" height="150" alt="Ice Fishing Simulator: Auto Fish, Auto Farm" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											452
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24397">
+										Ice Fishing Simulator: Auto Fish, Auto Farm
+									</h2>
+									
+											<div class="cheats-item--description 24397nie">
+												Auto Fish this function will catch fish at a very fast pace and quantity, Auto Farm a program that can provide you with all the necessary game resources such as money, experience, and other items automatically.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24397nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24397'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="IceFishingSimulatorAutoFishAutoFarm-QG0bl">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/IceFishingSimulatorAutoFishAutoFarm-QG0bl">
+										<button class="cheats-item--download"
+											id="qprivet24397452">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24397452.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24397=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24397=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24397" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Mon Dec 09 2024 06:25:08 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".IceFishingSimulatorAutoFishAutoFarm-QG0bl");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+							<div class="cheats-grid--item" style="margin-top: 1em">
+								<div class="cheats-item--head">
+									<div class="cheats-item--image">
+										<img src="/images/-h5ALYXtbsK-preview.jpg" height="150" alt="Aftermath: Aimbot, Esp" />
+										<span class="cheats-item--counter"><i class="fas fa-download"></i>
+											352
+										</span>
+										
+
+										
+												
+											
+									</div>
+								</div>
+								<div class="cheats-item--main">
+									<h2 class="cheats-item--title 24302">
+										Aftermath: Aimbot, Esp
+									</h2>
+									
+											<div class="cheats-item--description 24302nie">
+												Aimbot the function is a tool that assists players in hitting their targets in the Roblox game. It can be used to improve accuracy and precision in shooting games, Esp this feature enables users to visualize the location of all players or opponents on the map, even when obstructed by walls or other obstacles. It provides an edge in gameplay by allowing users to have a greater understanding of the game's dynamics.
+											</div>
+											<script>
+												$(document).ready(function () {
+													var size = 110,
+														newsContent = $('.24302nie'),
+														newsText = newsContent.text().trim(); // ◀
+													if (newsText.length > size) {
+														newsContent.text(newsText.slice(0, size) + '...');
+													}
+												});
+											</script>
+								</div>
+								<script>
+									$(document).ready(function () {
+										var size = 24,
+											newsContent = $('.24302'),
+											newsText = newsContent.text().trim(); // ◀
+										if (newsText.length > size) {
+											newsContent.text(newsText.slice(0, size) + '...');
+										}
+									});
+								</script>
+								<div class="cheats-item--bottom">
+									<div class="cheats-item--date">
+										<i class="far fa-clock" style="display: inline-block"></i>
+										<div style="display: inline-block" class="AftermathAimbotEsp-T9wHe">
+											01/01/1970
+										</div>
+									</div>
+									<a href="/post/AftermathAimbotEsp-T9wHe">
+										<button class="cheats-item--download"
+											id="qprivet24302352">
+											<i class="fas fa-download"></i> Get
+										</button>
+									</a>
+									<script>
+
+										qprivet24302352.onclick = () => {
+											if (document.cookie.split(';').filter((item) => item.includes('24302=active')).length) {
+												console.log('Bruh')
+											} else {
+												let date = new Date(Date.now() + 86400e3);
+												date = date.toUTCString();
+												document.cookie = "24302=active; expires=" + date;
+												const fetchOptions = {
+													method: 'POST',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify({ id: "24302" }),
+												};
+
+												fetch('/', fetchOptions)
+													.then(() => {
+
+													})
+													.catch((err) => {
+														console.log('Ошибка:' + err);
+													});
+											}
+
+										}
+
+									</script>
+								</div>
+							</div>
+							<script>
+								function totaltime(UNIX_timestamp) {
+									var today = new Date("Mon Dec 09 2024 05:37:57 GMT+0100 (Central European Standard Time)");
+									var time = +new Date(today.toISOString());
+									var a = new Date(time);
+									var months = [
+										"01",
+										"02",
+										"03",
+										"04",
+										"05",
+										"06",
+										"07",
+										"08",
+										"09",
+										"10",
+										"11",
+										"12",
+									];
+									var year = a.getFullYear();
+									var month = months[a.getMonth()];
+									var date = ('0' + a.getDate()).slice(-2);
+									var hour = a.getHours();
+									var min = a.getMinutes();
+									var sec = a.getSeconds();
+									var time = date + "." + month + "." + year;
+									return time;
+								}
+								var logElem = document.querySelector(".AftermathAimbotEsp-T9wHe");
+								logElem.innerHTML = totaltime();
+							</script>
+							
+					</div>
+				</div>
+			</div>
+	</div>
+	</main>
+	<center>
+		<h1 style="padding-top: 50px;">Why us<i class="far fa-question-circle" style="color: #02681F;
+		padding-left: 7px;"></i></h1>
+	</center>
+	<center>
+		<div class="row" style="padding-bottom: 50px;">
+			<div class="whyus-section">
+				<div class="whyus-title">
+					<i class="fas fa-shield-alt icon-whyus"></i>
+					<h1 style="center;">Secure</h1>
+				</div>
+				<p class="whyus-subtitle">Yes. Antiviruses incorrectly assume that content presented by us is malicious
+					due to their lack of company reputation. Unfortunately, a few websites and articles based their
+					information on them and spread false information.</p>
+
+			</div>
+			<div class="whyus-section">
+				<div class="whyus-title">
+					<i class="fas fa-sync-alt icon-whyus"></i>
+					<h1 style="padding-left:10px;">Daily Updates</h1>
+				</div>
+				<p class="whyus-subtitle"> Our team is working hard to add new content for you. 
+					Every day you can see more than +5 new scripts on RbxScript!</p>
+
+			</div>
+			<div class="whyus-section">
+				<div class="whyus-title">
+					<i class="fas fa-check icon-whyus"></i>
+					<h1 style="padding-left:10px;">Quality</h1>
+				</div>
+				<p class="whyus-subtitle">All files and scripts are checked for quality and Malware, 
+				you can trust everything on RbxScript!</p>
+			</div>
+	</center>
+	</div>
+	</div>
+	<script async src="https://fundingchoicesmessages.google.com/i/pub-1624058124791572?ers=1" nonce="FoFr-u4g7g7ufmW64n9LNg"></script><script nonce="FoFr-u4g7g7ufmW64n9LNg">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+	<script>(function(){/*
+
+		Copyright The Closure Library Authors.
+		SPDX-License-Identifier: Apache-2.0
+	   */
+	   'use strict';var aa=function(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}},ba="function"==typeof Object.create?Object.create:function(a){var b=function(){};b.prototype=a;return new b},k;if("function"==typeof Object.setPrototypeOf)k=Object.setPrototypeOf;else{var m;a:{var ca={a:!0},n={};try{n.__proto__=ca;m=n.a;break a}catch(a){}m=!1}k=m?function(a,b){a.__proto__=b;if(a.__proto__!==b)throw new TypeError(a+" is not extensible");return a}:null}
+	   var p=k,q=function(a,b){a.prototype=ba(b.prototype);a.prototype.constructor=a;if(p)p(a,b);else for(var c in b)if("prototype"!=c)if(Object.defineProperties){var d=Object.getOwnPropertyDescriptor(b,c);d&&Object.defineProperty(a,c,d)}else a[c]=b[c];a.v=b.prototype},r=this||self,da=function(){},t=function(a){return a};var u;var w=function(a,b){this.g=b===v?a:""};w.prototype.toString=function(){return this.g+""};var v={},x=function(a){if(void 0===u){var b=null;var c=r.trustedTypes;if(c&&c.createPolicy){try{b=c.createPolicy("goog#html",{createHTML:t,createScript:t,createScriptURL:t})}catch(d){r.console&&r.console.error(d.message)}u=b}else u=b}a=(b=u)?b.createScriptURL(a):a;return new w(a,v)};var A=function(){return Math.floor(2147483648*Math.random()).toString(36)+Math.abs(Math.floor(2147483648*Math.random())^Date.now()).toString(36)};var B={},C=null;var D="function"===typeof Uint8Array;function E(a,b,c){return"object"===typeof a?D&&!Array.isArray(a)&&a instanceof Uint8Array?c(a):F(a,b,c):b(a)}function F(a,b,c){if(Array.isArray(a)){for(var d=Array(a.length),e=0;e<a.length;e++){var f=a[e];null!=f&&(d[e]=E(f,b,c))}Array.isArray(a)&&a.s&&G(d);return d}d={};for(e in a)Object.prototype.hasOwnProperty.call(a,e)&&(f=a[e],null!=f&&(d[e]=E(f,b,c)));return d}
+	   function ea(a){return F(a,function(b){return"number"===typeof b?isFinite(b)?b:String(b):b},function(b){var c;void 0===c&&(c=0);if(!C){C={};for(var d="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split(""),e=["+/=","+/","-_=","-_.","-_"],f=0;5>f;f++){var h=d.concat(e[f].split(""));B[f]=h;for(var g=0;g<h.length;g++){var l=h[g];void 0===C[l]&&(C[l]=g)}}}c=B[c];d=Array(Math.floor(b.length/3));e=c[64]||"";for(f=h=0;h<b.length-2;h+=3){var y=b[h],z=b[h+1];l=b[h+2];g=c[y>>2];y=c[(y&3)<<
+	   4|z>>4];z=c[(z&15)<<2|l>>6];l=c[l&63];d[f++]=""+g+y+z+l}g=0;l=e;switch(b.length-h){case 2:g=b[h+1],l=c[(g&15)<<2]||e;case 1:b=b[h],d[f]=""+c[b>>2]+c[(b&3)<<4|g>>4]+l+e}return d.join("")})}var fa={s:{value:!0,configurable:!0}},G=function(a){Array.isArray(a)&&!Object.isFrozen(a)&&Object.defineProperties(a,fa);return a};var H;var J=function(a,b,c){var d=H;H=null;a||(a=d);d=this.constructor.u;a||(a=d?[d]:[]);this.j=d?0:-1;this.h=null;this.g=a;a:{d=this.g.length;a=d-1;if(d&&(d=this.g[a],!(null===d||"object"!=typeof d||Array.isArray(d)||D&&d instanceof Uint8Array))){this.l=a-this.j;this.i=d;break a}void 0!==b&&-1<b?(this.l=Math.max(b,a+1-this.j),this.i=null):this.l=Number.MAX_VALUE}if(c)for(b=0;b<c.length;b++)a=c[b],a<this.l?(a+=this.j,(d=this.g[a])?G(d):this.g[a]=I):(d=this.l+this.j,this.g[d]||(this.i=this.g[d]={}),(d=this.i[a])?
+	   G(d):this.i[a]=I)},I=Object.freeze(G([])),K=function(a,b){if(-1===b)return null;if(b<a.l){b+=a.j;var c=a.g[b];return c!==I?c:a.g[b]=G([])}if(a.i)return c=a.i[b],c!==I?c:a.i[b]=G([])},M=function(a,b){var c=L;if(-1===b)return null;a.h||(a.h={});if(!a.h[b]){var d=K(a,b);d&&(a.h[b]=new c(d))}return a.h[b]};J.prototype.toJSON=function(){var a=N(this,!1);return ea(a)};
+	   var N=function(a,b){if(a.h)for(var c in a.h)if(Object.prototype.hasOwnProperty.call(a.h,c)){var d=a.h[c];if(Array.isArray(d))for(var e=0;e<d.length;e++)d[e]&&N(d[e],b);else d&&N(d,b)}return a.g},O=function(a,b){H=b=b?JSON.parse(b):null;a=new a(b);H=null;return a};J.prototype.toString=function(){return N(this,!1).toString()};var P=function(a){J.call(this,a)};q(P,J);function ha(a){var b,c=(a.ownerDocument&&a.ownerDocument.defaultView||window).document,d=null===(b=c.querySelector)||void 0===b?void 0:b.call(c,"script[nonce]");(b=d?d.nonce||d.getAttribute("nonce")||"":"")&&a.setAttribute("nonce",b)};var Q=function(a,b){b=String(b);"application/xhtml+xml"===a.contentType&&(b=b.toLowerCase());return a.createElement(b)},R=function(a){this.g=a||r.document||document};R.prototype.appendChild=function(a,b){a.appendChild(b)};var S=function(a,b,c,d,e,f){try{var h=a.g,g=Q(a.g,"SCRIPT");g.async=!0;g.src=b instanceof w&&b.constructor===w?b.g:"type_error:TrustedResourceUrl";ha(g);h.head.appendChild(g);g.addEventListener("load",function(){e();d&&h.head.removeChild(g)});g.addEventListener("error",function(){0<c?S(a,b,c-1,d,e,f):(d&&h.head.removeChild(g),f())})}catch(l){f()}};var ia=r.atob("aHR0cHM6Ly93d3cuZ3N0YXRpYy5jb20vaW1hZ2VzL2ljb25zL21hdGVyaWFsL3N5c3RlbS8xeC93YXJuaW5nX2FtYmVyXzI0ZHAucG5n"),ja=r.atob("WW91IGFyZSBzZWVpbmcgdGhpcyBtZXNzYWdlIGJlY2F1c2UgYWQgb3Igc2NyaXB0IGJsb2NraW5nIHNvZnR3YXJlIGlzIGludGVyZmVyaW5nIHdpdGggdGhpcyBwYWdlLg=="),ka=r.atob("RGlzYWJsZSBhbnkgYWQgb3Igc2NyaXB0IGJsb2NraW5nIHNvZnR3YXJlLCB0aGVuIHJlbG9hZCB0aGlzIHBhZ2Uu"),la=function(a,b,c){this.h=a;this.j=new R(this.h);this.g=null;this.i=[];this.l=!1;this.o=b;this.m=c},V=function(a){if(a.h.body&&!a.l){var b=
+	   function(){T(a);r.setTimeout(function(){return U(a,3)},50)};S(a.j,a.o,2,!0,function(){r[a.m]||b()},b);a.l=!0}},T=function(a){for(var b=W(1,5),c=0;c<b;c++){var d=X(a);a.h.body.appendChild(d);a.i.push(d)}b=X(a);b.style.bottom="0";b.style.left="0";b.style.position="fixed";b.style.width=W(100,110).toString()+"%";b.style.zIndex=W(2147483544,2147483644).toString();b.style["background-color"]=ma(249,259,242,252,219,229);b.style["box-shadow"]="0 0 12px #888";b.style.color=ma(0,10,0,10,0,10);b.style.display=
+	   "flex";b.style["justify-content"]="center";b.style["font-family"]="Roboto, Arial";c=X(a);c.style.width=W(80,85).toString()+"%";c.style.maxWidth=W(750,775).toString()+"px";c.style.margin="24px";c.style.display="flex";c.style["align-items"]="flex-start";c.style["justify-content"]="center";d=Q(a.j.g,"IMG");d.className=A();d.src=ia;d.style.height="24px";d.style.width="24px";d.style["padding-right"]="16px";var e=X(a),f=X(a);f.style["font-weight"]="bold";f.textContent=ja;var h=X(a);h.textContent=ka;Y(a,
+	   e,f);Y(a,e,h);Y(a,c,d);Y(a,c,e);Y(a,b,c);a.g=b;a.h.body.appendChild(a.g);b=W(1,5);for(c=0;c<b;c++)d=X(a),a.h.body.appendChild(d),a.i.push(d)},Y=function(a,b,c){for(var d=W(1,5),e=0;e<d;e++){var f=X(a);b.appendChild(f)}b.appendChild(c);c=W(1,5);for(d=0;d<c;d++)e=X(a),b.appendChild(e)},W=function(a,b){return Math.floor(a+Math.random()*(b-a))},ma=function(a,b,c,d,e,f){return"rgb("+W(Math.max(a,0),Math.min(b,255)).toString()+","+W(Math.max(c,0),Math.min(d,255)).toString()+","+W(Math.max(e,0),Math.min(f,
+	   255)).toString()+")"},X=function(a){a=Q(a.j.g,"DIV");a.className=A();return a},U=function(a,b){0>=b||null!=a.g&&0!=a.g.offsetHeight&&0!=a.g.offsetWidth||(na(a),T(a),r.setTimeout(function(){return U(a,b-1)},50))},na=function(a){var b=a.i;var c="undefined"!=typeof Symbol&&Symbol.iterator&&b[Symbol.iterator];b=c?c.call(b):{next:aa(b)};for(c=b.next();!c.done;c=b.next())(c=c.value)&&c.parentNode&&c.parentNode.removeChild(c);a.i=[];(b=a.g)&&b.parentNode&&b.parentNode.removeChild(b);a.g=null};var pa=function(a,b,c,d,e){var f=oa(c),h=function(l){l.appendChild(f);r.setTimeout(function(){f?(0!==f.offsetHeight&&0!==f.offsetWidth?b():a(),f.parentNode&&f.parentNode.removeChild(f)):a()},d)},g=function(l){document.body?h(document.body):0<l?r.setTimeout(function(){g(l-1)},e):b()};g(3)},oa=function(a){var b=document.createElement("div");b.className=a;b.style.width="1px";b.style.height="1px";b.style.position="absolute";b.style.left="-10000px";b.style.top="-10000px";b.style.zIndex="-10000";return b};var L=function(a){J.call(this,a)};q(L,J);var qa=function(a){J.call(this,a)};q(qa,J);var ra=function(a,b){this.l=a;this.m=new R(a.document);this.g=b;this.i=K(this.g,1);b=M(this.g,2);this.o=x(K(b,4)||"");this.h=!1;b=M(this.g,13);b=x(K(b,4)||"");this.j=new la(a.document,b,K(this.g,12))};ra.prototype.start=function(){sa(this)};
+	   var sa=function(a){ta(a);S(a.m,a.o,3,!1,function(){a:{var b=a.i;var c=r.btoa(b);if(c=r[c]){try{var d=O(P,r.atob(c))}catch(e){b=!1;break a}b=b===K(d,1)}else b=!1}b?Z(a,K(a.g,14)):(Z(a,K(a.g,8)),V(a.j))},function(){pa(function(){Z(a,K(a.g,7));V(a.j)},function(){return Z(a,K(a.g,6))},K(a.g,9),K(a.g,10),K(a.g,11))})},Z=function(a,b){a.h||(a.h=!0,a=new a.l.XMLHttpRequest,a.open("GET",b,!0),a.send())},ta=function(a){var b=r.btoa(a.i);a.l[b]&&Z(a,K(a.g,5))};(function(a,b){r[a]=function(c){for(var d=[],e=0;e<arguments.length;++e)d[e-0]=arguments[e];r[a]=da;b.apply(null,d)}})("__h82AlnkH6D91__",function(a){"function"===typeof window.atob&&(new ra(window,O(qa,window.atob(a)))).start()});}).call(this);
+	   
+	   window.__h82AlnkH6D91__("WyJwdWItMTYyNDA1ODEyNDc5MTU3MiIsW251bGwsbnVsbCxudWxsLCJodHRwczovL2Z1bmRpbmdjaG9pY2VzbWVzc2FnZXMuZ29vZ2xlLmNvbS9iL3B1Yi0xNjI0MDU4MTI0NzkxNTcyIl0sbnVsbCxudWxsLCJodHRwczovL2Z1bmRpbmdjaG9pY2VzbWVzc2FnZXMuZ29vZ2xlLmNvbS9lbC9BR1NLV3hXb3N2NlJPTkZkeWVwdUlYZG5NR2FScWJCVGdKT0IzNEFsSUI2ZTVRYS1wUmlnTlFRYnNOWkJKUnpqcjZCcndOS2JGVkxhNi1RaUJvdWVTN2FwaURSQWZBXHUwMDNkXHUwMDNkP3RlXHUwMDNkVE9LRU5fRVhQT1NFRCIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFVzRUlBN2Z4UzVBODBfdEhUcVROUDV0UlQ5ZTZJcUdVXzBLNW9EWUM2aXhYbjBaenpadWMyVU4xNGhmYVg5c2VwQTNBZEs3MTNyOU9EUWZJUzYyR1dHZkFcdTAwM2RcdTAwM2Q/YWJcdTAwM2QxXHUwMDI2c2JmXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFhuWmxsbEoyXzBfeXF0U04xZDJoNldidi1hdi11QTZsVHRtQ1E2Q3FGdHpLX1JMX3RRMUc3RTViQUhQc1B0YnFwbEJTOGdhUWFGNEpBV0ZoVU9teGZsTWdcdTAwM2RcdTAwM2Q/YWJcdTAwM2QyXHUwMDI2c2JmXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFdDd0FyS3lsTUdlTW1ISnVsWUlkc28yVHJESHFQVnhpckdBTXBaNGJtSi16WTFnbF94aWVKUUc1WWE2bklvNklmTjJyMEFGMlIyU3ZaZGt0QV9tM1B1X0FcdTAwM2RcdTAwM2Q/c2JmXHUwMDNkMiIsImRpdi1ncHQtYWQiLDIwLDEwMCwiY0hWaUxURTJNalF3TlRneE1qUTNPVEUxTnpJXHUwMDNkIixbbnVsbCxudWxsLG51bGwsImh0dHBzOi8vd3d3LmdzdGF0aWMuY29tLzBlbW4vZi9wL3B1Yi0xNjI0MDU4MTI0NzkxNTcyLmpzP3VzcXBcdTAwM2RDQUUiXSwiaHR0cHM6Ly9mdW5kaW5nY2hvaWNlc21lc3NhZ2VzLmdvb2dsZS5jb20vZWwvQUdTS1d4VnRGbzFxY3o1NGdPTTkxSk5tZGFjaURreHVKTlhZQngteWhPV1FhTFZ0RmdSRUdKTnAyc1J2ME03dFFuTVVjeVU2blVuOVhwclpSaGtMcmZRY1pZeUpmUVx1MDAzZFx1MDAzZCJd");</script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/8d2b19b6bc.js" crossorigin="anonymous"></script>
+	<footer style="
+    background-color: #17142e;
+">
+	</script>
+	<div class="container footer-blocks">
+
+		<center class="footer">
+			<a href="/"><img src="/images/logo.png" alt="Logo" height="75" style="
+    padding-bottom: 20px;
+"></a>
+			<div class="copy" style="
+">Copyright © 2020 rbxscripts</div>
+			<br>
+			<div class="footer-links">
+				<div class="footer-link">
+					<a href="/privacy">Privacy</a>
+				</div>
+				<div class="footer-link">
+					<a href="/contact">Contact</a>
+				</div>
+				<div class="footer-link">
+					<a href="/impressum">Impressum</a>
+				</div>
+			</div>
+		</center>
+	</div>
+</footer>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G672HTPWBD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G672HTPWBD');
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+<script type="text/javascript" src="/../../../javascripts/slim.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js"></script>
+
+<script>
+	const $dropdownOrigin = $('.js-dropdown__trigger');
+	const $dropdownTrigger = $('.js-dropdown__trigger');
+	const $dropdown = $('.js-dropdown');
+
+	$dropdownTrigger.on('click', function () {
+		$(this).closest('.js-dropdown__origin').find('.js-dropdown').toggleClass('is-active');
+	});
+
+	$('html').click(function () {
+		$dropdown.removeClass('is-active');
+	});
+
+	$dropdownOrigin.click(function (e) {
+		e.stopPropagation();
+	});
+</script>
+		</div>
