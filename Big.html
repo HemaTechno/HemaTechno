@@ -1,34 +1,160 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الموقع</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        /* الشريط العلوي */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .navbar nav a {
+            margin: 0 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar .login-btn {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #444;
+            color: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* زر الفتح */
+        .open-sidebar-btn {
+            position: fixed;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1001;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* الخلفية مع تأثير Blur */
+        .blur-background {
+            filter: blur(5px);
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="logo-name">
-      <img src="your-logo-url.png" alt="Logo" class="logo">
-      <h1>اسم الموقع</h1>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="navbar">
+            <div class="logo">H-Scripts</div>
+            <nav>
+                <a href="All-scripts.html">الاسكربتات</a>
+                <a href="Hack.html">الهاكات</a>
+                <a href="youtube-scripts.html">يوتيوبرز</a>
+                <a href="admin/add-public.html">انشر سكربتك</a>
+            </nav>
+            <button class="login-btn" onclick="window.location.href='https://t.me/hscripts'">الدعم الفني</button>
+        </div>
+    </header>
+
+    <!-- زر فتح Sidebar -->
+    <button class="open-sidebar-btn" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <span class="close-btn" onclick="toggleSidebar()">×</span>
+        <ul>
+            <li><a href="All-scripts.html">الاسكربتات</a></li>
+            <li><a href="Hack.html">الهاكات</a></li>
+            <li><a href="youtube-scripts.html">يوتيوبرز</a></li>
+            <li><a href="admin/add-public.html">انشر سكربتك</a></li>
+            <li><a href="https://t.me/hscripts">الدعم الفني</a></li>
+        </ul>
     </div>
-  </header>
 
-  <!-- قسم المضاف مؤخراً -->
-  <section class="recent-scripts">
-    <h2>المضاف مؤخراً</h2>
-    <div id="scripts-container" class="scripts-container"></div>
-  </section>
+    <!-- محتوى الصفحة -->
+    <section class="hero">
+        <h1>H-Scripts.site</h1>
+        <p>اهلا بك في موقعنا هذا هو الموقع الاول باللغة العربية و المصمم خصيصا للعرب و ننشر فيه سكربتات و هاكات روبلوكس مع اقوي تيم دعم فني علي مدار يوم</p>
+        <div class="hero-buttons">
+            <button onclick="window.location.href='All-scripts.html'">استكشاف الاسكربتات</button>
+            <button onclick="window.location.href='https://t.me/hscripts'">انضم كشريك</button>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>عدد الزوار: <span id="visitor-count">0</span></p>
-  </footer>
+    <!-- JavaScript -->
+    <script>
+        const sidebar = document.getElementById("sidebar");
 
-  <script src="script.js"></script>
+        function toggleSidebar() {
+            const isOpen = sidebar.style.left === "0px";
+            sidebar.style.left = isOpen ? "-250px" : "0px";
+
+            // تأثير الخلفية
+            document.body.classList.toggle("blur-background", !isOpen);
+        }
+    </script>
 </body>
 </html>
-
