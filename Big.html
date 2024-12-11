@@ -1,1357 +1,819 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="New and the best script on the game Pets Go! With it you will be able to get the best pets very quickly without effort., roblox,  pets go,  pet simulator 99">
-   <title>Pets Go: Speed Hub X | AutoFarm, AutoRoll, AutoFarm Breakeables, e.t.c</title>
-   <link rel="canonical" href="https://crackedscripts.com/post/48">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-   <link rel="stylesheet" href="/css/styles.css?v=2">
-   <link rel="apple-touch-icon" sizes="180x180" href="/css/apple-touch-icon.png">
-   <link rel="icon" type="image/png" sizes="32x32" href="/css/favicon-32x32.png">
-   <link rel="icon" type="image/png" sizes="16x16" href="/css/favicon-16x16.png">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-   <style>
-      html, body {
-         height: 100%;
-         margin: 0;
-         font-family: system-ui, sans-serif; 
-         line-height: 1.6;
-         background-color: #121212;
-         color: white;
-      }
-      body {
-         display: flex;
-         flex-direction: column;
-      }
-      .content-wrapper {
-         flex: 1;
-         display: flex;
-         flex-direction: column;
-         justify-content: space-between;
-      }
-      .container {
-         padding: 20px;
-      }
-      .post-detail {
-         background-color: #1e1e1e;
-         border: 1px solid #333;
-         border-radius: 5px;
-         padding: 20px;
-         max-width: 800px;
-         margin: 20px auto;
-         position: relative;
-         z-index: 1;
-      }
-      header h1 {
-         margin: 0;
-         font-family: 'Syne', sans-serif; 
-      }
-      nav a {
-         color: white;
-         margin-left: 15px;
-         text-decoration: none;
-         position: relative;
-      }
-      nav a::after {
-         content: '';
-         position: absolute;
-         width: 100%;
-         height: 2px;
-         bottom: 0;
-         left: 0;
-         background-color: white;
-         transform: scaleX(0);
-         transition: transform 0.3s ease;
-         transform-origin: left;
-      }
-      nav a:hover::after {
-         transform: scaleX(1);
-      }
-      .post-detail h1 {
-         font-family: 'Syne', sans-serif;
-         font-size: 2rem;
-         margin-bottom: 10px;
-      }
-      .post-detail .status-indicator {
-         display: inline-block;
-         padding: 5px 10px;
-         border-radius: 10px;
-         color: white;
-         font-size: 0.9em;
-         font-family: 'Syne', sans-serif;
-         background-color: green;
-         box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-         transition: transform 0.2s ease;
-      }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover a vast collection of free Roblox scripts to enhance your gameplay. Access high-quality, regularly updated scripts for various games, ensuring safe and efficient usage.">
+    <meta property="og:description" content="Discover a vast collection of free Roblox scripts to enhance your gameplay. Access high-quality, regularly updated scripts for various games, ensuring safe and efficient usage.">
+    <title>CrackedScripts - Best Roblox Scripts</title>
+    <meta property="og:site_name" content="CrackedScripts">
+    <script type="application/ld+json">
+        { "@context": "http://schema.org", "@type": "WebSite", "url": "https://crackedscripts.com/", "potentialAction": { "@type": "SearchAction", "target": "https://crackedscripts.com/search?q={search_term_string}", "query-input": "required name=search_term_string"
+        } }
+    </script>
 
-      .post-detail .status-indicator.green {
-         background: linear-gradient(45deg, #32CD32, #006400);
-         box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
-      }
-      .post-detail .status-indicator.red {
-         background: linear-gradient(45deg, #FF6347, #8B0000);
-         box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-      }
-      .post-detail .tags {
-         margin-top: 10px;
-         margin-bottom: 20px;
-      }
-      .post-detail .tag {
-         display: inline-block;
-         background-color: #2a2a2a;
-         margin-top: 5px;
-         color: #ccc;
-         padding: 5px 10px;
-         margin-right: 5px;
-         border-radius: 5px;
-         font-size: 0.9em;
-         transition: transform 0.2s ease, background-color 0.3s ease;
-         cursor: pointer;
-      }
-      .post-detail .tag:hover {
-         transform: translateY(-3px);
-         background-color: #444;
-      }
-      .post-detail .tag i {
-         margin-right: 5px;
-      }
-      .post-detail p {
-         font-family: system-ui, sans-serif;
-         font-size: 16px;
-         line-height: 1.5;
-         color: #d4d4d4;
-         margin-bottom: 20px;
-      }
-      .post-detail h2 {
-         font-family: 'Syne', sans-serif; 
-      }
-      .post-detail img {
-         display: block;
-         max-width: 100%;
-         height: auto;
-         margin: 10px 0;
-         border-radius: 5px;
-         transition: transform 0.5s ease;
-         cursor: pointer;
-      }
-      .script-section {
-         background-color: #1e1e1e;
-         border: 1px solid #333;
-         border-radius: 10px;
-         padding: 20px;
-         margin-top: 20px;
-         box-shadow: 0 0 15px rgba(0,0,0,0.5);
-         position: relative;
-      }
-      .script-section h2 {
-         font-family: 'Syne', sans-serif;
-         font-size: 1.5rem;
-         margin-bottom: 10px;
-      }
-      .script-section .script-info {
-         top: 10px;
-         right: 20px;
-         font-family: 'Syne', sans-serif;
-         font-size: 0.85rem;
-         color: #ccc;
-      }
-      .script-section pre {
-         background-color: #1e1e1e;
-         background-image: linear-gradient(135deg, #1e1e1e 25%, #2a2a2a 100%);
-         border: 1px solid #333;
-         border-radius: 10px;
-         padding: 20px;
-         white-space: pre-wrap; 
-         overflow: auto; 
-         max-height: 600px;
-         scrollbar-width: thin;
-         scrollbar-color: #555 #1e1e1e;
-         font-family: 'Fira Code', monospace;
-         font-size: 14px;
-         line-height: 1.5;
-         color: #d4d4d4;
-         box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-      }
-      .script-section pre::-webkit-scrollbar {
-         width: 10px;
-      }
-      .script-section pre::-webkit-scrollbar-track {
-         background: #1e1e1e;
-      }
-      .script-section pre::-webkit-scrollbar-thumb {
-         background-color: #555;
-         border-radius: 5px;
-         border: 2px solid #1e1e1e;
-      }
-      .script-section pre::-webkit-scrollbar-thumb:hover {
-         background-color: #777;
-      }
-      .copy-button {
-         background-color: #333;
-         border: none;
-         color: white;
-         border-radius: 5px;
-         padding: 10px 20px;
-         cursor: pointer;
-         transition: background-color 0.3s;
-         margin-top: 10px;
-      }
-      .copy-button:hover {
-         background-color: #555;
-      }
-      .notification {
-         position: fixed;
-         bottom: 20px;
-         left: 50%;
-         transform: translateX(-50%) translateY(20px);
-         background-color: #333;
-         color: white;
-         padding: 10px 20px;
-         border-radius: 5px;
-         opacity: 0;
-         transition: opacity 0.5s ease, transform 0.5s ease;
-         z-index: 1000;
-      }
-      .notification.show {
-         opacity: 1;
-         transform: translateX(-50%) translateY(0);
-      }
-      .copy-button i {
-         margin-right: 5px;
-      }
-      @media (max-width: 768px) {
-         .post-detail {
-            padding: 10px;
-         }
-         .post-detail h1 {
-            font-size: 1.5rem;
-         }
-         .post-detail p {
-            font-size: 14px;
-         }
-         .script-section {
-            padding: 10px;
-         }
-         .script-section h2 {
-            font-size: 1.25rem;
-         }
-         .script-section pre {
-            padding: 10px;
-         }
-         .copy-button {
-            padding: 8px 16px;
-         }
-         .notification {
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 300px;
-         }
-      }
-      .like-button {
-         display: inline-flex;
-         align-items: center;
-         background-color: #333;
-         border: none;
-         color: white;
-         border-radius: 5px;
-         cursor: pointer;
-         padding: 10px 20px;
-         transition: background-color 0.3s, transform 0.2s ease;
-         font-family: 'Syne', sans-serif;
-      }
-      .like-button:hover {
-         background-color: #555;
-            }
-      .like-button i {
-         margin-right: 10px;
-      }
-      .like-count {
-         margin-left: 5px;
-         font-size: 1rem;
-      }
-      .like-button.disabled,
-      .like-button:disabled {
-      background-color: white;
-      color: black;
-      cursor: not-allowed;
-      transform: none;
-      }
+    <link rel="canonical" href="https://crackedscripts.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap">
+    <link rel="stylesheet" href="/css/styles.css?v=20">
+    <link rel="apple-touch-icon" sizes="180x180" href="/css/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/css/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/css/favicon-16x16.png">
+    <meta name="wot-verification" content="94cb29fe7f95da2edb30" />
+    <script async src='https://static.mywot.com/website_owners_badges/websiteOwnersBadge.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .post .status-indicator {
+           display: inline-block;
+           padding: 5px 10px;
+           border-radius: 10px;
+           color: white;
+           font-size: 0.8em;
+           margin: 10px 0;
+           box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+           visibility: hidden;
+           min-height: 24px; 
 
-/* Стиль для кнопки при загрузке */
-.like-button.loading {
-   cursor: not-allowed;
-   background-color: #888; /* Серая кнопка */
-   color: #fff;
-   position: relative;
-   overflow: hidden; /* Ограничиваем градиент внутри кнопки */
+
+        }
+        .post .status-indicator.green {
+           background: linear-gradient(45deg, #32CD32, #006400);
+           box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+           visibility: visible;
+
+        }
+        .post .status-indicator.red {
+           background: linear-gradient(45deg, #FF6347, #8B0000);
+           box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+           visibility: visible;
+
+        }
+        .youtube-button {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: 10px 20px;
+   margin-top: 20px;
+   background: linear-gradient(45deg, #FF0000, #8B0000);
+   color: white;
+   text-decoration: none;
+   font-size: 1em;
+   font-weight: bold;
+   border-radius: 5px;
+   box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+   animation: pulse 2s infinite;
+   transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
-/* Анимация градиента для кнопки */
-.like-button.loading::before {
-    content: ''; /* Псевдоэлемент для градиента */
-    position: absolute;
-    top: 0;
-    left: -200%; /* Начальное положение за кнопкой */
-    width: 300%; /* Более широкий градиент для мягкого эффекта */
-    height: 100%;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-    animation: loadingAnimation 3s ease-in-out infinite;
+.youtube-button:hover {
+   transform: scale(1.02);
+   box-shadow: 0 0 20px rgba(255, 0, 0, 1);
 }
 
-/* Анимация движения градиента */
-@keyframes loadingAnimation {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+.youtube-button i {
+   margin-right: 10px;
+   font-size: 1.2em;
 }
 
-
-
-.like-button.loading::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
+@keyframes pulse {
+   0% {
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+   }
+   50% {
+      box-shadow: 0 0 25px rgba(255, 0, 0, 1);
+   }
+   100% {
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+   }
 }
-
-
-
-
-/* Prevent hover effects on the disabled button */
-.like-button.disabled:hover,
-.like-button:disabled:hover {
-    background-color: white;
-    color: black;
-    transform: none;
-}
-      .notification-like {
-         position: fixed;
-         bottom: 20px;
-         left: 50%;
-         transform: translateX(-50%) translateY(20px);
-         background-color: #333;
-         color: white;
-         padding: 10px 20px;
-         border-radius: 5px;
-         opacity: 0;
-         transition: opacity 0.5s ease, transform 0.5s ease;
-         z-index: 1000;
-      }
-      .notification-like.show {
-         opacity: 1;
-         transform: translateX(-50%) translateY(0);
-      }
-
-      /* Button Container Styles */
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-/* Common Button Styles */
-.button-container button {
-    flex: 1;
-    margin: 0 5px;
-    padding: 10px 20px;
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.button-container button i {
-    margin-right: 8px;
-}
-   </style>
+    </style>
 </head>
+
 <body>
-   <script src="/js/menu.js"></script>
-   <script src="/js/particles.js"></script>
-   <script>
-      // Инициализация particles.js
-      document.addEventListener('DOMContentLoaded', function() {
-          particlesJS.load('particles-js', '/js/particles.json', function() {
-              console.log('particles.js config loaded');
-          });
-      });
-   </script>
-
-
-
-       
-   <div class="container">
-      <div class="post-detail">
-         <h1>Pets Go: Speed Hub X | AutoFarm, AutoRoll, AutoFarm Breakeables, e.t.c</h1>
-
-         <!-- Индикатор статуса под заголовком -->
-         
-            <div class="status-indicator red">
-            Rbxhub 
-            </div>
-         
-
-         
-            
-               <img src="${data.imageUrl}" alt="Photo" draggable="false">
-            
-         
-
-         <h2>Description:</h2>
-         <p>New and the best script on the game Pets Go! With it you will be able to get the best pets very quickly without effort.</p>
-         <div class="notification-like" id="notification-like"></div>
-         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-         <script>
-            // Функция, вызываемая при успешной проверке капчи
-            function enableLikeButton(token) {
-                const likeButton = document.getElementById('like-button');
-                likeButton.disabled = false;
-                likeButton.classList.remove('loading');  // Убираем анимацию после загрузки
-
-        
-                // Сохраняем токен капчи для отправки на сервер при клике на кнопку
-                likeButton.dataset.captchaToken = token;
-            }
-        
+    <div class="wrapper">
+        <script src="/js/particles.js"></script>
+        <script src="/js/menu.js"></script>
+        <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const likeButton = document.getElementById('like-button');
-                const likeCountElement = document.getElementById('like-count');
-                const notificationLike = document.getElementById('notification-like');
-        
-                // Проверка, поставил ли пользователь уже лайк
-                const hasLiked = false;
-                if (hasLiked) {
-                    likeButton.disabled = true;
-                    likeButton.classList.add('disabled');
-                }
-        
-                likeButton.addEventListener('click', function() {
-                    const captchaToken = likeButton.dataset.captchaToken;
-                    if (!captchaToken) {
-                     notificationLike.textContent = 'Please pass the CAPTCHA!';
-                        notificationLike.classList.add('show');
-                        setTimeout(() => {
-                            notificationLike.classList.remove('show');
-                        }, 2000);
-                        return;
-                    }
-
-                    likeButton.disabled = true;
-                    likeButton.classList.add('disabled');
-        
-                    fetch('/post/48/like', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ captchaToken })
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(data => { throw data; });
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        let currentLikes = parseInt(likeCountElement.textContent);
-                        likeCountElement.textContent = currentLikes + 1;
-        
-                        notificationLike.textContent = 'You liked this post!';
-                        notificationLike.classList.add('show');
-                        setTimeout(() => {
-                            notificationLike.classList.remove('show');
-                        }, 2000);
-        
-                        const rect = likeButton.getBoundingClientRect();
-                        const buttonX = rect.left + rect.width / 2;
-                        const buttonY = rect.top + rect.height / 2;
-                        const originX = buttonX / window.innerWidth;
-                        const originY = buttonY / window.innerHeight;
-        
-                        if (navigator.vibrate) {
-                            navigator.vibrate(50); 
-                        } 
-                        confetti({
-                            particleCount: 100,
-                            spread: 70,
-                            origin: { x: originX, y: originY },
-                            ticks: 200,
-                        });
-                    })
-                    .catch(err => {
-                        console.error('Error:', err);
-                        notificationLike.textContent = err.error || 'An error occurred.';
-                        notificationLike.classList.add('show');
-                        setTimeout(() => {
-                            notificationLike.classList.remove('show');
-                        }, 2000);
-        
-                        if (err.error !== 'You have already liked this post') {
-                            likeButton.disabled = false;
-                            likeButton.classList.remove('disabled');
-                        }
-                    });
+                particlesJS.load('particles-js', '/js/particles.json', function() {
+                    console.log('particles.js config loaded');
                 });
             });
         </script>
-         <div class="script-section">
-            <h2>Script:</h2>
-            <div class="script-info" id="script-info"></div>
-            
-            <pre id="script-content"><code class="language-lua">loadstring(game:HttpGet(&#34;https://raw.githubusercontent.com/mzkv/petsGO/refs/heads/main/xhub&#34;))()</code></pre>
-            <div class="button-container">
-                <button id="copy-button" class="copy-button">
-                    <i class="fas fa-copy"></i> Copy
-                </button>
-                <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-                <button id="like-button" class="like-button loading">
-                  <i class="fas fa-thumbs-up"></i>
-                  Like
-                  <span id="like-count" class="like-count">271</span>
-              </button>
+        <header>
+    <a href="/">
+        <img src="/css/logo.svg" alt="CrackedScripts Logo" style="height: 40px; margin-right: 10px;">
+        <h1>CrackedScripts</h1>
+    </a>
+    <nav>
+        <button id="menuButton">Menu</button>
+        <div id="menuPopup" class="popup">
+            <div class="popup-content">
+                <a href="https://discord.gg/crs">Discord</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <button id="closeButton">Close</button>
             </div>
-            
-               <div class="cf-turnstile" data-sitekey="0x4AAAAAAAy6kcAMEBsjMLdq" data-callback="enableLikeButton"></div>
-             
         </div>
-        
-         
-         <!-- Секция тегов -->
-         
-            <div class="tags">
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet sim</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script mobile</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> secret</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> titanic pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how to get gems</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how to get</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> free pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how get huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet sim 99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> new pets go script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go auto farm script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script auto farm</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script no key</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go auto roll script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator x</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how to</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> ps99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> big games</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> key</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> hatch</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> forever pack</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> titanic hatch</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how get titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #funnyanimals</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #adorableantics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #comedyanimals</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #cutelaughs</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #animalcomedy</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #laughingoutloud</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #hilariouspets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> eggs</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #animalbloopers</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> max mastery</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> achievement</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> trading</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> huge cat</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> plushie</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> update</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> giveaway</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> gems</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> diamonds</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> best pets go script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script trade scam</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script delta</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox simulator</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> lclc</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> trade</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> robux</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> titanics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how to make gems</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> free huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> plush</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> preston</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> enchants</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #bellylaughs</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> nightfoxx</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> huge pet</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> free</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> huge pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> exclusive</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #chuckleworthy</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> advice</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> filmmaking</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> interview</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> plot</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> creative writing</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> interviews</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> review</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> story</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> writing</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how to write</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> film</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> tips</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> script writing</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> writing tips</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> inspiration</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> motivation</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> acting</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> actors</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how to write a screenplay</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> beginners</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> 101</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> screenwriter</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> advice and tips</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> writers</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> writing process</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> masterclass</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> quick tips</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> screenplay tips</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #rollingonfloorlaughing</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #furreallaughs</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #pawsomecomedy</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #whimsicalcritters</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #lightheartedlaughs</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #sidesplittingpets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #petsbeingsilly</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #smileinducing</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #gigglesandgrins</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #humorousanimals</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #quirkypets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #unscriptedlaughs</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #amusinganimals</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #animalgiggles</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #playfulpets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> screenwriting</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> video essay</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> analysis</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> screenplay</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> screenplays</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #peace</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #heartless-killaz #peace-for-life</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #adorableguffaws</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #funfurfriends</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #lovablelaughs</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #furbloopers</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #world-star #hacker-for-life #attacker #thug-life #game-destroyers</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #furryfunnies</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> keys</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go how to get relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go how to get</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go secret</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go all locations of shiny relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go gems</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> jn hh gaming</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go all 50 relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go all 25 relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> shiny relic pet sim 99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script pastebin</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet simulator 99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> shiny relic locations pet simulator 99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet rng all shiny relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go all relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go all shiny relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go tutorial</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go diamonds</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go release</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet rng roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet rng ps99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> secret pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 doggy to titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet sim rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> noob pet sim 99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> rng huge pet</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet rng trailer</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet sim 99 live</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet rng release date</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> shiny relic locations pet sim 99</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go leaks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go new update</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 unboxing</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 opening</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> shiny titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> funny pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> rainbow shiny titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 presents</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> rainbow titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 titanic present</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 titanic gift</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go luck</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox mobile cheats</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> hacks roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox mobile exploits</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox mobile hacks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> hacker</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> exploiter</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> hacks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> mobile executor</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox executors</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox cheats and exploits</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox mobile executor</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> executor mobile roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox executor mobile</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> mobile hacks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> android</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet sim news</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> dog to titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> cat to titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> trading series</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go op luck</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> cute animals</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> cee zaa</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> วิธีฟาร์ม pets go</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> สูตรฟาร์ม pets go</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets rng luck</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets rng huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> nothing to titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet comedy</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> home crafts</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> crafts for kids</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> painting ideas</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> coloring</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> cartoons for kids</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> animals</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> slime videos</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #like</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #msubullyfarm</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #americanbully</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #thanks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #havenhomestead</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #turkeys</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> cartoons for children</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> crayola</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scribble scrubbie pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scribble scrubbie friends</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets for kids</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> color pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scribble s rubbies spy movie</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scribble scrubbies spy adventure</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> crayola scribble scrubbie</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> crayola cartoons for kids</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scribble scrubbies</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> crayola kingdom</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scribble scrubbies pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scribble scrubbies show</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> movie magic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #subscribe</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #love</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet fails</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> funny animal expressions</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> humorous pet behavior</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> playful pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet hijinks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> funny pet reactions</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> jn</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> laugh-out-loud animals</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> funny pet moments</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> animal antics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet bloopers</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> silly pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet pranks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet comedy skits</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> amusing animal tricks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #ducks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #diy</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #quail</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #bobwhite</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> $like</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #chickens</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #short</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> comical animal companions</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet humor</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #american</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #farm</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> #shorts</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> hilarious pet videos</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> how to hack on roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go solara script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> conor3d</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script arceus x</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script pastebin 2024</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go script 2024</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go get all coins script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> guide</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> tutorial</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> secret badge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> hidden badge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> badges</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> badge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> walkthrough</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go hack script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go hack</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> teddysim</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> teddy sim roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> tedwateddysim</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> tedwa</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> funny roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> tedwa roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go trade scam script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script auto farm mobile</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go auto farm</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go op script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script dupe pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script auto roll</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script huge pets</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> secret badges</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> hidden badges</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script keyless</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script fast auto roll</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go all cutscenes</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go free huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go all huge cutscenes</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script pc</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go script no key</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go auto pick coins script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> auto farm &amp; more | mobile and pc (no key)</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go! ✨ [new] script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pastebin pets go script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go! script pastebin</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go how to get huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> russo</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox hidden badges</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> badge hunt</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox secret badges</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox hidden badge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox secret badge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox badge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox badge hunt</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> russoplays</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> russotalks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> russo plays</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet sim x</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go rarest pet</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> petsgo secret</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go roblox huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go hatched</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go roblox cocktail</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> 15 hours grinding pets go</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go all relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go relics</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go rng game</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> petsimulator rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go relic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go huge pet</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go hatch huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go max luck</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go cocktail</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox scripts</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox hacking</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox cheats</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> scripts</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox hacks</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox games scripts</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox cheating</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go! script pastebin | auto roll</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> haxed</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pets go how to get gems</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script 2024</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> ahmed mode</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> mobile hacks roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> playofel</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> beebuyog game</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simulator 99 update</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> ganesh ji</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pets go script gui</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go new game</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go simulator</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> pet simualtor go</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> petsgo huge</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox anime games</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox anime</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> petsgo titanic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> rng update</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> rng event</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go new games</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go rng</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> good pet games on roblox</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet simulator 99 good vs evil</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet catchers golden ticket</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> beebuyog</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> lazysly</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet simulator 99 how to go to trading plaza</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> cookie god roblox pet simulator x</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go hindi video</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go hindi gameplay</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go script</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox pet go relic</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox muscle legends glitch pet golden phoenix</span>
-               
-                  <span class="tag"><i class="fas fa-tag"></i> roblox hacks download</span>
-               
-            </div>
-         
-         <div class="notification" id="notification">Script copied to clipboard!</div>
+    </nav>
+</header>
 
-      </div>
-   </div>
-   <div id="particles-js"></div>
-   <footer>
+            <div class="search-bar-container">
+                <div class="search-bar">
+                    <form action="/search" method="get">
+                        <input type="text" name="q" placeholder="Search..." value="">
+                    </form>
+                </div>
+                
+            </div>
+            <div class="footer-links">
+                <a href="https://discord.gg/crs" target="_blank">discord</a>
+                <span> / </span>
+                <a href="/shop" class="shop-link">
+            shop
+            </a>
+            </div>
+            <div class="footer-links">
+                <a href="https://youtu.be/gBgxoZa80iU" target="_blank" class="youtube-button">
+                    <i class="fab fa-youtube"></i> FREE EXECUTOR
+                </a>
+            </div>
+            
+                <div class="carousel">
+                    <div class="carousel-header">
+                        Top 3 scripts of this week
+                    </div>
+                    <div class="carousel-track-container">
+                        <div class="carousel-track">
+                            
+                                <div class="carousel-slide">
+                                    <div class="carousel-content">
+                                        <img class="carousel-image" src="/uploads/watermarked-1731348859728.jpg" alt="Photo">
+                                        <div class="carousel-info">
+                                            <h2 class="carousel-title">Murder Mystery 2: X-HUB | AutoFarm (5 methods), Kill All (Murder), Anti-AFK, E.T.C</h2>
+
+                                            <p class="carousel-description">
+                                                The best script for autofarming and for dominating players in Murder Mystery 2. It includes a huge number of features and 5 types of candy autofarming.
+                                            </p>
+                                            <a href="/post/57" class="carousel-link">
+                                                <i class="fas fa-eye"></i> View post
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="carousel-slide">
+                                    <div class="carousel-content">
+                                        <img class="carousel-image" src="/uploads/1728928217979.jpg" alt="Photo">
+                                        <div class="carousel-info">
+                                            <h2 class="carousel-title">Pets Go: Speed Hub X | AutoFarm, AutoRoll, AutoFarm Breakeables, e.t.c</h2>
+
+                                            <p class="carousel-description">
+                                                New and the best script on the game Pets Go! With it you will be able to get the best pets very quickly without effort.
+                                            </p>
+                                            <a href="/post/48" class="carousel-link">
+                                                <i class="fas fa-eye"></i> View post
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="carousel-slide">
+                                    <div class="carousel-content">
+                                        <img class="carousel-image" src="/uploads/watermarked-1733240918763.jpg" alt="Photo">
+                                        <div class="carousel-info">
+                                            <h2 class="carousel-title">Blox Fruits: Auto Farm, Auto Kill Boss, Mob Aura, Auto Sea, Teleports, ESP, Auto Race, Auto Stats, AND MORE!</h2>
+
+                                            <p class="carousel-description">
+                                                New script on Blox Fruits game which is supported by &#34;Solara&#34; executor. In this script all functions work and it is keyless!
+                                            </p>
+                                            <a href="/post/91" class="carousel-link">
+                                                <i class="fas fa-eye"></i> View post
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                        </div>
+                    </div>
+                    <button class="carousel-button carousel-button--left">&#10094;</button>
+                    <button class="carousel-button carousel-button--right">&#10095;</button>
+                </div>
+
+                
+                
+                    <div id="posts" class="posts">
+                        <div class="separator-line"></div>
+                        <div class="sorting-container">
+                            <div class="dropdown">
+                                <select id="sort-field">
+                                    <option value="views">&#128065; views</option>
+                                    <option value="likes">&#128077; likes</option>
+                                    <option value="createdAt" selected>&#128197; date</option>
+                                </select>
+                            </div>
+                            <div class="dropdown">
+                                <select id="sort-order">
+                                    <option value="DESC" selected>&#9660; descending</option>
+                                    <option value="ASC">&#9650; ascending</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                                
+                                    <div class="post" id="post-101">
+                                        <a href="/post/101">
+                                            <h3 class="post-title">GO FISHING: Auto Fishing, Auto Catch Fish, Dupe INF Bait, Teleports, Freeze Character, AND MORE!</h3>
+                                            <p class="post-description">
+                                                New and convenient script for the game GO FISHING. It contains all the features that are available in the game, it even has dupe bait! However, you should get the key for this script by watching the advertisement.
+                                            </p>
+
+                                            <div class="status-indicator  green ">
+                                                
+                                                    Solara supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733877097096.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>1</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/11/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>473</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-100">
+                                        <a href="/post/100">
+                                            <h3 class="post-title">Sakura Stand: ESP, Open [Stand/Item/Achievements], Auto Figthing Functions, Auto Farm, Auto Quests, AND MORE!</h3>
+                                            <p class="post-description">
+                                                The biggest and best script on the Sakura Stand game so far. It has everything you need to easily defeat your opponents. Try it now!
+                                            </p>
+
+                                            <div class="status-indicator  green ">
+                                                
+                                                    Solara supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733876940540.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>2</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/11/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>203</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-99">
+                                        <a href="/post/99">
+                                            <h3 class="post-title">Fisch: Auto Balance Nuke, Auto Shake, Auto Reel, Auto Sell All, Teleports, Anti AFK, AND MORE!</h3>
+                                            <p class="post-description">
+                                                Long dreamed of getting a huge number of different functions that will work perfectly and which are not in other scripts? Then you must try this script!
+                                            </p>
+
+                                            <div class="status-indicator  green ">
+                                                
+                                                    Solara supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733752360743.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>23</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/9/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>2339</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-98">
+                                        <a href="/post/98">
+                                            <h3 class="post-title">Rivals: Aimbot, ESP, World Visuals, Viewmodel Visuals, SpeedHack, Claim Rewards, AND MORE!</h3>
+                                            <p class="post-description">
+                                                A new script on the game Rivals that will give you the biggest advantage in the game! It has a quality ESP, AIMBOT, and you can also replace weapon models.
+                                            </p>
+
+                                            <div class="status-indicator  green ">
+                                                
+                                                    Solara supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733752258656.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>19</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/9/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>3308</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-97">
+                                        <a href="/post/97">
+                                            <h3 class="post-title">Gym League: Auto Train, Auto Load, Auto Farm, Auto Treadmill, Auto MiniGame, Auto Competition, AND MORE!</h3>
+                                            <p class="post-description">
+                                                The fastest pumping in the game Gym League is now available thanks to this script! You can easily level up to the strongest player in one night!
+                                            </p>
+
+                                            <div class="status-indicator  green ">
+                                                
+                                                    Solara supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733690330491.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>2</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/8/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>622</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-96">
+                                        <a href="/post/96">
+                                            <h3 class="post-title">Blue Lock: Rivals: Grab Ball, Auto Goal | Infinite Autofarm Coins VIA AFK</h3>
+                                            <p class="post-description">
+                                                Thanks to the new script for the game Blue Lock, now you will be able to stand afk and farm coins with goals on your account. All you need to do is to inject the script and enable two functions.
+                                            </p>
+
+                                            <div class="status-indicator  red ">
+                                                
+                                                    Solara not supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733690157363.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>8</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/8/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>1562</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-95">
+                                        <a href="/post/95">
+                                            <h3 class="post-title">Blue Lock: Rivals: Lock On Foot Ball, Auto TP Goal, ESP, Noclip, Infinite Stamina, Auto Flow, Auto Awaken, AND MORE!</h3>
+                                            <p class="post-description">
+                                                Defeat your opponents, score goals, automate your gameplay and enjoy endless victories! All this is available with the new &#34;Blue Lock&#34; game script.
+                                            </p>
+
+                                            <div class="status-indicator  green ">
+                                                
+                                                    Solara supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733610589110.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>39</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/7/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>5077</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-94">
+                                        <a href="/post/94">
+                                            <h3 class="post-title">King Legacy: Auto Farm, Auto Skill, Auto Sea Monster, Auto Ghost Ship, Auto Monster, Teleports, AND MORE!</h3>
+                                            <p class="post-description">
+                                                This script has everything you need. And also fully customizable autofarm bosses and mobs, which you can customize for yourself!
+                                            </p>
+
+                                            <div class="status-indicator  red ">
+                                                
+                                                    Solara not supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733324564955.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>84</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/4/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>5451</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-93">
+                                        <a href="/post/93">
+                                            <h3 class="post-title">Heroes Battlegrounds: Auto Farm, Hunt Players, Auto Attack, Anti Ragdoll, Anti Stun, Auto Skills, AND MORE!</h3>
+                                            <p class="post-description">
+                                                Have you long dreamed of getting your opponents into combos and not giving them even a chance to win? Then try this script right now!
+                                            </p>
+
+                                            <div class="status-indicator  red ">
+                                                
+                                                    Solara not supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733324454481.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>9</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/4/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>1487</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                    <div class="post" id="post-92">
+                                        <a href="/post/92">
+                                            <h3 class="post-title">Fisch: Dupe Shadow, Auto Cast, Auto Shake, Auto Reel, Sell [ All/Hand ], Teleports, AND MORE!</h3>
+                                            <p class="post-description">
+                                                Have you long dreamed of free dupe in the game Fisch? Then this script is for you! It contains dupe and autofarm that will help you to upgrade in a fraction of a second.
+                                            </p>
+
+                                            <div class="status-indicator  green ">
+                                                
+                                                    Solara supported
+                                                        
+                                            </div>
+
+                                            
+                                                <img src="/uploads/watermarked-1733241057746.jpg" alt="Photo">
+                                                
+
+                                                    <div class="post-footer">
+                                                        <div class="post-likes-block">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span>82</span>
+                                                        </div>
+                                                        <div class="post-date-block">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <span>12/3/2024</span>
+                                                        </div>
+                                                        <div class="post-views-block">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span>12388</span>
+                                                        </div>
+                                                    </div>
+                                        </a>
+                                    </div>
+
+
+                                    
+                                        
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const searchBar = document.querySelector('.search-bar');
+                                                const showAfterScroll = 200;
+                                                let page = 1;
+                                                let loading = false;
+                                                let endOfPosts = false;
+                                        
+                                                const isSearchQuery = false;
+                                        
+                                                function resetPosts() {
+                                                    page = 1;
+                                                    endOfPosts = false;
+                                                    const postContainer = document.getElementById('posts');
+                                                    const posts = document.querySelectorAll('.post');
+                                                    posts.forEach(post => post.remove());
+                                                }
+                                        
+                                                function loadPosts() {
+                                                    if (loading || endOfPosts || isSearchQuery) return;
+                                                    loading = true;
+                                        
+                                                    const sortField = document.getElementById('sort-field').value;
+                                                    const sortOrder = document.getElementById('sort-order').value;
+                                        
+                                                    fetch(`/posts?page=${page}&limit=10&sortField=${sortField}&sortOrder=${sortOrder}`)
+                                                        .then(response => {
+                                                            if (!response.ok) {
+                                                                throw new Error('Network response was not ok');
+                                                            }
+                                                            return response.json();
+                                                        })
+                                                        .then(posts => {
+                                                            if (posts.length === 0) {
+                                                                endOfPosts = true;
+                                                                const loadingIndicator = document.getElementById('loading');
+                                                                if (loadingIndicator) {
+                                                                    loadingIndicator.textContent = 'No more posts';
+                                                                }
+                                                                return;
+                                                            }
+                                        
+                                                            const postContainer = document.getElementById('posts');
+                                                            posts.forEach(post => {
+                                                                const existingPost = document.getElementById(`post-${post.id}`);
+                                                                if (!existingPost) {
+                                                                    const postDiv = document.createElement('div');
+                                                                    postDiv.className = 'post';
+                                                                    postDiv.id = `post-${post.id}`;
+                                        
+                                                                    const statusClass = post.status === 'Solara supported' ? 'green' : (post.status ? 'red' : '');
+                                                                    const statusIndicator = `
+                                                                        <div class="status-indicator ${statusClass}">
+                                                                            ${post.status || ''}
+                                                                        </div>
+                                                                    `;
+                                        
+                                                                    let photo = '';
+                                                                    if (post.photos && post.photos.length > 0) {
+                                                                        const photosArray = Array.isArray(post.photos) ? post.photos : post.photos.split(', ');
+                                                                        photo = `<img src="${photosArray[0]}" alt="Photo">`;
+                                                                    }
+                                        
+                                                                    postDiv.innerHTML = `
+                                                                        <a href="/post/${post.id}">
+                                                                            <h3 class="post-title">${post.title}</h3>
+                                                                            <p class="post-description">${post.description}</p>
+                                                                            ${statusIndicator}
+                                                                            ${photo}
+                                                                            <div class="post-footer">
+                                                                                <div class="post-likes-block">
+                                                                                    <i class="fa fa-thumbs-up"></i>
+                                                                                    <span>${post.likes}</span>
+                                                                                </div>
+                                                                                <div class="post-date-block">
+                                                                                    <i class="fa fa-calendar"></i>
+                                                                                    <span>${new Date(post.createdAt).toLocaleDateString()}</span>
+                                                                                </div>
+                                                                                <div class="post-views-block">
+                                                                                    <i class="fa fa-eye"></i>
+                                                                                    <span>${post.views}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    `;
+                                                                    postContainer.appendChild(postDiv);
+                                                                }
+                                                            });
+                                        
+                                                            page++;
+                                                            loading = false;
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
+                                                            loading = false;
+                                                        });
+                                                }
+                                        
+                                                function handleScroll() {
+                                                    if (!isSearchQuery && window.innerHeight + window.scrollY + 150 >= document.documentElement.scrollHeight) {
+                                                        loadPosts();
+                                                    }
+                                                }
+                                        
+                                                window.addEventListener('scroll', handleScroll);
+                                        
+                                                if (!isSearchQuery) {
+                                                    loadPosts();
+                                                }
+                                        
+                                                function updateSearchBarVisibility() {
+                                                    if (window.scrollY > showAfterScroll) {
+                                                        searchBar.classList.add('fixed', 'show');
+                                                    } else {
+                                                        searchBar.classList.remove('fixed', 'show');
+                                                    }
+                                                }
+                                        
+                                                window.addEventListener('scroll', updateSearchBarVisibility);
+                                        
+                                                updateSearchBarVisibility();
+                                        
+                                                document.getElementById('sort-field').addEventListener('change', function() {
+                                                    resetPosts();
+                                                    loadPosts();
+                                                });
+                                        
+                                                document.getElementById('sort-order').addEventListener('change', function() {
+                                                    resetPosts();
+                                                    loadPosts();
+                                                });
+                                            });
+                                        </script>
+                    </div>
+                    <div id="particles-js"></div>
+    </div>
+    <footer>
     <div class="footer-content">
         <p>&copy; 2024 <br> crackedscripts.com<br>All rights reserved</p>
         <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
     </div>
 </footer>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                 const track = document.querySelector(".carousel-track");
+                 const slides = Array.from(track.children);
+                 const nextButton = document.querySelector(".carousel-button--right");
+                 const prevButton = document.querySelector(".carousel-button--left");
+             
+                 let currentSlideIndex = 0;
+                 let isScrolling = false;
+             
+                 function updateSlides() {
+                     slides.forEach((slide, index) => {
+                         slide.classList.remove('active', 'prev', 'next');
+                         if (index === currentSlideIndex) {
+                             slide.classList.add('active');
+                         } else if (index === (currentSlideIndex - 1 + slides.length) % slides.length) {
+                             slide.classList.add('prev');
+                         } else if (index === (currentSlideIndex + 1) % slides.length) {
+                             slide.classList.add('next');
+                         } else {
+                             slide.style.opacity = '0';
+                             slide.style.transform = 'translateX(-50%) scale(0.9)';
+                         }
+                     });
+                 }
+             
+                 function moveToNextSlide() {
+                     if (isScrolling) return;
+                     isScrolling = true;
+                     currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                     updateSlides();
+                     setTimeout(() => { isScrolling = false; }, 300); 
+                 }
+             
+                 function moveToPrevSlide() {
+                     if (isScrolling) return;
+                     isScrolling = true;
+                     currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                     updateSlides();
+                     setTimeout(() => { isScrolling = false; }, 300); 
+                 }
+             
+                 nextButton.addEventListener('click', moveToNextSlide);
+                 prevButton.addEventListener('click', moveToPrevSlide);
+             
+                 let startX = 0;
+                 let isSwiping = false;
+             
+                 track.addEventListener('touchstart', (e) => {
+                     startX = e.touches[0].clientX;
+                     isSwiping = true;
+                 });
+             
+                 track.addEventListener('touchmove', (e) => {
+                     if (!isSwiping) return;
+                     const endX = e.touches[0].clientX;
+                     const diffX = startX - endX;
+             
+                     if (Math.abs(diffX) > 50) {
+                         if (diffX > 0) {
+                             moveToNextSlide();
+                         } else {
+                             moveToPrevSlide();
+                         }
+                         isSwiping = false;
+                     }
+                 });
+             
+                 track.addEventListener('touchend', () => {
+                     isSwiping = false;
+                 });
+             
+                 // Поддержка колесика мыши
+                 track.addEventListener('wheel', (e) => {
+                     e.preventDefault();
+                     if (isScrolling) return;
+                     if (e.deltaY < 0) {
+                         moveToPrevSlide();
+                     } else {
+                         moveToNextSlide();
+                     }
+                 }, { passive: false });
+             
+                 // Инициализация
+                 updateSlides();
+             });
+        </script>
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-   <script>
-      Prism.highlightAll();
-   </script>
 
-   <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const copyButton = document.getElementById('copy-button');
-          const scriptContentElement = document.getElementById('script-content');
-          const scriptInfoElement = document.getElementById('script-info');
-          const scriptContent = scriptContentElement.textContent.trim();
-          const notification = document.getElementById('notification');
-
-          function updateScriptInfo() {
-              const lines = scriptContent.split('\n').length;
-              const bytes = new TextEncoder().encode(scriptContent).length;
-              scriptInfoElement.textContent = `${lines} lines ・ ${bytes} Bytes`;
-          }
-          updateScriptInfo();
-
-          copyButton.addEventListener('click', function() {
-              navigator.clipboard.writeText(scriptContent)
-                  .then(() => {
-                      notification.classList.add('show');
-                      setTimeout(() => {
-                          notification.classList.remove('show');
-                      }, 2000);
-                  })
-                  .catch(err => {
-                      console.error('Failed to copy: ', err);
-                  });
-          });
-      });
-   </script>
 </body>
+
 </html>
